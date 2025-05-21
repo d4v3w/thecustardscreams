@@ -75,7 +75,7 @@ export default function HomePage() {
           </div>
         </main>
         <footer className="flex flex-col items-center text-white opacity-50">
-          Copyright &copy; {new Date().getFullYear()} The Custard Screams
+          Copyright &copy; 2025 The Custard Screams
         </footer>
       </div>
     </div>
