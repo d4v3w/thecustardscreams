@@ -6,7 +6,13 @@ import { Geist } from "next/font/google";
 export const metadata: Metadata = {
   title: "The Custard Screams",
   description: "London Post Hardcore Punk Rock Band",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [
+    { rel: "icon", url: "/favicon.ico" },
+    { rel: "apple-touch-icon", url: "/apple-touch-icon.png", sizes: "180x180" },
+    { rel: "icon", url: "/favicon-32x32.png", type: "img/png", sizes: "32x32" },
+    { rel: "icon", url: "/favicon-16x16.png", type: "img/png", sizes: "16x16" },
+    { rel: "manifest", url: "/site.webmanifest" },
+  ],
 };
 
 const geist = Geist({
