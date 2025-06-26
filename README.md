@@ -1,3 +1,4 @@
 # The Custard Screams Website
 
-That is all.
+Website for band marketing etc.
+
