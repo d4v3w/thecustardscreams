@@ -7,10 +7,27 @@ export const metadata: Metadata = {
   title: "The Custard Screams",
   description: "London based Post Hardcore Punk Rock Band",
   icons: [
-    { rel: "icon", url: "/favicon.ico" },
-    { rel: "apple-touch-icon", url: "/apple-touch-icon.png", sizes: "180x180" },
-    { rel: "icon", url: "/favicon-32x32.png", type: "img/png", sizes: "32x32" },
-    { rel: "icon", url: "/favicon-16x16.png", type: "img/png", sizes: "16x16" },
+    {
+      rel: "icon",
+      url: "https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1Wu9GgIUOvpXGBUM3TayYgd68ANQbRfo01SLV",
+    },
+    {
+      rel: "apple-touch-icon",
+      url: "https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1jNWCBe9CW63sKRVJPxiQH09w81nhzYZI5bMg",
+      sizes: "180x180",
+    },
+    {
+      rel: "icon",
+      url: "https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX125lhOH54f6C7O5UiyzsSR8NkawKYFJxpQXub",
+      type: "img/png",
+      sizes: "32x32",
+    },
+    {
+      rel: "icon",
+      url: "https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1mGp6uNMjTQkG4hEKUy1iDXwJAzfC73u9NL5O",
+      type: "img/png",
+      sizes: "16x16",
+    },
     { rel: "manifest", url: "/site.webmanifest" },
   ],
 };
