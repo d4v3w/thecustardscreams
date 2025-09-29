@@ -122,7 +122,7 @@ const Footer = () => {
 
 export default function HomePage() {
   return (
-    <div className="mx-auto max-w-5xl min-w-[320px] bg-black p-2 md:p-3">
+    <div className="mx-auto max-w-4xl min-w-[320px] bg-black p-2 md:p-3">
       <Title />
       <Links />
       <main className="">
