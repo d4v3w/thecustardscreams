@@ -2,13 +2,15 @@
 import Link from "next/link";
 
 const Title = () => (
-  <header className="p-2 md:p-3">
+  <header className="mb-2 md:mb-3">
     <h1>
-      <span className="invisible">The Custard Screams</span>
+      <span className="sr-only">The Custard Screams</span>
       <img
-        src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX11TVvcM2zyFK0ROkwl3WSGv8XHuon7LfdbVrj"
+        src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1jT0o1Y9CW63sKRVJPxiQH09w81nhzYZI5bMg"
+        srcSet="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX12Faf3d4f6C7O5UiyzsSR8NkawKYFJxpQXubM 1x, https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1P1BEX2etUewJhN0Aqrcjg6Poimx8d2OY9G3Z 2x"
         alt="The Custard Screams logo"
-        className="mx-auto h-45 w-45 rounded-full object-cover object-left md:h-60 md:w-60"
+        width={250}
+        className="mx-auto h-40 w-40 rounded-full sm:h-50 sm:w-50 md:mx-0 lg:h-60 lg:w-60"
       />
     </h1>
   </header>
@@ -100,6 +102,10 @@ const Shows = () => (
         src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX12Faf3d4f6C7O5UiyzsSR8NkawKYFJxpQXubM"
         alt="Freaks and Geeks - Stratford, London, May 31st 2025"
         className="mb-3 w-full rounded-lg object-cover"
+      />
+      <img
+        src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX11TVvcM2zyFK0ROkwl3WSGv8XHuon7LfdbVrj"
+        alt="The Custard Screams"
       />
     </section>
   </article>
