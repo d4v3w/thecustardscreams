@@ -1,83 +1,129 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 
+const Title = () => (
+  <header className="p-2 md:p-3">
+    <h1>
+      <span className="invisible">The Custard Screams</span>
+      <img
+        src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX11TVvcM2zyFK0ROkwl3WSGv8XHuon7LfdbVrj"
+        alt="The Custard Screams logo"
+        className="mx-auto h-45 w-45 rounded-full object-cover object-left md:h-60 md:w-60"
+      />
+    </h1>
+  </header>
+);
+
+const Music = () => (
+  <article className="p-2 md:p-3">
+    <h2 className="text-xl font-bold text-amber-400">Music</h2>
+    <p>
+      The Custard Screams are avilable to listen and download on Bandcamp now!
+    </p>
+    <div className="mt-3 flex flex-col gap-3 md:flex-row md:flex-wrap">
+      <section className="rounded-xl">
+        <iframe
+          style={{ border: 0, maxWidth: 400, height: 120 }}
+          title="The Custard Screams - Bandcamp - Royal Flush"
+          src="https://bandcamp.com/EmbeddedPlayer/track=593440947/size=large/bgcol=333333/linkcol=e99708/tracklist=false/artwork=small/transparent=true/"
+          seamless
+        >
+          <a href="https://thecustardscreams.bandcamp.com/track/royal-flush">
+            Royal Flush by The Custard Screams
+          </a>
+        </iframe>
+      </section>
+      <section className="rounded-xl">
+        <iframe
+          style={{ border: 0, maxWidth: 400, height: 120 }}
+          title="The Custard Screams - Bandcamp - Tomorrow"
+          src="https://bandcamp.com/EmbeddedPlayer/track=2403260668/size=large/bgcol=333333/linkcol=e99708/tracklist=false/artwork=small/transparent=true/"
+          seamless
+        >
+          <a href="https://thecustardscreams.bandcamp.com/track/tomorrow">
+            Tomorrow by The Custard Screams
+          </a>
+        </iframe>
+      </section>
+    </div>
+  </article>
+);
+
+const Links = () => (
+  <>
+    <nav className="mb-3 flex flex-col items-center gap-3 md:flex-row md:flex-wrap">
+      <Link
+        className="w-full flex-grow flex-col gap-1 rounded-xl bg-yellow-400 p-3 text-white hover:bg-yellow-500"
+        href="https://www.instagram.com/thecustardscreams"
+        target="_blank"
+      >
+        <h3 className="text-xl font-bold text-amber-900">Next Live Show →</h3>
+        <div className="text-lg font-bold text-black">
+          November 21st 2025 - Freaks and Geeks
+          <br /> Stratford, London
+        </div>
+      </Link>
+      <Link
+        className="flex w-full flex-1 flex-col gap-0 rounded-xl bg-white/10 p-3 text-white hover:bg-yellow-900"
+        href="https://instagram.thecustardscreams.com/"
+        target="_blank"
+      >
+        <h3 className="text-lg font-bold text-amber-400">Instagram →</h3>
+        <div className="text-lg">@thecustardscreams</div>
+      </Link>
+      <Link
+        className="flex w-full flex-1 flex-col gap-0 rounded-xl bg-white/10 p-3 text-white hover:bg-yellow-900"
+        href="https://www.facebook.com/profile.php?id=61572629866193"
+        target="_blank"
+      >
+        <h3 className="text-lg font-bold text-amber-400">Facebook →</h3>
+        <div className="text-lg">@thecustardscreams</div>
+      </Link>
+      <Link
+        className="flex w-full flex-1 flex-col gap-0 rounded-xl bg-white/10 p-3 text-white hover:bg-yellow-900"
+        href="https://tiktok.thecustardscreams.com/"
+        target="_blank"
+      >
+        <h3 className="text-lg font-bold text-amber-400">TikTok →</h3>
+        <div className="text-lg">@the.custard.screams</div>
+      </Link>
+    </nav>
+  </>
+);
+
+const Shows = () => (
+  <article className="p2 md:p-3">
+    <h2 className="text-xl font-bold text-amber-400">Past shows</h2>
+    <p>The Custard Screams previous shows</p>
+    <section className="mt-3 columns-1 gap-3 sm:columns-2 lg:columns-3">
+      <img
+        src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX12Faf3d4f6C7O5UiyzsSR8NkawKYFJxpQXubM"
+        alt="Freaks and Geeks - Stratford, London, May 31st 2025"
+        className="mb-3 w-full rounded-lg object-cover"
+      />
+    </section>
+  </article>
+);
+
+const Footer = () => {
+  const currentYear: number = new Date().getFullYear();
+  return (
+    <footer className="flex flex-col items-center p-2 text-amber-400 opacity-50">
+      Copyright &copy; {currentYear} The Custard Screams
+    </footer>
+  );
+};
+
 export default function HomePage() {
   return (
-    <div className="bg-black">
-      <div className="bk-center flex min-h-screen flex-col items-center justify-center bg-black opacity-90">
-        <main className="container flex flex-col items-center justify-center gap-4 bg-black px-4 py-16 text-white opacity-100">
-          <h1>
-            <span className="invisible">The Custard Screams</span>
-            <img
-              src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX11TVvcM2zyFK0ROkwl3WSGv8XHuon7LfdbVrj"
-              alt="The Custard Screams logo"
-            />
-          </h1>
-          <div className="grid grid-cols-1 justify-center gap-2">
-            <iframe
-              style={{ border: 0, maxWidth: 400, height: 120 }}
-              title="The Custard Screams - Bandcamp - Royal Flush"
-              src="https://bandcamp.com/EmbeddedPlayer/track=4158228932/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/artwork=none/transparent=true/"
-              seamless
-            >
-              <a href="https://thecustardscreams.bandcamp.com/track/royal-flush">
-                Royal Flush by The Custard Screams
-              </a>
-            </iframe>
-          </div>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="flex max-w-xs flex-col gap-2 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="https://www.instagram.com/thecustardscreams"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold text-amber-400">
-                Next Live Show →
-              </h3>
-              <div className="text-lg">
-                May 31st 2025 - Freaks and Geeks
-                <br /> Stratford, London
-              </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-2 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="https://instagram.thecustardscreams.com/"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold text-amber-400">Instagram →</h3>
-              <div className="text-lg">@thecustardscreams</div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-2 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="https://facebook.thecustardscreams.com/"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold text-amber-400">Facebook →</h3>
-              <div className="text-lg">@thecustardscreams</div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-2 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-              href="https://tiktok.thecustardscreams.com/"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold text-amber-400">TikTok →</h3>
-              <div className="text-lg">@the.custard.screams</div>
-            </Link>
-          </div>
-          <div>
-            <h2>Shows</h2>
-            <p>The Custard Screams are playing at the upcoming shows:</p>
-            <img
-              src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX12Faf3d4f6C7O5UiyzsSR8NkawKYFJxpQXubM"
-              alt="Freaks and Geeks - Stratford, London, May 31st 2025"
-              width={678}
-            />
-          </div>
-        </main>
-        <footer className="flex flex-col items-center text-white opacity-50">
-          Copyright &copy; 2025 The Custard Screams
-        </footer>
-      </div>
+    <div className="mx-auto max-w-5xl min-w-[320px] bg-black p-2 md:p-3">
+      <Title />
+      <Links />
+      <main className="">
+        <Music />
+        <Shows />
+      </main>
+      <Footer />
     </div>
   );
 }
