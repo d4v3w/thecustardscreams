@@ -5,7 +5,7 @@ import { Geist } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "The Custard Screams",
-  description: "London Post Hardcore Punk Rock Band",
+  description: "London based Post Hardcore Punk Rock Band",
   icons: [
     { rel: "icon", url: "/favicon.ico" },
     { rel: "apple-touch-icon", url: "/apple-touch-icon.png", sizes: "180x180" },
