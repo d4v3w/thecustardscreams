@@ -95,7 +95,15 @@ const Links = () => (
 
 const Shows = () => (
   <article className="p2 md:p-3">
-    <h2 className="text-xl font-bold text-amber-400">Past shows</h2>
+    <h2 className="text-xl font-bold text-amber-400">Upcoming shows</h2>
+    <p>Come and see The Custard Screams play live at these upcoming shows</p>
+    <section className="mt-3 columns-1 gap-3 sm:columns-2 lg:columns-3">
+      <img
+        src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1jhiX7K9CW63sKRVJPxiQH09w81nhzYZI5bMg"
+        alt="Freaks and Geeks - Stratford, London, November 21st 2025"
+        className="mb-3 w-full rounded-lg object-cover"
+      />
+    <h2 className="text-xl font-bold text-amber-400">Previous shows</h2>
     <p>The Custard Screams previous shows</p>
     <section className="mt-3 columns-1 gap-3 sm:columns-2 lg:columns-3">
       <img
