@@ -103,6 +103,7 @@ const Shows = () => (
         alt="The Custard Screams at Freaks and Geeks - Stratford, London, November 21st 2025"
         className="mb-3 w-full rounded-lg object-cover"
       />
+    </section>
     <h2 className="text-xl font-bold text-amber-400">Previous shows</h2>
     <p>The Custard Screams previous shows</p>
     <section className="mt-3 columns-1 gap-3 sm:columns-2 lg:columns-3">
