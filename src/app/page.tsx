@@ -47,6 +47,18 @@ const Music = () => (
           </a>
         </iframe>
       </section>
+      <section className="rounded-xl">
+        <iframe
+          style={{ border: 0, maxWidth: 400, height: 120 }}
+          title="The Custard Screams - Bandcamp - Would You (Breathe)"
+          src="https://bandcamp.com/EmbeddedPlayer/track=1319783194/size=large/bgcol=333333/linkcol=e99708/tracklist=false/artwork=small/transparent=true/"
+          seamless
+        >
+          <a href="https://thecustardscreams.bandcamp.com/track/would-you-breathe">
+            Would You (Breathe) by The Custard Screams
+          </a>
+        </iframe>
+      </section>
     </div>
   </article>
 );
