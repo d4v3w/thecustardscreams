@@ -170,7 +170,6 @@ const DialogOverlay = ({ initialState }: DialogOverlayProps) => {
 
     if (!supportsWebM && !supportsMP4) {
       setShowOverlay(false); // Hide if neither format is supported
-      return null;
     }
 
     if (showOverlay && dialogRef.current && !dialogRef.current.open) {
