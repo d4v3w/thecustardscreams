@@ -245,3 +245,11 @@ export default function HomePage() {
     </div>
   );
 }
+
+HomePage.displayName = 'HomePage'
+Dialog.displayName = 'Dialog'
+Title.displayName = 'Title'
+Links.displayName = 'Links'
+Music.displayName = 'Music'
+Shows.displayName = 'Shows'
+Footer.displayName = 'Footer'
