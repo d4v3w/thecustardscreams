@@ -221,10 +221,9 @@ const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
 
 export default function HomePage() {
   const dialogRef = React.useRef<HTMLDivElement>(null);
+  const [showDialog, setShowDialog] = React.useState(true);
   const hideElement = (event: React.MouseEvent<HTMLDivElement>): void => {
-    if (dialogRef?.current) {
-      dialogRef.current.style.display = "none";
-    }
+      setShowDialog(false); // Hide if dialog
   };
 
   return (
@@ -232,7 +231,7 @@ export default function HomePage() {
       className="mx-auto max-w-4xl min-w-[320px] bg-black p-2 md:p-3"
       onClick={hideElement}
     >
-      <Dialog ref={dialogRef} />
+      {showDialog && <Dialog ref={dialogRef} />}
       <Title />
       <Links />
       <main>
