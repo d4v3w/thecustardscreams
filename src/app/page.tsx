@@ -142,99 +142,96 @@ const Footer = () => {
   );
 };
 
-interface DialogProps {
+interface DialogOverlayProps {
   initialState: boolean;
 }
 
-const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
-  ({ initialState }, ref) => {
-    const [showOverlay, setShowOverlay] = React.useState(initialState);
+const DialogOverlay = ({ initialState }: DialogOverlayProps) => {
+  const [showOverlay, setShowOverlay] = React.useState(initialState);
 
-    // Check browser support on mount
-    React.useEffect(() => {
-      const videoEl = document.createElement("video");
-      const supportsWebM = videoEl.canPlayType("video/webm") !== "";
-      const supportsMP4 = videoEl.canPlayType("video/mp4") !== "";
+  // Check browser support on mount
+  React.useEffect(() => {
+    const videoEl = document.createElement("video");
+    const supportsWebM = videoEl.canPlayType("video/webm") !== "";
+    const supportsMP4 = videoEl.canPlayType("video/mp4") !== "";
 
-      if (!supportsWebM && !supportsMP4) {
-        setShowOverlay(false); // Hide if neither format is supported
-      }
-    }, []);
+    if (!supportsWebM && !supportsMP4) {
+      setShowOverlay(false); // Hide if neither format is supported
+    }
+  }, []);
 
-    // Update state when the prop changes
-    React.useEffect(() => {
-      setShowOverlay(initialState);
-    }, [initialState]);
+  // Update state when the prop changes
+  React.useEffect(() => {
+    setShowOverlay(initialState);
+  }, [initialState]);
 
-    const handleVideoError = () => {
-      setShowOverlay(false); // Hide if video fails to load/play
-    };
+  const handleVideoError = () => {
+    setShowOverlay(false); // Hide if video fails to load/play
+  };
 
-    const stopPropagation = (event: React.MouseEvent<HTMLDivElement>): void => {
-      event?.stopPropagation();
-    };
+  // Prevent the event from propgating to the parent (don't close on click)
+  const stopPropagation = (event: React.MouseEvent<HTMLDivElement>): void => {
+    event?.stopPropagation();
+  };
 
-    if (!showOverlay) return null;
+  if (!showOverlay) return null;
 
-    return (
-      <div
+  return (
+    <div
+      onClick={stopPropagation}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        background: "rgba(0, 0, 0, 0.6)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 9999,
+      }}
+    >
+      <dialog
+        className="flex flex-col items-center"
         style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          background: "rgba(0, 0, 0, 0.6)",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          zIndex: 9999,
+          boxShadow: "0 0 10px rgba(0,0,0,0.3)",
         }}
-        ref={ref}
-        onClick={stopPropagation}
       >
-        <dialog
-          className="flex flex-col items-center"
-          style={{
-            boxShadow: "0 0 10px rgba(0,0,0,0.3)",
-          }}
+        <video
+          autoPlay
+          loop
+          controls
+          className="h-screen object-cover aspect-[9/16]"
+          onError={handleVideoError}
         >
-          <video
-            autoPlay
-            loop
-            controls
-            className="h-screen object-cover aspect-[9/16]"
-            onError={handleVideoError}
-          >
-            <source
-              src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1VmoiNTAuIT0qi4yXtg9SldF37jxKBDaPcHZr"
-              type="video/webm"
-            />
-            <source
-              src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1vCABEku14NJBxIZe9ydb5S7Ko2ADc3qwMT0G"
-              type="video/mp4"
-            />
-            <p>Your browser does not support the video tag.</p>
-          </video>
-        </dialog>
-      </div>
-    );
-  }
-);
+          <source
+            src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1VmoiNTAuIT0qi4yXtg9SldF37jxKBDaPcHZr"
+            type="video/webm"
+          />
+          <source
+            src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1vCABEku14NJBxIZe9ydb5S7Ko2ADc3qwMT0G"
+            type="video/mp4"
+          />
+          <p>Your browser does not support the video tag.</p>
+        </video>
+      </dialog>
+    </div>
+  );
+};
 
 export default function HomePage() {
-  const dialogRef = React.useRef<HTMLDivElement>(null);
   const [showDialog, setShowDialog] = React.useState(true);
-  const hideElement = (): void => {
-    setShowDialog(false); // Hide if dialog
+  const hideDialogOverlay = (): void => {
+    setShowDialog(false);
   };
 
   return (
     <div
       className="mx-auto max-w-4xl min-w-[320px] bg-black p-2 md:p-3"
-      onClick={hideElement}
+      onClick={hideDialogOverlay}
     >
-      <Dialog ref={dialogRef} initialState={showDialog} />
+      <DialogOverlay initialState={showDialog} />
       <Title />
       <Links />
       <main>
@@ -246,10 +243,10 @@ export default function HomePage() {
   );
 }
 
-HomePage.displayName = 'HomePage'
-Dialog.displayName = 'Dialog'
-Title.displayName = 'Title'
-Links.displayName = 'Links'
-Music.displayName = 'Music'
-Shows.displayName = 'Shows'
-Footer.displayName = 'Footer'
+HomePage.displayName = "HomePage";
+DialogOverlay.displayName = "DialogOverlay";
+Title.displayName = "Title";
+Links.displayName = "Links";
+Music.displayName = "Music";
+Shows.displayName = "Shows";
+Footer.displayName = "Footer";
