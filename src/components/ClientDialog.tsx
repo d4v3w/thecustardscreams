@@ -62,7 +62,6 @@ const ClientDialog = ({ initialState }: ClientDialogProps) => {
     >
       <video
         autoPlay
-        loop
         controls
         className="aspect-[9/16] h-screen object-cover"
         onError={handleVideoError}
