@@ -142,20 +142,9 @@ const Footer = () => {
 };
 
 const Hero = () => {
-  const section: React.CSSProperties = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  };
-  const video: React.CSSProperties = {
-    height: "100svh",
-    objectFit: "cover",
-    aspectRatio: "9 / 16"
-  };
-
   return (
-    <section style={section}>
-      <video autoPlay loop style={video}>
+    <section className="flex items-center">
+      <video autoPlay loop className="h-screen object-cover aspect-[9/16]">
         <source
           src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1DvpntnQpdTzPRF1Mfx0OqnBA8chlyrDL9ioK"
           type="video/mp4"
