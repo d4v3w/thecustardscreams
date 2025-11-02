@@ -155,9 +155,9 @@ const Hero = () => {
 
   return (
     <section style={section}>
-      <video autoPlay={true} loop={false} style={video}>
+      <video autoPlay loop style={video}>
         <source
-          src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1iAaMFSmIAtbXEjSeMlOLwNGWoynxzCZrK6Tv"
+          src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1DvpntnQpdTzPRF1Mfx0OqnBA8chlyrDL9ioK"
           type="video/mp4"
         />
         Your browser does not support the video tag.
