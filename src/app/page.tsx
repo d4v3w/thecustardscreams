@@ -182,7 +182,11 @@ const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(({className}, ref) 
           className="h-screen object-cover aspect-[9/16]"
         >
           <source
-            src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1DvpntnQpdTzPRF1Mfx0OqnBA8chlyrDL9ioK"
+            src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1VmoiNTAuIT0qi4yXtg9SldF37jxKBDaPcHZr"
+            type="video/webm"
+          />
+          <source
+            src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1vCABEku14NJBxIZe9ydb5S7Ko2ADc3qwMT0G"
             type="video/mp4"
           />
           Your browser does not support the video tag.
