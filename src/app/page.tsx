@@ -141,16 +141,65 @@ const Footer = () => {
   );
 };
 
-export default function HomePage() {
+const Hero = () => {
+  const video: React.CSSProperties = {
+    minWidth: "100%",
+    height: "100%",
+    objectFit: "cover",
+  };
+
   return (
-    <div className="mx-auto max-w-4xl min-w-[320px] bg-black p-2 md:p-3">
-      <Title />
-      <Links />
-      <main className="">
-        <Music />
-        <Shows />
-      </main>
-      <Footer />
+    <section className="video-section">
+      <video autoPlay loop style={video}>
+        <source
+          src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1iAaMFSmIAtbXEjSeMlOLwNGWoynxzCZrK6Tv"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+    </section>
+  );
+};
+
+export default function HomePage() {
+  const scrollContainer: React.CSSProperties = {
+    height: "100vh",
+    overflowY: "scroll",    
+    scrollSnapType: "y mandatory",
+    scrollBehavior: "smooth"
+  };
+
+  const scrollTop: React.CSSProperties = {
+    scrollSnapAlign: "start",
+    height: "100svh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+
+  const scrollBody: React.CSSProperties = {
+    height: "100svh",
+    overflowY: "scroll",
+    scrollSnapType: "y mandatory",
+  };
+
+  return (
+    <div style={scrollContainer}>
+      <div style={scrollTop}>
+        <Hero />
+      </div>
+      <div
+        className="mx-auto max-w-4xl min-w-[320px] bg-black p-2 md:p-3"
+        style={scrollBody}
+      >
+        <Title />
+        <Links />
+        <main className="">
+          <Music />
+          <Shows />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }
