@@ -148,7 +148,7 @@ interface DialogOverlayProps {
 
 const DialogOverlay = ({ initialState }: DialogOverlayProps) => {
   const [showOverlay, setShowOverlay] = React.useState(initialState);
-  const dialogRef = useRef<HTMLDialogElement>(null);
+  const dialogRef = React.useRef<HTMLDialogElement>(null);
 
   const closeDialog = () => {
     dialogRef.current?.close();
