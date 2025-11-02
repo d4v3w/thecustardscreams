@@ -66,6 +66,7 @@ const ClientDialog = ({ initialState }: ClientDialogProps) => {
         controls
         className="aspect-[9/16] h-screen object-cover"
         onError={handleVideoError}
+        onEnded={closeDialog}
       >
         <source
           src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1VmoiNTAuIT0qi4yXtg9SldF37jxKBDaPcHZr"
