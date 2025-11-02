@@ -143,7 +143,7 @@ const Footer = () => {
 
 const Hero = () => {
   return (
-    <section className="flex items-center">
+    <section className="p2 md:p-3 flex items-center justify-center">
       <video autoPlay loop className="h-screen object-cover aspect-[9/16]">
         <source
           src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1DvpntnQpdTzPRF1Mfx0OqnBA8chlyrDL9ioK"
