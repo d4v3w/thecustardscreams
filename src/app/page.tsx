@@ -136,7 +136,7 @@ const Shows = () => (
 const Footer = () => {
   const currentYear: number = new Date().getFullYear();
   return (
-    <footer className="flex flex-col items-center p-2 text-amber-400 opacity-50">
+    <footer className="flex flex-col items-center p-2 text-amber-200">
       Copyright &copy; {currentYear} The Custard Screams
     </footer>
   );
