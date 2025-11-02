@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import React from "react";
 
 const Title = () => (
   <header className="mb-2 md:mb-3">
@@ -141,24 +142,63 @@ const Footer = () => {
   );
 };
 
-const Hero = () => {
+const Dialog = React.forwardRef<HTMLDivElement, {}>((props, ref) => {
+  const stopPropagation = (event: React.MouseEvent<HTMLDivElement>) => {
+    event?.stopPropagation()
+  }
   return (
-    <section className="flex flex-col items-center p-2">
-      <video autoPlay loop controls className="h-screen object-cover aspect-[9/16]">
-        <source
-          src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1DvpntnQpdTzPRF1Mfx0OqnBA8chlyrDL9ioK"
-          type="video/mp4"
-        />
-        Your browser does not support the video tag.
-      </video>
-    </section>
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        background: "rgba(0, 0, 0, 0.6)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 9999,
+      }}
+      ref={ref}
+      onClick={stopPropagation}
+    >
+      <dialog
+        className="flex flex-col items-center"
+        style={{
+          boxShadow: "0 0 10px rgba(0,0,0,0.3)",
+        }}
+      >
+        <video
+          autoPlay
+          loop
+          controls
+          className="h-screen object-cover aspect-[9/16]"
+        >
+          <source
+            src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1DvpntnQpdTzPRF1Mfx0OqnBA8chlyrDL9ioK"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+      </dialog>
+    </div>
   );
 };
 
 export default function HomePage() {
+  const dialogRef= React.useRef<HTMLDivElement>(null);
+
+  const hideElement = (event: React.MouseEvent<HTMLDivElement>) => {
+      if (dialogRef?.current)  {   
+         dialogRef.current.style.display = 'none';
+      }
+      return;
+  }
+
   return (
-    <div className="mx-auto max-w-4xl min-w-[320px] bg-black p-2 md:p-3">
-      <Hero />
+    <div className="mx-auto max-w-4xl min-w-[320px] bg-black p-2 md:p-3" onClick={hideElement}>
+      <Dialog ref={dialogRef} />
       <Title />
       <Links />
       <main>
@@ -168,4 +208,4 @@ export default function HomePage() {
       <Footer />
     </div>
   );
-}
+};
