@@ -147,67 +147,91 @@ interface DialogProps {
   children?: React.ReactNode;
 }
 
-const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(({className}, ref) => {
-  const stopPropagation = (event: React.MouseEvent<HTMLDivElement>) => {
-    event?.stopPropagation()
-  }
-  return (
-    <div
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        background: "rgba(0, 0, 0, 0.6)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 9999,
-      }}
-      className={className}
-      ref={ref}
-      onClick={stopPropagation}
-    >
-      <dialog
-        className="flex flex-col items-center"
+const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
+  ({ className }, ref) => {
+    const [showOverlay, setShowOverlay] = React.useState(true);
+
+    // Check browser support on mount
+    React.useEffect(() => {
+      const videoEl = document.createElement('video');
+      const supportsWebM = videoEl.canPlayType('video/webm') !== '';
+      const supportsMP4 = videoEl.canPlayType('video/mp4') !== '';
+
+      if (!supportsWebM && !supportsMP4) {
+        setShowOverlay(false); // Hide if neither format is supported
+      }
+    }, []);
+
+    const handleVideoError = () => {
+      setShowOverlay(false); // Hide if video fails to load/play
+    };
+
+    const stopPropagation = (event: React.MouseEvent<HTMLDivElement>): void => {
+      event?.stopPropagation();
+    };
+
+    if (!showOverlay) return null;
+
+    return (
+      <div
         style={{
-          boxShadow: "0 0 10px rgba(0,0,0,0.3)",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "rgba(0, 0, 0, 0.6)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 9999,
         }}
+        className={className}
+        ref={ref}
+        onClick={stopPropagation}
       >
-        <video
-          autoPlay
-          loop
-          controls
-          className="h-screen object-cover aspect-[9/16]"
+        <dialog
+          className="flex flex-col items-center"
+          style={{
+            boxShadow: "0 0 10px rgba(0,0,0,0.3)",
+          }}
         >
-          <source
-            src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1VmoiNTAuIT0qi4yXtg9SldF37jxKBDaPcHZr"
-            type="video/webm"
-          />
-          <source
-            src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1vCABEku14NJBxIZe9ydb5S7Ko2ADc3qwMT0G"
-            type="video/mp4"
-          />
-          Your browser does not support the video tag.
-        </video>
-      </dialog>
-    </div>
-  );
-};
+          <video
+            autoPlay
+            loop
+            controls
+            className="h-screen object-cover aspect-[9/16]"
+            onError={handleVideoError}
+          >
+            <source
+              src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1VmoiNTAuIT0qi4yXtg9SldF37jxKBDaPcHZr"
+              type="video/webm"
+            />
+            <source
+              src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1vCABEku14NJBxIZe9ydb5S7Ko2ADc3qwMT0G"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </dialog>
+      </div>
+    );
+  }
+);
 
 export default function HomePage() {
-  const dialogRef= React.useRef<HTMLDivElement>(null);
-
-  const hideElement = (event: React.MouseEvent<HTMLDivElement>) => {
-      if (dialogRef?.current)  {   
-         dialogRef.current.style.display = 'none';
-      }
-      return;
-  }
+  const dialogRef = React.useRef<HTMLDivElement>(null);
+  const hideElement = (event: React.MouseEvent<HTMLDivElement>): void => {
+    if (dialogRef?.current) {
+      dialogRef.current.style.display = "none";
+    }
+  };
 
   return (
-    <div className="mx-auto max-w-4xl min-w-[320px] bg-black p-2 md:p-3" onClick={hideElement}>
+    <div
+      className="mx-auto max-w-4xl min-w-[320px] bg-black p-2 md:p-3"
+      onClick={hideElement}
+    >
       <Dialog ref={dialogRef} />
       <Title />
       <Links />
@@ -218,4 +242,4 @@ export default function HomePage() {
       <Footer />
     </div>
   );
-};
+}
