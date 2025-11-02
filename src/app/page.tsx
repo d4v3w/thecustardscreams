@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import React from "react";
-import { ClientDialogOverlay as Dialog } from "../components/ClientDialogOverlay";
+import Dialog from "../components/ClientDialogOverlay";
 
 const Title = () => (
   <header className="mb-2 md:mb-3">
