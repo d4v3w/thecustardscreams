@@ -11,22 +11,13 @@ const ClientDialog = ({ initialState }: ClientDialogProps) => {
   const [showOverlay, setShowOverlay] = useState(initialState);
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-  const openDialog = () => {
-    console.log("opening");
-    setShowOverlay(true);
-    // ensure native dialog opens immediately if available
-    if (dialogRef.current && !dialogRef.current.open)
-      dialogRef.current.showModal();
-  };
   const closeDialog = () => {
-    console.log("closing");
     setShowOverlay(false);
     // close native dialog immediately when requested
-    if (dialogRef.current && dialogRef.current.open) dialogRef.current.close();
+    if (dialogRef?.current?.open) dialogRef.current.close();
   };
 
   useEffect(() => {
-    console.log("useEffect");
     const videoEl = document.createElement("video");
     const supportsWebM = videoEl.canPlayType("video/webm") !== "";
     const supportsMP4 = videoEl.canPlayType("video/mp4") !== "";
@@ -38,14 +29,11 @@ const ClientDialog = ({ initialState }: ClientDialogProps) => {
 
     if (showOverlay) {
       // open the native dialog when state turns true
-      if (dialogRef.current && !dialogRef.current.open) {
-        console.log("useEffect: showModal");
+      if (dialogRef?.current && !dialogRef?.current.open)
         dialogRef.current.showModal();
-      }
     } else {
       // close the native dialog when state turns false
-      if (dialogRef.current && dialogRef.current.open) {
-        console.log("useEffect: close native dialog");
+      if (dialogRef?.current?.open) {
         dialogRef.current.close();
       }
     }
@@ -66,7 +54,6 @@ const ClientDialog = ({ initialState }: ClientDialogProps) => {
       // only close when clicking the backdrop (target is the dialog itself)
       onClick={(e: MouseEvent<HTMLDialogElement>) => {
         if (e.target === dialogRef.current) {
-          console.log("backdrop clicked");
           closeDialog();
         }
       }}
@@ -84,11 +71,14 @@ const ClientDialog = ({ initialState }: ClientDialogProps) => {
           src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1VmoiNTAuIT0qi4yXtg9SldF37jxKBDaPcHZr"
           type="video/webm"
         />
+        <source
+          src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1vCABEku14NJBxIZe9ydb5S7Ko2ADc3qwMT0G"
+          type="video/mp4"
+        />
         <p>Your browser does not support the video tag.</p>
       </video>
     </dialog>
   );
 };
 
-ClientDialog.displayName = "ClientDialog";
 export default ClientDialog;
