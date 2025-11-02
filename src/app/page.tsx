@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import React from "react";
-import ClientDialogOverlay from '../components/ClientDialogOverlay'
+import { ClientDialogOverlay as Dialog } from "../components/ClientDialogOverlay";
 
 const Title = () => (
   <header className="mb-2 md:mb-3">
@@ -146,7 +146,7 @@ const Footer = () => {
 export default function HomePage() {
   return (
     <div className="mx-auto max-w-4xl min-w-[320px] bg-black p-2 md:p-3">
-      <ClientDialogOverlay initialState={true} />
+      <Dialog initialState={true} />
       <Title />
       <Links />
       <main>
