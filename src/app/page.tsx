@@ -179,7 +179,7 @@ const DialogOverlay = ({ initialState }: DialogOverlayProps) => {
 
   return (
     <dialog
-      onClick={closeDialog()}
+      onClick={closeDialog}
       open={showOverlay}
       className="flex flex-col items-center"
       style={{
