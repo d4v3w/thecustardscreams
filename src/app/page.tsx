@@ -148,14 +148,14 @@ const Hero = () => {
     alignItems: "center",
   };
   const video: React.CSSProperties = {
-    minHeight: "100svh",
+    height: "100svh",
     objectFit: "cover",
     aspectRatio: "9 / 16"
   };
 
   return (
     <section style={section}>
-      <video autoPlay loop style={video}>
+      <video autoPlay={true} loop={false} style={video}>
         <source
           src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1iAaMFSmIAtbXEjSeMlOLwNGWoynxzCZrK6Tv"
           type="video/mp4"
