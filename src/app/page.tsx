@@ -142,7 +142,12 @@ const Footer = () => {
   );
 };
 
-const Dialog = React.forwardRef<HTMLDivElement, {}>((props, ref) => {
+interface DialogProps {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(({className}, ref) => {
   const stopPropagation = (event: React.MouseEvent<HTMLDivElement>) => {
     event?.stopPropagation()
   }
@@ -160,6 +165,7 @@ const Dialog = React.forwardRef<HTMLDivElement, {}>((props, ref) => {
         alignItems: "center",
         zIndex: 9999,
       }}
+      className={className}
       ref={ref}
       onClick={stopPropagation}
     >
