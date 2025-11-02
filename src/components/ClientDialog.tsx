@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-interface ClientDialogOverlayProps {
+interface ClientDialogProps {
   initialState: boolean;
 }
 
-const ClientDialogOverlay = ({ initialState }: ClientDialogOverlayProps) => {
+const ClientDialog = ({ initialState }: ClientDialogProps) => {
   const [showOverlay, setShowOverlay] = useState(initialState);
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -46,7 +46,7 @@ const ClientDialogOverlay = ({ initialState }: ClientDialogOverlayProps) => {
         autoPlay
         loop
         controls
-        className="h-screen object-cover aspect-[9/16]"
+        className="aspect-[9/16] h-screen object-cover"
         onError={handleVideoError}
       >
         <source
@@ -63,5 +63,5 @@ const ClientDialogOverlay = ({ initialState }: ClientDialogOverlayProps) => {
   );
 };
 
-ClientDialogOverlay.displayName = "ClientDialogOverlay";
-export default ClientDialogOverlay;
+ClientDialog.displayName = "ClientDialog";
+export default ClientDialog;
