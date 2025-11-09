@@ -1,5 +1,5 @@
 module.exports = {
-    siteUrl: 'https://www.digitalnativeuk.com',
+    siteUrl: 'https://www.thecustardscreams.com',
     generateRobotsTxt: true,
     generateIndexSitemap: false,
 };
