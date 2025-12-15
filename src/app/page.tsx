@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import ClientDialog from "@/components/ClientDialog";
 import Link from "next/link";
 
 const Title = () => (
@@ -145,7 +144,6 @@ const Footer = () => {
 export default function HomePage() {
   return (
     <div className="mx-auto max-w-4xl min-w-[320px] bg-black p-2 md:p-3">
-      <ClientDialog initialState={true} />
       <Title />
       <Links />
       <main>
