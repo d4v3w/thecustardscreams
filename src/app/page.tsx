@@ -6,7 +6,12 @@ export const metadata = {
     "The Custard Screams from London, England. Grunge, Heavy Rock, Punk Rock, Rock band.",
 };
 export default function HomePage() {
-  return <Music />;
+  return (
+    <article className="p2 md:p-3">
+      <h1 className="text-xl font-bold text-amber-400">The Custard Screams</h1>
+      <Music />
+    </article>
+  );
 }
 
 HomePage.displayName = "HomePage";
