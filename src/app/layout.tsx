@@ -2,6 +2,8 @@ import "~/styles/globals.css";
 
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
+import Footer from "~/components/Footer";
+import Title from "~/components/Title";
 
 export const metadata: Metadata = {
   title: "The Custard Screams",
@@ -42,7 +44,13 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en-GB" className={`${geist.variable}`}>
-      <body className="bg-black text-white">{children}</body>
+      <body className="bg-black text-white">
+        <div className="mx-auto max-w-4xl min-w-[320px] bg-black p-2 md:p-3">
+          <Title />
+          <main>{children}</main>
+          <Footer />
+        </div>
+      </body>
     </html>
   );
 }
