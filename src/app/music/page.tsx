@@ -1,5 +1,10 @@
 import Music from "~/components/Music";
 
+export const metadata = {
+  title: "Music Downloads and Streaming - The Custard Screams",
+  description: "The Custard Screams music downloads and streaming links.",
+};
+
 export default async function MusicPage() {
   return (
     <article className="p2 md:p-3">
