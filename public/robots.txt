@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.thecustardscreams.com
+
+# Sitemaps
+Sitemap: https://www.thecustardscreams.com/sitemap.xml
