@@ -10,7 +10,7 @@ export default async function LiveShowsPage() {
   return (
     <article className="p2 md:p-3">
       <h1 className="text-xl font-bold text-amber-400">
-        Custard Screams Live Shows
+        Custard Screams Live Shows, Gigs and Events
       </h1>
 
       <article className="p2 md:p-3">
@@ -19,8 +19,8 @@ export default async function LiveShowsPage() {
           Come and see The Custard Screams play live at these upcoming shows
         </p>
         <script
-          charSet="utf-8"
           src="https://widgetv3.bandsintown.com/main.min.js"
+          defer
         ></script>
         <a
           className="bit-widget-initializer"
