@@ -1,4 +1,3 @@
-import Links from "~/components/Links";
 import Music from "~/components/Music";
 
 export const metadata = {
@@ -7,14 +6,7 @@ export const metadata = {
     "The Custard Screams from London, England. Grunge, Heavy Rock, Punk Rock, Rock band.",
 };
 export default function HomePage() {
-  return (
-    <>
-      <Links />
-      <main>
-        <Music />
-      </main>
-    </>
-  );
+  return <Music />;
 }
 
 HomePage.displayName = "HomePage";
