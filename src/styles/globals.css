@@ -5,3 +5,22 @@
     var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+
+/* Inline list separators for song nav */
+.inline-sep {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+.inline-sep li {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.5rem;
+}
+.inline-sep li + li::before {
+  content: "|";
+  display: inline-flex;
+  margin-right: 0.5rem;
+}

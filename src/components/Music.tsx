@@ -14,6 +14,16 @@ const Music = () => (
       </Link>
       .
     </p>
+    <p>
+      Read more about {""}
+      <Link
+        href="/music/the-custard-screams-ep"
+        className="text-amber-400 underline"
+      >
+        The Custard Screams EP here
+      </Link>
+      .
+    </p>
 
     <Socials type="streaming" />
   </article>

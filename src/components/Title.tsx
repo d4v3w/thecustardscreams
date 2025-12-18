@@ -44,7 +44,7 @@ export const Title = () => (
       </Link>
     </nav>
 
-    <article className="mb-3 flex flex-col items-center gap-3 md:flex-row md:flex-wrap">
+    {/* <article className="mb-3 flex flex-col items-center gap-3 md:flex-row md:flex-wrap">
       <Link
         className="w-full flex-grow flex-col gap-1 rounded-xl bg-yellow-400 p-3 text-white hover:bg-yellow-500"
         href="https://www.instagram.com/thecustardscreams"
@@ -56,7 +56,7 @@ export const Title = () => (
           <br /> Stratford, London
         </div>
       </Link>
-    </article>
+    </article> */}
   </>
 );
 
