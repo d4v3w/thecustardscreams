@@ -8,6 +8,7 @@ import Title from "~/components/Title";
 export const metadata: Metadata = {
   title: "The Custard Screams",
   description: "London based Post Hardcore Punk Rock Band",
+  metadataBase: new URL("https://www.thecustardscreams.com"),
   icons: [
     {
       rel: "icon",

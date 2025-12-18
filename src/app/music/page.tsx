@@ -1,8 +1,12 @@
 import Music from "~/components/Music";
+import { getCanonicalUrl } from "~/lib/metadata";
 
 export const metadata = {
   title: "Music Downloads and Streaming - The Custard Screams",
   description: "The Custard Screams music downloads and streaming links.",
+  alternates: {
+    canonical: getCanonicalUrl("/music"),
+  },
 };
 
 export default async function MusicPage() {

@@ -1,10 +1,14 @@
 import Link from "next/link";
 import Music from "~/components/Music";
+import { getCanonicalUrl } from "~/lib/metadata";
 
 export const metadata = {
   title: "The Custard Screams",
   description:
     "The Custard Screams from London, England. Grunge, Heavy Rock, Punk Rock, Rock band.",
+  alternates: {
+    canonical: getCanonicalUrl("/"),
+  },
 };
 export default function HomePage() {
   return (
