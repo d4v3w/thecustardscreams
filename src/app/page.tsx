@@ -13,6 +13,9 @@ export const metadata = {
 export default function HomePage() {
   return (
     <article className="p2 md:p-3">
+      <h1 className="text-xl font-bold text-amber-400">
+        The Custard Screams
+      </h1>
       <Music />
       <img
         src="https://punkrockmag.com/wp-content/uploads/2025/12/custard-screams-band.jpg"
