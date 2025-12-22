@@ -3,7 +3,7 @@ import Link from "next/link";
 export const Title = () => (
   <>
     <header className="mb-2 md:mb-3">
-      <h1>
+      <div>
         <Link href="/">
           <span className="sr-only">The Custard Screams</span>
           <img
@@ -14,7 +14,7 @@ export const Title = () => (
             className="mx-auto h-40 w-40 rounded-full sm:h-50 sm:w-50 md:mx-0 lg:h-60 lg:w-60"
           />
         </Link>
-      </h1>
+      </div>
     </header>
 
     <nav className="mb-2 flex w-full gap-3 md:mb-3">
