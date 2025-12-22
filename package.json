@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.12.0",
-    "next": "^16.0.10",
+    "next": "^16.1.0",
     "next-sitemap": "^4.2.3",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
