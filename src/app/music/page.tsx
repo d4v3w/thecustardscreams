@@ -13,7 +13,7 @@ export default async function MusicPage() {
   return (
     <article className="p2 md:p-3">
       <h1 className="text-xl font-bold text-amber-400">
-        About Custard Screams
+        About The Custard Screams
       </h1>
       <Music />
 
