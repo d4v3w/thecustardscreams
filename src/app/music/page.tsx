@@ -2,7 +2,7 @@ import Music from "~/components/Music";
 import { getCanonicalUrl } from "~/lib/metadata";
 
 export const metadata = {
-  title: "Music Downloads and Streaming - The Custard Screams",
+  title: "Music Downloads and Streaming",
   description: "The Custard Screams music downloads and streaming links.",
   alternates: {
     canonical: getCanonicalUrl("/music"),

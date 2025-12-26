@@ -9,17 +9,63 @@ export const metadata = {
   alternates: {
     canonical: getCanonicalUrl("/"),
   },
+  openGraph: {
+    images: [
+      {
+        url: "https://punkrockmag.com/wp-content/uploads/2025/12/custard-screams-band.jpg",
+        width: 1200,
+        height: 630,
+        alt: "The Custard Screams band photo, four members standing in a rehearsal studio.",
+      },
+    ],
+  },
 };
+
 export default function HomePage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    name: "The Custard Screams",
+    url: "https://www.thecustardscreams.com",
+    logo: "https://www.thecustardscreams.com/android-chrome-512x512.png",
+    genre: ["Post-Hardcore", "Punk Rock", "Rock"],
+    location: {
+      "@type": "Place",
+      name: "London",
+    },
+    sameAs: [
+      "https://thecustardscreams.bandcamp.com/",
+      "https://www.youtube.com/@TheCustardScreams",
+      "https://www.instagram.com/thecustardscreams",
+    ],
+  };
+
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "The Custard Screams",
+    url: "https://www.thecustardscreams.com",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://www.thecustardscreams.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   return (
     <article className="p2 md:p-3">
-      <h1 className="text-xl font-bold text-amber-400">
-        The Custard Screams
-      </h1>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
       <Music />
       <img
         src="https://punkrockmag.com/wp-content/uploads/2025/12/custard-screams-band.jpg"
-        alt="The Custard Screams Band Photo 2025"
+        alt="The Custard Screams band photo, four members standing in a rehearsal studio."
         className="my-4 w-full rounded-xl"
       />
       <blockquote className="border-l-4 border-amber-400 pl-4 italic">

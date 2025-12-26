@@ -2,7 +2,7 @@ import Links from "~/components/Links";
 import { getCanonicalUrl } from "~/lib/metadata";
 
 export const metadata = {
-  title: "About Us - The Custard Screams",
+  title: "About Us",
   description: "Learn more about The Custard Screams.",
   alternates: {
     canonical: getCanonicalUrl("/about"),

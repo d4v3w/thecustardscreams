@@ -2,7 +2,7 @@ import Shows from "~/components/Shows";
 import { getCanonicalUrl } from "~/lib/metadata";
 
 export const metadata = {
-  title: "Live Shows, Gigs & Events - The Custard Screams",
+  title: "Live Shows, Gigs & Events",
   description:
     "The Custard Screams live show dates, gigs and tour events. Including past shows and upcoming performances.",
   alternates: {
