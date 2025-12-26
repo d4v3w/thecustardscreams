@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Royal Flush - The Custard Screams",
+  title: "Royal Flush",
   description:
     "Royal Flush song breakdown and lyrics, taken from the debut self-titled EP by The Custard Screams.",
 };
@@ -7,9 +7,7 @@ export const metadata = {
 export function Song() {
   return (
     <article className="p2 md:p-3">
-      <h1 className="text-xl font-bold text-amber-400">
-        Song: Royal Flush - The Custard Screams
-      </h1>
+      <h1 className="text-xl font-bold text-amber-400">Song: Royal Flush</h1>
 
       <p>
         Royal Flush song breakdown and lyrics, taken from the debut self-titled

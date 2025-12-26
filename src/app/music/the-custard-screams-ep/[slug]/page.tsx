@@ -35,7 +35,7 @@ export async function generateMetadata({
   const pathname = `/music/the-custard-screams-ep/${slug}`;
 
   return {
-    title: `${songTitle} - The Custard Screams`,
+    title: `${songTitle}`,
     description: `${songTitle} song breakdown and lyrics, taken from the debut self-titled EP by The Custard Screams.`,
     alternates: {
       canonical: getCanonicalUrl(pathname),

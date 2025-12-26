@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Tomorrow - The Custard Screams",
+  title: "Tomorrow",
   description:
     "Tomorrow song breakdown and lyrics, taken from the debut self-titled EP by The Custard Screams.",
 };
@@ -7,9 +7,7 @@ export const metadata = {
 export function Song() {
   return (
     <article className="p2 md:p-3">
-      <h1 className="text-xl font-bold text-amber-400">
-        Song: Tomorrow - The Custard Screams
-      </h1>
+      <h1 className="text-xl font-bold text-amber-400">Song: Tomorrow</h1>
 
       <p>
         Tomorrow song breakdown and lyrics, taken from the debut self-titled EP
