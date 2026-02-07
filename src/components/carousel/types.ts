@@ -45,7 +45,7 @@ export interface UseCarouselReturn {
   scrollToIndex: (index: number) => void;
   scrollToNext: () => void;
   scrollToPrevious: () => void;
-  containerRef: React.RefObject<HTMLDivElement>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
   canScrollPrevious: boolean;
   canScrollNext: boolean;
 }
@@ -58,7 +58,7 @@ export interface UseLightboxReturn {
   selectedImage: CarouselImage | null;
   openLightbox: (image: CarouselImage) => void;
   closeLightbox: () => void;
-  dialogRef: React.RefObject<HTMLDialogElement>;
+  dialogRef: React.RefObject<HTMLDialogElement | null>;
 }
 
 /**

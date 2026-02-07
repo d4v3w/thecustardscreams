@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Section from "~/components/Section";
+import Socials from "~/components/Socials";
 
 /**
  * Home section with band introduction and next show banner
@@ -25,6 +26,11 @@ export default function HeroSection() {
         <h1 id="home-heading" className="mb-4 text-center text-4xl font-bold text-amber-400 md:text-5xl lg:text-6xl">
           The Custard Screams
         </h1>
+
+        {/* Social Links */}
+        <div className="mb-6 flex justify-center">
+          <Socials type="all" />
+        </div>
 
         <p className="mb-8 text-center text-lg text-white md:text-xl">
           London based Post Hardcore Punk Rock Band

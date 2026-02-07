@@ -82,7 +82,7 @@ section[data-section-id] {
   display: flex;
   align-items: center;
 }
-.inline-sep li {
+.inline-sep li:not(:first-child) {
   display: inline-flex;
   align-items: center;
   margin-left: 0.5rem;

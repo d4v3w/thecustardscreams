@@ -23,9 +23,8 @@ export default function NavItem({ section, isActive, onClick, iconType }: NavIte
     if (resolvedIconType === 'music') {
       return (
         <div 
-          className={`icon-container icon-music relative ${isActive ? 'active' : ''}`}
+          className={`icon-container icon-music relative w-8 h-8 ${isActive ? 'active' : ''}`}
           aria-hidden="true"
-          style={{ width: '32px', height: '32px' }}
         >
           {/* Note stem */}
           <div className="music-stem" />
@@ -40,13 +39,11 @@ export default function NavItem({ section, isActive, onClick, iconType }: NavIte
     // Other icons use pure CSS
     return (
       <div 
-        className={`icon-container relative ${isActive ? 'active' : ''}`}
+        className={`icon-container relative w-8 h-8 ${isActive ? 'active' : ''}`}
         aria-hidden="true"
-        style={{ width: '32px', height: '32px' }}
       >
         <div 
-          className={`icon-${resolvedIconType}`} 
-          style={{ width: '32px', height: '32px', color: 'currentColor' }}
+          className={`icon-${resolvedIconType} text-current w-8 h-8`}
         />
       </div>
     );

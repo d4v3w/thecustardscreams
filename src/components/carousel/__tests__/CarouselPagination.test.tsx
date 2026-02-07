@@ -61,13 +61,13 @@ describe('CarouselPagination', () => {
 
     const dots = screen.getAllByRole('tab');
     
-    fireEvent.click(dots[0]);
+    fireEvent.click(dots[0]!);
     expect(mockOnDotClick).toHaveBeenCalledWith(0);
 
-    fireEvent.click(dots[1]);
+    fireEvent.click(dots[1]!);
     expect(mockOnDotClick).toHaveBeenCalledWith(1);
 
-    fireEvent.click(dots[2]);
+    fireEvent.click(dots[2]!);
     expect(mockOnDotClick).toHaveBeenCalledWith(2);
   });
 

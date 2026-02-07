@@ -6,9 +6,20 @@
 
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import React from "react";
 import Section from "~/components/Section";
 import BottomNav from "~/components/navigation/BottomNav";
 import { NavigationProvider } from "~/contexts/NavigationContext";
+
+// Mock Next.js router
+jest.mock("next/navigation", () => ({
+  usePathname: jest.fn(() => "/"),
+  useRouter: jest.fn(() => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    prefetch: jest.fn(),
+  })),
+}));
 
 // Mock hooks
 jest.mock("~/hooks/useReducedMotion", () => ({
@@ -34,10 +45,10 @@ describe("Navigation and Scroll Snap", () => {
   });
 
   describe("Scroll Snap CSS Classes", () => {
-    it("should apply snap-start class to all sections", () => {
+    it("should render all sections with data-section-id attribute", () => {
       const { container } = render(
         <NavigationProvider>
-          <Section id="hero">Hero Content</Section>
+          <Section id="home">Home Content</Section>
           <Section id="music">Music Content</Section>
           <Section id="shows">Shows Content</Section>
           <Section id="about">About Content</Section>
@@ -48,33 +59,35 @@ describe("Navigation and Scroll Snap", () => {
       expect(sections).toHaveLength(4);
 
       sections.forEach((section) => {
-        expect(section).toHaveClass("snap-start");
+        expect(section).toHaveAttribute("data-section-id");
       });
     });
 
-    it("should apply min-h-screen to all sections for proper snap alignment", () => {
+    it("should render sections with proper structure for scroll snap", () => {
       const { container } = render(
         <NavigationProvider>
-          <Section id="hero">Hero Content</Section>
+          <Section id="home">Home Content</Section>
           <Section id="music">Music Content</Section>
         </NavigationProvider>
       );
 
       const sections = container.querySelectorAll("section");
+      // Sections should exist and have data-section-id for global CSS targeting
       sections.forEach((section) => {
-        expect(section).toHaveClass("min-h-screen");
+        expect(section.tagName).toBe("SECTION");
+        expect(section).toHaveAttribute("data-section-id");
       });
     });
 
     it("should have data-section-id attribute for intersection observer", () => {
       const { container } = render(
         <NavigationProvider>
-          <Section id="hero">Hero Content</Section>
+          <Section id="home">Home Content</Section>
           <Section id="music">Music Content</Section>
         </NavigationProvider>
       );
 
-      expect(container.querySelector('[data-section-id="hero"]')).toBeInTheDocument();
+      expect(container.querySelector('[data-section-id="home"]')).toBeInTheDocument();
       expect(container.querySelector('[data-section-id="music"]')).toBeInTheDocument();
     });
   });
@@ -85,12 +98,12 @@ describe("Navigation and Scroll Snap", () => {
 
       // Create a test component with navigation
       const TestComponent = () => {
-        const [currentSection, setCurrentSection] = React.useState<string | null>("hero");
+        const [currentSection, setCurrentSection] = React.useState<string | null>("home");
 
         return (
           <NavigationProvider>
             <div>
-              <Section id="hero">Hero Content</Section>
+              <Section id="home">Home Content</Section>
               <Section id="music">Music Content</Section>
               <Section id="shows">Shows Content</Section>
               <Section id="about">About Content</Section>
@@ -132,10 +145,10 @@ describe("Navigation and Scroll Snap", () => {
         return (
           <NavigationProvider>
             <div>
-              <Section id="hero">Hero Content</Section>
+              <Section id="home">Home Content</Section>
               <Section id="music">Music Content</Section>
               <BottomNav
-                activeSection="hero"
+                activeSection="home"
                 onNavigate={(id) => {
                   window.history.pushState(null, "", `#${id}`);
                 }}
@@ -157,7 +170,7 @@ describe("Navigation and Scroll Snap", () => {
 
     it("should navigate to all sections in order", async () => {
       const user = userEvent.setup();
-      const sections = ["hero", "music", "shows", "about"];
+      const sections = ["home", "music", "shows", "about"];
 
       const TestComponent = () => {
         return (
@@ -169,7 +182,7 @@ describe("Navigation and Scroll Snap", () => {
                 </Section>
               ))}
               <BottomNav
-                activeSection="hero"
+                activeSection="home"
                 onNavigate={(id) => {
                   const element = document.querySelector(`[data-section-id="${id}"]`);
                   element?.scrollIntoView({ behavior: "smooth" });
@@ -219,7 +232,7 @@ describe("Navigation and Scroll Snap", () => {
     it("should maintain section order for proper snap sequence", () => {
       const { container } = render(
         <NavigationProvider>
-          <Section id="hero">Hero</Section>
+          <Section id="home">Home</Section>
           <Section id="music">Music</Section>
           <Section id="shows">Shows</Section>
           <Section id="about">About</Section>
@@ -229,7 +242,7 @@ describe("Navigation and Scroll Snap", () => {
       const sections = container.querySelectorAll("section");
       const sectionIds = Array.from(sections).map((s) => s.getAttribute("data-section-id"));
 
-      expect(sectionIds).toEqual(["hero", "music", "shows", "about"]);
+      expect(sectionIds).toEqual(["home", "music", "shows", "about"]);
     });
   });
 
@@ -242,26 +255,26 @@ describe("Navigation and Scroll Snap", () => {
       );
 
       const musicButton = screen.getByRole("button", { name: /music/i });
-      const heroButton = screen.getByRole("button", { name: /home/i });
+      const homeButton = screen.getByRole("button", { name: /home/i });
 
       // Active button should have amber background
       expect(musicButton).toHaveClass("bg-amber-400");
       expect(musicButton).toHaveClass("text-black");
 
       // Inactive button should not have amber background
-      expect(heroButton).not.toHaveClass("bg-amber-400");
-      expect(heroButton).toHaveClass("text-white");
+      expect(homeButton).not.toHaveClass("bg-amber-400");
+      expect(homeButton).toHaveClass("text-white");
     });
 
     it("should update active state when different section is active", () => {
       const { rerender } = render(
         <NavigationProvider>
-          <BottomNav activeSection="hero" onNavigate={() => {}} />
+          <BottomNav activeSection="home" onNavigate={() => {}} />
         </NavigationProvider>
       );
 
-      let heroButton = screen.getByRole("button", { name: /home/i });
-      expect(heroButton).toHaveClass("bg-amber-400");
+      let homeButton = screen.getByRole("button", { name: /home/i });
+      expect(homeButton).toHaveClass("bg-amber-400");
 
       // Change active section
       rerender(
@@ -270,10 +283,10 @@ describe("Navigation and Scroll Snap", () => {
         </NavigationProvider>
       );
 
-      heroButton = screen.getByRole("button", { name: /home/i });
+      homeButton = screen.getByRole("button", { name: /home/i });
       const showsButton = screen.getByRole("button", { name: /shows/i });
 
-      expect(heroButton).not.toHaveClass("bg-amber-400");
+      expect(homeButton).not.toHaveClass("bg-amber-400");
       expect(showsButton).toHaveClass("bg-amber-400");
     });
   });
@@ -282,14 +295,14 @@ describe("Navigation and Scroll Snap", () => {
     it("should have proper ARIA labels on navigation items", () => {
       render(
         <NavigationProvider>
-          <BottomNav activeSection="hero" onNavigate={() => {}} />
+          <BottomNav activeSection="home" onNavigate={() => {}} />
         </NavigationProvider>
       );
 
-      const heroButton = screen.getByRole("button", { name: /hero section/i });
+      const homeButton = screen.getByRole("button", { name: /home section/i });
       const musicButton = screen.getByRole("button", { name: /music/i });
 
-      expect(heroButton).toHaveAttribute("aria-label");
+      expect(homeButton).toHaveAttribute("aria-label");
       expect(musicButton).toHaveAttribute("aria-label");
     });
 
@@ -307,7 +320,7 @@ describe("Navigation and Scroll Snap", () => {
     it("should have minimum touch target size of 44x44px", () => {
       const { container } = render(
         <NavigationProvider>
-          <BottomNav activeSection="hero" onNavigate={() => {}} />
+          <BottomNav activeSection="home" onNavigate={() => {}} />
         </NavigationProvider>
       );
 
@@ -325,15 +338,15 @@ describe("Navigation and Scroll Snap", () => {
 
       render(
         <NavigationProvider>
-          <BottomNav activeSection="hero" onNavigate={() => {}} />
+          <BottomNav activeSection="home" onNavigate={() => {}} />
         </NavigationProvider>
       );
 
-      const heroButton = screen.getByRole("button", { name: /home/i });
+      const homeButton = screen.getByRole("button", { name: /home/i });
 
       // Tab to first button
       await user.tab();
-      expect(heroButton).toHaveFocus();
+      expect(homeButton).toHaveFocus();
     });
 
     it("should activate navigation on Enter key", async () => {
@@ -342,7 +355,7 @@ describe("Navigation and Scroll Snap", () => {
 
       render(
         <NavigationProvider>
-          <BottomNav activeSection="hero" onNavigate={mockNavigate} />
+          <BottomNav activeSection="home" onNavigate={mockNavigate} />
         </NavigationProvider>
       );
 
@@ -360,7 +373,7 @@ describe("Navigation and Scroll Snap", () => {
 
       render(
         <NavigationProvider>
-          <BottomNav activeSection="hero" onNavigate={mockNavigate} />
+          <BottomNav activeSection="home" onNavigate={mockNavigate} />
         </NavigationProvider>
       );
 

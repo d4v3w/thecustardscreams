@@ -65,33 +65,34 @@ export default async function SongPage({
 
   return (
     <>
-      <ol className="inline-sep m-3">
-        <li>
-          <Link
-            href="/music/the-custard-screams-ep/royal-flush"
-            className="text-amber-400 underline"
-          >
-            Royal Flush
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/music/the-custard-screams-ep/would-you"
-            className="text-amber-400 underline"
-          >
-            Would You
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/music/the-custard-screams-ep/tomorrow"
-            className="text-amber-400 underline"
-          >
-            Tomorrow
-          </Link>
-        </li>
-      </ol>
-      <SongComponent />
+      <SongComponent songNavigation={
+        <ol className="inline-sep m-3">
+          <li>
+            <Link
+              href="/music/the-custard-screams-ep/royal-flush"
+              className="text-amber-400 underline"
+            >
+              Royal Flush
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/music/the-custard-screams-ep/would-you"
+              className="text-amber-400 underline"
+            >
+              Would You
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/music/the-custard-screams-ep/tomorrow"
+              className="text-amber-400 underline"
+            >
+              Tomorrow
+            </Link>
+          </li>
+        </ol>
+      } />
       <p>
         <Link href="/music/the-custard-screams-ep">
           Read more about{" "}

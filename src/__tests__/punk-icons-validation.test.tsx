@@ -12,7 +12,7 @@ describe("Punk Icons CSS Validation", () => {
   it("should render icon elements with correct classes", () => {
     const { container } = render(
       <NavItem
-        section={SECTIONS[0]}
+        section={SECTIONS[0]!}
         isActive={false}
         onClick={() => {}}
         iconType="home"
@@ -35,7 +35,7 @@ describe("Punk Icons CSS Validation", () => {
   it("should have text-current class for color inheritance", () => {
     const { container } = render(
       <NavItem
-        section={SECTIONS[0]}
+        section={SECTIONS[0]!}
         isActive={false}
         onClick={() => {}}
         iconType="home"
@@ -52,7 +52,7 @@ describe("Punk Icons CSS Validation", () => {
     iconTypes.forEach((iconType) => {
       const { container } = render(
         <NavItem
-          section={SECTIONS[0]}
+          section={SECTIONS[0]!}
           isActive={false}
           onClick={() => {}}
           iconType={iconType}
@@ -68,7 +68,7 @@ describe("Punk Icons CSS Validation", () => {
   it("should apply active class to container when isActive is true", () => {
     const { container } = render(
       <NavItem
-        section={SECTIONS[0]}
+        section={SECTIONS[0]!}
         isActive={true}
         onClick={() => {}}
         iconType="home"
@@ -83,7 +83,7 @@ describe("Punk Icons CSS Validation", () => {
     // Inactive button - should have text-white
     const { container: inactiveContainer } = render(
       <NavItem
-        section={SECTIONS[0]}
+        section={SECTIONS[0]!}
         isActive={false}
         onClick={() => {}}
         iconType="home"
@@ -96,7 +96,7 @@ describe("Punk Icons CSS Validation", () => {
     // Active button - should have text-black
     const { container: activeContainer } = render(
       <NavItem
-        section={SECTIONS[0]}
+        section={SECTIONS[0]!}
         isActive={true}
         onClick={() => {}}
         iconType="home"
@@ -111,7 +111,7 @@ describe("Punk Icons CSS Validation", () => {
   it("should have relative positioning on icon container", () => {
     const { container } = render(
       <NavItem
-        section={SECTIONS[0]}
+        section={SECTIONS[0]!}
         isActive={false}
         onClick={() => {}}
         iconType="home"

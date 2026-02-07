@@ -67,7 +67,7 @@ export default function Section({
       ref={mergedRef}
       id={id}
       data-section-id={id}
-      className={className}
+      className={`snap-start min-h-screen ${className}`}
       aria-labelledby={`${id}-heading`}
     >
       {children}

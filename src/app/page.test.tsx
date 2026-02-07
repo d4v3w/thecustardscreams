@@ -1,9 +1,10 @@
 import { render, screen } from "@testing-library/react";
+import { NavigationProvider } from "~/contexts/NavigationContext";
 import HomePage from "./page";
 
 // Mock the hooks
 jest.mock("~/hooks/useIntersectionObserver", () => ({
-  useIntersectionObserver: () => "hero",
+  useIntersectionObserver: () => "home",
 }));
 
 jest.mock("~/hooks/useSmoothScroll", () => ({
@@ -16,11 +17,19 @@ jest.mock("~/hooks/useReducedMotion", () => ({
 
 describe("Home Page", () => {
   it("renders without errors", () => {
-    expect(() => render(<HomePage />)).not.toThrow();
+    expect(() => render(
+      <NavigationProvider>
+        <HomePage />
+      </NavigationProvider>
+    )).not.toThrow();
   });
 
   it("renders all main sections", () => {
-    render(<HomePage />);
+    render(
+      <NavigationProvider>
+        <HomePage />
+      </NavigationProvider>
+    );
     
     // Check that all section headings are present
     expect(screen.getByRole("heading", { name: /The Custard Screams/i, level: 1 })).toBeInTheDocument();

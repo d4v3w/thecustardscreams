@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import Footer from "~/components/Footer";
 import { useNavigation } from "~/contexts/NavigationContext";
 import { useNavigationObserver } from "~/hooks/useNavigationObserver";
 import AboutSection from "./_components/AboutSection";
@@ -85,11 +84,6 @@ export default function HomePage() {
       <ShowsSection />
       <MusicSection />
       <AboutSection />
-      
-      {/* Footer - outside scroll-snap flow */}
-      <div className="pb-20">
-        <Footer />
-      </div>
 
       {/* BottomNav now rendered in layout */}
     </>

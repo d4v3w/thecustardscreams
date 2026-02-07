@@ -15,7 +15,7 @@ import {
     simulateTouchScroll,
     simulateWheelEvent,
     wait,
-} from "./utils/scroll-test-utils";
+} from "~/test-utils/scroll-test-utils";
 
 describe("Scroll-Snap Diagnostics", () => {
   beforeEach(() => {

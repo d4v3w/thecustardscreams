@@ -56,7 +56,7 @@ describe('ImageCarousel', () => {
   });
 
   it('should hide navigation for single image', () => {
-    const singleImage = [mockImages[0]];
+    const singleImage = [mockImages[0]!];
     render(<ImageCarousel images={singleImage} />);
 
     expect(screen.queryByLabelText('Previous image')).not.toBeInTheDocument();

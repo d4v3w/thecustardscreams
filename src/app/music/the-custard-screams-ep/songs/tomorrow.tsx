@@ -4,10 +4,12 @@ export const metadata = {
     "Tomorrow song breakdown and lyrics, taken from the debut self-titled EP by The Custard Screams.",
 };
 
-export function Song() {
+export function Song({ songNavigation }: { songNavigation?: React.ReactNode }) {
   return (
     <article className="p2 md:p-3">
       <h1 className="text-xl font-bold text-amber-400">Song: Tomorrow</h1>
+      
+      {songNavigation}
 
       <p>
         Tomorrow song breakdown and lyrics, taken from the debut self-titled EP
