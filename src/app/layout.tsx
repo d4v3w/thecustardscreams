@@ -1,11 +1,12 @@
 "use client";
 
-import { Geist } from "next/font/google";
+import { Bebas_Neue, Geist } from "next/font/google";
 import CookieConsent from "~/components/cookie/CookieConsent";
 import { NavigationProvider } from "~/contexts/NavigationContext";
 import { useCookieConsent } from "~/hooks/useCookieConsent";
 import "~/styles/globals.css";
 import "~/styles/punk-icons.css";
+import "~/styles/punk-typography.css";
 import { LayoutClient } from "./LayoutClient";
 
 const geist = Geist({
@@ -14,13 +15,21 @@ const geist = Geist({
   display: "swap",
 });
 
+const bebasNeue = Bebas_Neue({
+  weight: ["400"],
+  subsets: ["latin"],
+  variable: "--font-bebas-neue",
+  display: "swap",
+  preload: true,
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const { hasConsent, acceptCookies, declineCookies } = useCookieConsent();
 
   return (
-    <html lang="en-GB" className={`${geist.variable}`}>
+    <html lang="en-GB" className={`${geist.variable} ${bebasNeue.variable}`}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

@@ -5,6 +5,8 @@
   --font-sans:
     var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-display:
+    var(--font-bebas-neue), Impact, "Arial Black", "Franklin Gothic Bold", sans-serif;
 }
 
 /* Smooth scroll behavior - only when not using scroll-snap */
