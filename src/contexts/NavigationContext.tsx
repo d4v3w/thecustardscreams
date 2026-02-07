@@ -91,18 +91,18 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
       return;
     }
 
-    // Get the section's position
+    // Get the section element
     const element = registration.ref.current;
-    const offsetTop = element.offsetTop;
 
     // Determine scroll behavior based on user preference
     const behavior = prefersReducedMotion ? "auto" : "smooth";
 
-    // Scroll the body container to trigger scroll-snap
-    // CSS scroll-snap will handle the snapping behavior
-    window.scrollTo({
-      top: offsetTop,
+    // Use scrollIntoView to scroll to the section
+    // This works better with scroll-snap-type
+    element.scrollIntoView({
       behavior,
+      block: "start",
+      inline: "nearest",
     });
 
     // Update URL hash

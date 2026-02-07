@@ -42,22 +42,22 @@
 
 /* Home Icon Hover State */
 .icon-home:hover::before {
-  border-bottom-color: #ff0000;
+  border-bottom-color: #ff0000 !important;
   filter: drop-shadow(0 0 4px #ff0000);
 }
 
 .icon-home:hover::after {
-  background-color: #ff0000;
+  background-color: #ff0000 !important;
   filter: drop-shadow(0 0 4px #ff0000);
 }
 
 /* Home Icon Active State */
 .icon-container.active .icon-home::before {
-  border-bottom-color: #ff0000;
+  border-bottom-color: #ff0000 !important;
 }
 
 .icon-container.active .icon-home::after {
-  background-color: #ff0000;
+  background-color: #ff0000 !important;
 }
 
 /* Music Icon - Single Bold Eighth Note */
@@ -113,7 +113,7 @@
 .icon-music:hover .music-stem,
 .icon-music:hover .music-head,
 .icon-music:hover .music-flag {
-  background-color: #ff0000;
+  background-color: #ff0000 !important;
   filter: drop-shadow(0 0 4px #ff0000);
 }
 
@@ -121,7 +121,7 @@
 .icon-container.active .music-stem,
 .icon-container.active .music-head,
 .icon-container.active .music-flag {
-  background-color: #ff0000;
+  background-color: #ff0000 !important;
 }
 
 /* Shows Icon - Angular Star (Stage/Performance) */
@@ -174,22 +174,22 @@
 
 /* Shows Icon Hover State */
 .icon-shows:hover::before {
-  background-color: #ff0000;
+  background-color: #ff0000 !important;
   filter: drop-shadow(0 0 6px #ff0000);
   transform: translate(-50%, -50%) rotate(15deg) scale(1.1);
 }
 
 .icon-shows:hover::after {
-  background-color: #ffff00;
+  background-color: #ffff00 !important;
 }
 
 /* Shows Icon Active State */
 .icon-container.active .icon-shows::before {
-  background-color: #ff0000;
+  background-color: #ff0000 !important;
 }
 
 .icon-container.active .icon-shows::after {
-  background-color: #ffff00;
+  background-color: #ffff00 !important;
 }
 
 /* About Icon - Exclamation Mark (Information/Impact) */
@@ -231,14 +231,14 @@
 /* About Icon Hover State */
 .icon-about:hover::before,
 .icon-about:hover::after {
-  background-color: #ff0000;
+  background-color: #ff0000 !important;
   filter: drop-shadow(0 0 4px #ff0000);
 }
 
 /* About Icon Active State */
 .icon-container.active .icon-about::before,
 .icon-container.active .icon-about::after {
-  background-color: #ff0000;
+  background-color: #ff0000 !important;
 }
 
 /* Focus State for All Icons */
