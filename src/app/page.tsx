@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import Footer from "~/components/Footer";
-import BottomNav from "~/components/navigation/BottomNav";
 import { useNavigation } from "~/contexts/NavigationContext";
 import { useNavigationObserver } from "~/hooks/useNavigationObserver";
 import AboutSection from "./_components/AboutSection";
@@ -13,11 +12,11 @@ import ShowsSection from "./_components/ShowsSection";
 /**
  * Single-page home with smooth scrolling sections
  * Uses NavigationContext for state management
- * Feature: website-modernization
- * Requirements: 1.1, 1.2, 1.3, 2.1, 3.4, 10.4
+ * Feature: website-modernization, persistent-navigation-breadcrumbs
+ * Requirements: 1.1, 1.2, 1.3, 2.1, 3.4, 10.4, 9.7
  */
 export default function HomePage() {
-  const { currentSection, navigateToSection } = useNavigation();
+  const { navigateToSection } = useNavigation();
 
   // Set up intersection observer to track active section
   useNavigationObserver({
@@ -92,8 +91,7 @@ export default function HomePage() {
         <Footer />
       </div>
 
-      {/* Bottom Navigation */}
-      <BottomNav activeSection={currentSection} onNavigate={navigateToSection} />
+      {/* BottomNav now rendered in layout */}
     </>
   );
 }

@@ -6,6 +6,7 @@ import { NavigationProvider } from "~/contexts/NavigationContext";
 import { useCookieConsent } from "~/hooks/useCookieConsent";
 import "~/styles/globals.css";
 import "~/styles/punk-icons.css";
+import { LayoutClient } from "./LayoutClient";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -35,7 +36,9 @@ export default function RootLayout({
       </head>
       <body className="bg-black text-white">
         <NavigationProvider>
-          {children}
+          <LayoutClient>
+            {children}
+          </LayoutClient>
           
           {/* Cookie Consent Banner - only show if user hasn't decided */}
           {hasConsent === null && (

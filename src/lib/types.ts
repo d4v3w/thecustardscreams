@@ -213,6 +213,33 @@ export interface ImageWithFallbackProps {
 }
 
 // ============================================================================
+// Breadcrumb Types
+// ============================================================================
+
+/**
+ * Represents a single item in the breadcrumb trail
+ * Feature: persistent-navigation-breadcrumbs
+ */
+export interface BreadcrumbItem {
+  /** Display text for the breadcrumb */
+  label: string;
+  
+  /** URL path for navigation */
+  href: string;
+  
+  /** Whether this is the current page (non-clickable) */
+  isActive: boolean;
+}
+
+/**
+ * Props for Breadcrumb component
+ * Feature: persistent-navigation-breadcrumbs
+ */
+export interface BreadcrumbProps {
+  className?: string;
+}
+
+// ============================================================================
 // Hook Return Types
 // ============================================================================
 

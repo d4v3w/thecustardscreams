@@ -1,24 +1,20 @@
 "use client";
 
-import CookieConsent from "~/components/cookie/CookieConsent";
-import { useCookieConsent } from "~/hooks/useCookieConsent";
+import BottomNav from "~/components/navigation/BottomNav";
+import { useNavigation } from "~/contexts/NavigationContext";
 
 /**
- * Client-side layout wrapper for cookie consent
- * Feature: website-modernization
- * Requirements: 13.1
+ * Client-side layout wrapper for navigation
+ * Feature: website-modernization, persistent-navigation-breadcrumbs
+ * Requirements: 13.1, 1.1, 4.1, 4.7, 9.1
  */
 export function LayoutClient({ children }: { children: React.ReactNode }) {
-  const { hasConsent, acceptCookies, declineCookies } = useCookieConsent();
+  const { currentSection, navigateToSection } = useNavigation();
 
   return (
     <>
       {children}
-
-      {/* Cookie Consent Banner - only show if user hasn't decided */}
-      {hasConsent === null && (
-        <CookieConsent onAccept={acceptCookies} onDecline={declineCookies} />
-      )}
+      <BottomNav activeSection={currentSection} onNavigate={navigateToSection} />
     </>
   );
 }
