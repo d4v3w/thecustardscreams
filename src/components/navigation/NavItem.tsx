@@ -10,7 +10,7 @@ import type { IconType, NavItemProps } from "~/lib/types";
  */
 export default function NavItem({ section, isActive, onClick, iconType }: NavItemProps) {
   // Determine icon type from section ID if not provided
-  const resolvedIconType: IconType = iconType || (section.id === "hero" ? "home" : section.id as IconType);
+  const resolvedIconType: IconType = iconType || (section.id === "home" ? "home" : section.id as IconType);
   
   // Dev warning for missing iconType
   if (process.env.NODE_ENV === "development" && !iconType) {

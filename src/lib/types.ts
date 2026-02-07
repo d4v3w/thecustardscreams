@@ -11,7 +11,7 @@
 /**
  * Unique identifier for each major section of the single-page layout
  */
-export type SectionId = "hero" | "music" | "shows" | "about";
+export type SectionId = "home" | "music" | "shows" | "about";
 
 /**
  * Configuration for a single section including navigation metadata
@@ -28,9 +28,9 @@ export interface SectionConfig {
  */
 export const SECTIONS: readonly SectionConfig[] = [
   {
-    id: "hero",
+    id: "home",
     title: "The Custard Screams",
-    ariaLabel: "Hero section with band introduction",
+    ariaLabel: "Home section with band introduction",
     navLabel: "Home",
   },
   {

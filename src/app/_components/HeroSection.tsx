@@ -2,13 +2,13 @@ import Link from "next/link";
 import Section from "~/components/Section";
 
 /**
- * Hero section with band introduction and next show banner
+ * Home section with band introduction and next show banner
  * Feature: website-modernization
  * Requirements: 1.1, 5.1, 10.2
  */
 export default function HeroSection() {
   return (
-    <Section id="hero" className="flex flex-col items-center justify-center p-4 md:p-6">
+    <Section id="home" className="flex flex-col items-center justify-center p-4 md:p-6">
       <div className="w-full max-w-4xl">
         {/* Band Logo */}
         <div className="mb-6 text-center md:mb-8">
@@ -22,7 +22,7 @@ export default function HeroSection() {
         </div>
 
         {/* Band Name */}
-        <h1 id="hero-heading" className="mb-4 text-center text-4xl font-bold text-amber-400 md:text-5xl lg:text-6xl">
+        <h1 id="home-heading" className="mb-4 text-center text-4xl font-bold text-amber-400 md:text-5xl lg:text-6xl">
           The Custard Screams
         </h1>
 

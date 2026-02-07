@@ -38,7 +38,7 @@ export default function BottomNav({
       <div className="mx-auto flex max-w-4xl items-center justify-around gap-2 px-2 py-2">
         {SECTIONS.map((section) => {
           // Map section IDs to icon types
-          const iconType = section.id === "hero" ? "home" : section.id;
+          const iconType = section.id === "home" ? "home" : section.id;
           
           return (
             <NavItem
