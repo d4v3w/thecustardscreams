@@ -1,0 +1,296 @@
+/* Punk Rock Navigation Icons - Pure CSS Implementation */
+/* Feature: punk-rock-navigation-icons */
+/* KISS-inspired bold, angular, high-contrast aesthetic */
+
+/* Home Icon - Angular House */
+.icon-home {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  color: currentColor;
+  /* Ensure the element takes up space even with no content */
+  min-height: 32px;
+  min-width: 32px;
+}
+
+.icon-home::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-bottom: 14px solid currentColor;
+  transition: all 0.2s ease;
+}
+
+.icon-home::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 14px;
+  background-color: currentColor;
+  transition: all 0.2s ease;
+}
+
+/* Home Icon Hover State */
+.icon-home:hover::before {
+  border-bottom-color: #ff0000;
+  filter: drop-shadow(0 0 4px #ff0000);
+}
+
+.icon-home:hover::after {
+  background-color: #ff0000;
+  filter: drop-shadow(0 0 4px #ff0000);
+}
+
+/* Home Icon Active State */
+.icon-container.active .icon-home::before {
+  border-bottom-color: #ff0000;
+}
+
+.icon-container.active .icon-home::after {
+  background-color: #ff0000;
+}
+
+/* Music Icon - Single Bold Eighth Note */
+.icon-music {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  color: currentColor;
+  /* Ensure the element takes up space even with no content */
+  min-height: 32px;
+  min-width: 32px;
+}
+
+/* Note head (large filled circle) */
+.music-head {
+  position: absolute;
+  bottom: 6px;
+  left: 8px;
+  width: 12px;
+  height: 10px;
+  background-color: currentColor;
+  border-radius: 50%;
+  transform: rotate(-25deg);
+  transition: all 0.2s ease;
+}
+
+/* Note stem (vertical line coming from note head) */
+.music-stem {
+  position: absolute;
+  bottom: 14px;
+  left: 18px;
+  width: 3px;
+  height: 16px;
+  background-color: currentColor;
+  border-radius: 1.5px;
+  transition: all 0.2s ease;
+}
+
+/* Flag (curved shape at top of stem) */
+.music-flag {
+  position: absolute;
+  top: 4px;
+  left: 18px;
+  width: 6px;
+  height: 6px;
+  background-color: currentColor;
+  border-radius: 0 30% 30% 0;
+  transition: all 0.2s ease;
+}
+
+/* Music Icon Hover State */
+.icon-music:hover .music-stem,
+.icon-music:hover .music-head,
+.icon-music:hover .music-flag {
+  background-color: #ff0000;
+  filter: drop-shadow(0 0 4px #ff0000);
+}
+
+/* Music Icon Active State */
+.icon-container.active .music-stem,
+.icon-container.active .music-head,
+.icon-container.active .music-flag {
+  background-color: #ff0000;
+}
+
+/* Shows Icon - Angular Star (Stage/Performance) */
+.icon-shows {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  color: currentColor;
+  /* Ensure the element takes up space even with no content */
+  min-height: 32px;
+  min-width: 32px;
+}
+
+.icon-shows::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  background-color: currentColor;
+  clip-path: polygon(
+    50% 0%, 
+    61% 35%, 
+    98% 35%, 
+    68% 57%, 
+    79% 91%, 
+    50% 70%, 
+    21% 91%, 
+    32% 57%, 
+    2% 35%, 
+    39% 35%
+  );
+  transform: translate(-50%, -50%);
+  transition: all 0.2s ease;
+}
+
+.icon-shows::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background-color: currentColor;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s ease;
+}
+
+/* Shows Icon Hover State */
+.icon-shows:hover::before {
+  background-color: #ff0000;
+  filter: drop-shadow(0 0 6px #ff0000);
+  transform: translate(-50%, -50%) rotate(15deg) scale(1.1);
+}
+
+.icon-shows:hover::after {
+  background-color: #ffff00;
+}
+
+/* Shows Icon Active State */
+.icon-container.active .icon-shows::before {
+  background-color: #ff0000;
+}
+
+.icon-container.active .icon-shows::after {
+  background-color: #ffff00;
+}
+
+/* About Icon - Exclamation Mark (Information/Impact) */
+.icon-about {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  color: currentColor;
+  /* Ensure the element takes up space even with no content */
+  min-height: 32px;
+  min-width: 32px;
+}
+
+.icon-about::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  width: 4px;
+  height: 18px;
+  background-color: currentColor;
+  transform: translateX(-50%);
+  transition: all 0.2s ease;
+}
+
+.icon-about::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background-color: currentColor;
+  transform: translateX(-50%);
+  transition: all 0.2s ease;
+}
+
+/* About Icon Hover State */
+.icon-about:hover::before,
+.icon-about:hover::after {
+  background-color: #ff0000;
+  filter: drop-shadow(0 0 4px #ff0000);
+}
+
+/* About Icon Active State */
+.icon-container.active .icon-about::before,
+.icon-container.active .icon-about::after {
+  background-color: #ff0000;
+}
+
+/* Focus State for All Icons */
+.icon-container:focus-within {
+  outline: 2px solid #ff0000;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .icon-home::before,
+  .icon-home::after,
+  .icon-music::before,
+  .icon-shows::before,
+  .icon-shows::after,
+  .icon-about::before,
+  .icon-about::after {
+    filter: contrast(1.5);
+  }
+}
+
+/* Browser Fallback for clip-path */
+@supports not (clip-path: polygon(50% 0%, 100% 100%, 0% 100%)) {
+  /* Fallback for music icon - simple triangle */
+  .icon-music::before {
+    clip-path: none;
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 16px solid currentColor;
+  }
+  
+  /* Fallback for shows icon - simple diamond */
+  .icon-shows::before {
+    clip-path: none;
+    width: 16px;
+    height: 16px;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .icon-home::before,
+  .icon-home::after,
+  .icon-music::before,
+  .icon-shows::before,
+  .icon-shows::after,
+  .icon-about::before,
+  .icon-about::after {
+    transition: none !important;
+  }
+}

@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import BottomNav from "~/components/navigation/BottomNav";
 import Footer from "~/components/Footer";
+import BottomNav from "~/components/navigation/BottomNav";
 import { useNavigation } from "~/contexts/NavigationContext";
 import { useNavigationObserver } from "~/hooks/useNavigationObserver";
 import AboutSection from "./_components/AboutSection";

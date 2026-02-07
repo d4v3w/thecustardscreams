@@ -21,14 +21,20 @@ export default function BottomNav({
       aria-label="Main navigation"
     >
       <div className="mx-auto flex max-w-4xl items-center justify-around gap-2 px-2 py-2">
-        {SECTIONS.map((section) => (
-          <NavItem
-            key={section.id}
-            section={section}
-            isActive={activeSection === section.id}
-            onClick={() => onNavigate(section.id)}
-          />
-        ))}
+        {SECTIONS.map((section) => {
+          // Map section IDs to icon types
+          const iconType = section.id === "hero" ? "home" : section.id;
+          
+          return (
+            <NavItem
+              key={section.id}
+              section={section}
+              isActive={activeSection === section.id}
+              onClick={() => onNavigate(section.id)}
+              iconType={iconType as "home" | "music" | "shows" | "about"}
+            />
+          );
+        })}
       </div>
     </nav>
   );

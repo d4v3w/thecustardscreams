@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./punk-icons.css";
 
 @theme {
   --font-sans:

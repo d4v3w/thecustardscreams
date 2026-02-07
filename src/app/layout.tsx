@@ -5,6 +5,7 @@ import CookieConsent from "~/components/cookie/CookieConsent";
 import { NavigationProvider } from "~/contexts/NavigationContext";
 import { useCookieConsent } from "~/hooks/useCookieConsent";
 import "~/styles/globals.css";
+import "~/styles/punk-icons.css";
 
 const geist = Geist({
   subsets: ["latin"],

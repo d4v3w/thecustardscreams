@@ -3,6 +3,7 @@
  * Feature: website-modernization
  */
 
+
 // ============================================================================
 // Section Types
 // ============================================================================
@@ -133,7 +134,7 @@ export interface AnalyticsEvent {
 export interface SectionProps {
   id: SectionId;
   className?: string;
-  children: React.ReactNode;
+  children: any;
   onVisibilityChange?: (isVisible: boolean) => void;
 }
 
@@ -146,12 +147,18 @@ export interface BottomNavProps {
 }
 
 /**
+ * Icon type for navigation items
+ */
+export type IconType = "home" | "music" | "shows" | "about";
+
+/**
  * Props for NavItem component
  */
 export interface NavItemProps {
   section: SectionConfig;
   isActive: boolean;
   onClick: () => void;
+  iconType?: IconType;
 }
 
 /**

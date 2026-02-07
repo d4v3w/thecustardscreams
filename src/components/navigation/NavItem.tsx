@@ -1,14 +1,57 @@
 "use client";
 
-import type { NavItemProps } from "~/lib/types";
+import type { IconType, NavItemProps } from "~/lib/types";
 
 /**
  * Individual navigation item for bottom nav
  * Displays icon and label with active state styling
- * Feature: website-modernization
- * Requirements: 2.2, 2.6, 8.1, 8.7
+ * Feature: punk-rock-navigation-icons
+ * Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 3.2, 6.1
  */
-export default function NavItem({ section, isActive, onClick }: NavItemProps) {
+export default function NavItem({ section, isActive, onClick, iconType }: NavItemProps) {
+  // Determine icon type from section ID if not provided
+  const resolvedIconType: IconType = iconType || (section.id === "hero" ? "home" : section.id as IconType);
+  
+  // Dev warning for missing iconType
+  if (process.env.NODE_ENV === "development" && !iconType) {
+    console.warn(`NavItem: iconType prop is missing for section "${section.id}", falling back to "${resolvedIconType}"`);
+  }
+  
+  // Render CSS icon with multiple elements for music
+  const renderIcon = () => {
+    // Music icon uses multiple HTML elements for better control
+    if (resolvedIconType === 'music') {
+      return (
+        <div 
+          className={`icon-container icon-music relative ${isActive ? 'active' : ''}`}
+          aria-hidden="true"
+          style={{ width: '32px', height: '32px' }}
+        >
+          {/* Note stem */}
+          <div className="music-stem" />
+          {/* Note head */}
+          <div className="music-head" />
+          {/* Flag */}
+          <div className="music-flag" />
+        </div>
+      );
+    }
+    
+    // Other icons use pure CSS
+    return (
+      <div 
+        className={`icon-container relative ${isActive ? 'active' : ''}`}
+        aria-hidden="true"
+        style={{ width: '32px', height: '32px' }}
+      >
+        <div 
+          className={`icon-${resolvedIconType}`} 
+          style={{ width: '32px', height: '32px', color: 'currentColor' }}
+        />
+      </div>
+    );
+  };
+
   return (
     <button
       onClick={onClick}
@@ -25,13 +68,8 @@ export default function NavItem({ section, isActive, onClick }: NavItemProps) {
       aria-label={section.ariaLabel}
       aria-current={isActive ? "page" : undefined}
     >
-      {/* Icon placeholder - using emoji for now */}
-      <span className="text-xl" aria-hidden="true">
-        {section.id === "hero" && "🏠"}
-        {section.id === "music" && "🎵"}
-        {section.id === "shows" && "📅"}
-        {section.id === "about" && "ℹ️"}
-      </span>
+      {/* CSS Icon */}
+      {renderIcon()}
       
       {/* Label */}
       <span className="text-xs font-bold">{section.navLabel}</span>
