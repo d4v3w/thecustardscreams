@@ -6,6 +6,71 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+/* Smooth scroll behavior - only when not using scroll-snap */
+html {
+  height: 100%;
+}
+
+/* HTML and Body setup for scroll-snap */
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Body is the scroll container with scroll-snap */
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-padding-bottom: 80px; /* Account for bottom nav */
+  -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
+}
+
+/* Ensure sections snap properly */
+section[data-section-id] {
+  min-height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  scroll-margin-top: 0;
+  position: relative; /* Ensure sections are positioned */
+}
+
+/* Fade-in animation for sections */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Inline list separators for song nav */
 .inline-sep {
   list-style: none;

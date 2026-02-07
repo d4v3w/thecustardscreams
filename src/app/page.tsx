@@ -1,84 +1,100 @@
-import Link from "next/link";
-import Music from "~/components/Music";
-import { getCanonicalUrl } from "~/lib/metadata";
+"use client";
 
-export const metadata = {
-  title: "The Custard Screams",
-  description:
-    "The Custard Screams from London, England. Grunge, Heavy Rock, Punk Rock, Rock band.",
-  alternates: {
-    canonical: getCanonicalUrl("/"),
-  },
-  openGraph: {
-    images: [
-      {
-        url: "https://punkrockmag.com/wp-content/uploads/2025/12/custard-screams-band.jpg",
-        width: 1200,
-        height: 630,
-        alt: "The Custard Screams band photo, four members standing in a rehearsal studio.",
-      },
-    ],
-  },
-};
+import { useEffect } from "react";
+import BottomNav from "~/components/navigation/BottomNav";
+import Footer from "~/components/Footer";
+import { useNavigation } from "~/contexts/NavigationContext";
+import { useNavigationObserver } from "~/hooks/useNavigationObserver";
+import AboutSection from "./_components/AboutSection";
+import HeroSection from "./_components/HeroSection";
+import MusicSection from "./_components/MusicSection";
+import ShowsSection from "./_components/ShowsSection";
 
+/**
+ * Single-page home with smooth scrolling sections
+ * Uses NavigationContext for state management
+ * Feature: website-modernization
+ * Requirements: 1.1, 1.2, 1.3, 2.1, 3.4, 10.4
+ */
 export default function HomePage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "MusicGroup",
-    name: "The Custard Screams",
-    url: "https://www.thecustardscreams.com",
-    logo: "https://www.thecustardscreams.com/android-chrome-512x512.png",
-    genre: ["Post-Hardcore", "Punk Rock", "Rock"],
-    location: {
-      "@type": "Place",
-      name: "London",
-    },
-    sameAs: [
-      "https://thecustardscreams.bandcamp.com/",
-      "https://www.youtube.com/@TheCustardScreams",
-      "https://www.instagram.com/thecustardscreams",
-    ],
-  };
+  const { currentSection, navigateToSection } = useNavigation();
 
-  const websiteJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "The Custard Screams",
-    url: "https://www.thecustardscreams.com",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://www.thecustardscreams.com/search?q={search_term_string}",
-      "query-input": "required name=search_term_string",
-    },
-  };
+  // Set up intersection observer to track active section
+  useNavigationObserver({
+    threshold: 0.3,
+    rootMargin: "-80px 0px -80px 0px",
+  });
+
+  // Handle initial hash navigation
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        // Small delay to ensure sections are registered
+        setTimeout(() => {
+          navigateToSection(hash as any);
+        }, 100);
+      }
+    }
+  }, [navigateToSection]);
 
   return (
-    <article className="p2 md:p-3">
+    <>
+      {/* Structured Data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "MusicGroup",
+            name: "The Custard Screams",
+            url: "https://www.thecustardscreams.com",
+            logo: "https://www.thecustardscreams.com/android-chrome-512x512.png",
+            genre: ["Post-Hardcore", "Punk Rock", "Rock"],
+            location: {
+              "@type": "Place",
+              name: "London",
+            },
+            sameAs: [
+              "https://thecustardscreams.bandcamp.com/",
+              "https://www.youtube.com/@TheCustardScreams",
+              "https://www.instagram.com/thecustardscreams",
+            ],
+          }),
+        }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "The Custard Screams",
+            url: "https://www.thecustardscreams.com",
+            potentialAction: {
+              "@type": "SearchAction",
+              target:
+                "https://www.thecustardscreams.com/search?q={search_term_string}",
+              "query-input": "required name=search_term_string",
+            },
+          }),
+        }}
       />
-      <Music />
-      <img
-        src="https://punkrockmag.com/wp-content/uploads/2025/12/custard-screams-band.jpg"
-        alt="The Custard Screams band photo, four members standing in a rehearsal studio."
-        className="my-4 w-full rounded-xl"
-      />
-      <blockquote className="border-l-4 border-amber-400 pl-4 italic">
-        "The Custard Screams’ new three-track ST/EP feels like a solid snapshot
-        of where the band is right now. Rooted in punk rock, the songs don’t
-        rely on speed alone—they breathe, groove, and give space for the message
-        to land. It’s straightforward music, but it’s tight, well-executed, and
-        honest, which makes it stick.” –{" "}
-        <Link href="https://punkrockmag.com/2025/12/14/the-custard-scream/">
-          Punk Rock Magazine
-        </Link>
-      </blockquote>
-    </article>
+
+      {/* Main content */}
+      <HeroSection />
+      <MusicSection />
+      <ShowsSection />
+      <AboutSection />
+      
+      {/* Footer - outside scroll-snap flow */}
+      <div className="pb-20">
+        <Footer />
+      </div>
+
+      {/* Bottom Navigation */}
+      <BottomNav activeSection={currentSection} onNavigate={navigateToSection} />
+    </>
   );
 }
 
