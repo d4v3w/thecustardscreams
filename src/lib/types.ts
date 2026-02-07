@@ -34,16 +34,16 @@ export const SECTIONS: readonly SectionConfig[] = [
     navLabel: "Home",
   },
   {
-    id: "music",
-    title: "Music",
-    ariaLabel: "Music streaming and downloads",
-    navLabel: "Music",
-  },
-  {
     id: "shows",
     title: "Live Shows",
     ariaLabel: "Upcoming and past live shows",
     navLabel: "Shows",
+  },
+  {
+    id: "music",
+    title: "Music",
+    ariaLabel: "Music streaming and downloads",
+    navLabel: "Music",
   },
   {
     id: "about",

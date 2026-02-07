@@ -82,8 +82,8 @@ export default function HomePage() {
 
       {/* Main content */}
       <HeroSection />
-      <MusicSection />
       <ShowsSection />
+      <MusicSection />
       <AboutSection />
       
       {/* Footer - outside scroll-snap flow */}
