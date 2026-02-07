@@ -13,17 +13,19 @@ export function useIntersectionObserver(
   refs: Map<SectionId, React.RefObject<HTMLElement | null>>,
   options?: UseIntersectionObserverOptions,
 ): SectionId | null {
-  const [activeSection, setActiveSection] = useState<SectionId | null>(null);
+  const [activeSection, setActiveSection] = useState<SectionId | null>(() => {
+    // Initialize with first section as fallback
+    if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
+      return Array.from(refs.keys())[0] ?? null;
+    }
+    return null;
+  });
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     // Check if window and IntersectionObserver are available
     if (typeof window === "undefined" || !("IntersectionObserver" in window)) {
-      // Fallback: return first section
-      const firstSection = Array.from(refs.keys())[0];
-      if (firstSection) {
-        setActiveSection(firstSection);
-      }
+      // Fallback already handled in initial state
       return;
     }
 

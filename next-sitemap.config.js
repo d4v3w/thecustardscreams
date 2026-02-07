@@ -1,7 +1,7 @@
 import { execSync } from 'child_process';
 
 /** @type {import('next-sitemap').IConfig} */
-export default {
+const config = {
     siteUrl: 'https://www.thecustardscreams.com',
     generateRobotsTxt: true,
     generateIndexSitemap: false,
@@ -21,3 +21,5 @@ export default {
         }
     },
 };
+
+export default config;

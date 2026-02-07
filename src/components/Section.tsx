@@ -23,7 +23,7 @@ export default function Section({
   id,
   className = "",
   children,
-  onVisibilityChange,
+  onVisibilityChange: _onVisibilityChange,
 }: SectionProps) {
   const prefersReducedMotion = useReducedMotion();
   const internalRef = useRef<HTMLElement>(null);
@@ -31,10 +31,13 @@ export default function Section({
   // Register section with navigation context
   const contextRef = useRegisterSection(id, SECTION_ORDER[id] ?? 999);
 
-  // Merge refs
+  // Merge refs using callback ref pattern
   const mergedRef = (element: HTMLElement | null) => {
     internalRef.current = element;
-    (contextRef as React.MutableRefObject<HTMLElement | null>).current = element;
+    // Use type assertion to safely update the ref from the hook
+    if (contextRef && 'current' in contextRef) {
+      contextRef.current = element;
+    }
   };
 
   useEffect(() => {

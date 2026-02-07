@@ -13,6 +13,7 @@ export default function HeroSection() {
       <div className="w-full max-w-4xl">
         {/* Band Logo */}
         <div className="mb-6 text-center md:mb-8">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1jT0o1Y9CW63sKRVJPxiQH09w81nhzYZI5bMg"
             srcSet="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX12Faf3d4f6C7O5UiyzsSR8NkawKYFJxpQXubM 1x, https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1P1BEX2etUewJhN0Aqrcjg6Poimx8d2OY9G3Z 2x"
@@ -37,6 +38,7 @@ export default function HeroSection() {
         </p>
 
         {/* Band Photo */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="https://punkrockmag.com/wp-content/uploads/2025/12/custard-screams-band.jpg"
           alt="The Custard Screams band photo, four members standing in a rehearsal studio."

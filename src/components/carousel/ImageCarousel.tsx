@@ -25,6 +25,7 @@ export default function ImageCarousel({
             className="w-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2"
             aria-label={`View full size: ${image.alt}`}
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={image.src}
               alt={image.alt}

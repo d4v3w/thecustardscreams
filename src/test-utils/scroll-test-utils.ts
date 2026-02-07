@@ -182,8 +182,8 @@ export function wait(ms: number): Promise<void> {
  * Checks if an event listener was added with passive option
  */
 export function isPassiveListener(
-  element: HTMLElement | Window,
-  eventType: string
+  _element: HTMLElement | Window,
+  _eventType: string
 ): boolean {
   // This is a simplified check - in real tests, you'd need to spy on addEventListener
   // For now, we'll return true if no preventDefault was called
@@ -195,7 +195,7 @@ export function isPassiveListener(
  */
 export function createTestSection(
   id: string,
-  order: number
+  _order: number
 ): HTMLElement {
   const section = document.createElement("section");
   section.id = id;

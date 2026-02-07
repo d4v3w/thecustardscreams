@@ -27,7 +27,7 @@ describe('useCarousel hook', () => {
   });
 
   it('should update navigation availability at boundaries', () => {
-    const { result, rerender } = renderHook(({ count }) => useCarousel(count), {
+    const { result } = renderHook(({ count }) => useCarousel(count), {
       initialProps: { count: 3 },
     });
 

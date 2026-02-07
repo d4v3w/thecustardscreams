@@ -224,7 +224,6 @@ describe("Navigation and Scroll Snap", () => {
       `;
       document.head.appendChild(style);
 
-      const bodyStyle = window.getComputedStyle(document.body);
       // Note: jsdom doesn't fully support computed styles, so this is a structural test
       expect(document.body).toBeDefined();
     });

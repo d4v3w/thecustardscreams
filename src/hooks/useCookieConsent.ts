@@ -14,12 +14,10 @@ import { CONSENT_VERSION, COOKIE_CONSENT_KEY } from "~/lib/types";
  * Requirements: 13.1, 13.2, 13.3, 13.4, 13.5, 13.6
  */
 export function useCookieConsent(): UseCookieConsentReturn {
-  const [hasConsent, setHasConsent] = useState<boolean | null>(null);
-
-  // Read consent from localStorage on mount
-  useEffect(() => {
+  // Initialize state with lazy initialization to read from localStorage
+  const [hasConsent, setHasConsent] = useState<boolean | null>(() => {
     if (typeof window === "undefined") {
-      return;
+      return null;
     }
 
     try {
@@ -29,24 +27,22 @@ export function useCookieConsent(): UseCookieConsentReturn {
         
         // Check if consent version matches
         if (preferences.version === CONSENT_VERSION) {
-          setHasConsent(preferences.analytics);
-          
-          // Load analytics if consent was previously granted
-          if (preferences.analytics) {
-            loadAnalytics();
-          }
-        } else {
-          // Version mismatch, reset consent
-          setHasConsent(null);
+          return preferences.analytics;
         }
-      } else {
-        // No stored preference, user needs to decide
-        setHasConsent(null);
       }
     } catch (error) {
       console.error("Error reading cookie consent:", error);
-      setHasConsent(null);
     }
+    
+    return null;
+  });
+
+  // Load analytics on mount if consent was previously granted
+  useEffect(() => {
+    if (hasConsent === true) {
+      loadAnalytics();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const acceptCookies = () => {

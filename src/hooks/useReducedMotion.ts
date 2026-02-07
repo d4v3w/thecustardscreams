@@ -9,7 +9,13 @@ import { useEffect, useState } from "react";
  * Requirements: 4.8, 8.8
  */
 export function useReducedMotion(): boolean {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  // Initialize state with lazy initialization to avoid sync setState in effect
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
 
   useEffect(() => {
     // Check if window is available (client-side only)
@@ -19,9 +25,6 @@ export function useReducedMotion(): boolean {
 
     // Create media query for prefers-reduced-motion
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    // Set initial value
-    setPrefersReducedMotion(mediaQuery.matches);
 
     // Handler for media query changes
     const handleChange = (event: MediaQueryListEvent) => {

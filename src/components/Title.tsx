@@ -6,6 +6,7 @@ export const Title = () => (
       <div>
         <Link href="/">
           <span className="sr-only">The Custard Screams</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1jT0o1Y9CW63sKRVJPxiQH09w81nhzYZI5bMg"
             srcSet="https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX12Faf3d4f6C7O5UiyzsSR8NkawKYFJxpQXubM 1x, https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX1P1BEX2etUewJhN0Aqrcjg6Poimx8d2OY9G3Z 2x"

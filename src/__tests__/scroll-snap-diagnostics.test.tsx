@@ -44,7 +44,6 @@ describe("Scroll-Snap Diagnostics", () => {
       // Requirements: 1.1, 1.6, 5.1
       setupTestDOM(["hero", "music", "shows", "about"]);
 
-      const initialScrollY = window.scrollY;
       simulateWheelEvent(document.body, 100);
 
       // Note: In jsdom, scroll doesn't actually happen, but we verify the event wasn't blocked
@@ -149,7 +148,7 @@ describe("Scroll-Snap Diagnostics", () => {
       setupTestDOM(["hero", "music", "shows", "about"]);
 
       // Create an observer (simulating useIntersectionObserver)
-      const observer = new IntersectionObserver(() => {
+      new IntersectionObserver(() => {
         // Observer callback should NOT call scrollTo
       });
 

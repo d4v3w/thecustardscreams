@@ -8,7 +8,20 @@ interface ClientDialogProps {
 }
 
 const ClientDialog = ({ initialState }: ClientDialogProps) => {
-  const [showOverlay, setShowOverlay] = useState(initialState);
+  // Initialize state with lazy initialization to check video support
+  const [showOverlay, setShowOverlay] = useState(() => {
+    if (!initialState) return false;
+    
+    // Check video support on initialization
+    if (typeof document !== "undefined") {
+      const videoEl = document.createElement("video");
+      const supportsWebM = videoEl.canPlayType("video/webm") !== "";
+      const supportsMP4 = videoEl.canPlayType("video/mp4") !== "";
+      return supportsWebM || supportsMP4;
+    }
+    
+    return initialState;
+  });
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   const closeDialog = () => {
@@ -18,15 +31,6 @@ const ClientDialog = ({ initialState }: ClientDialogProps) => {
   };
 
   useEffect(() => {
-    const videoEl = document.createElement("video");
-    const supportsWebM = videoEl.canPlayType("video/webm") !== "";
-    const supportsMP4 = videoEl.canPlayType("video/mp4") !== "";
-
-    if (!supportsWebM && !supportsMP4) {
-      setShowOverlay(false);
-      return;
-    }
-
     if (showOverlay) {
       // open the native dialog when state turns true
       if (dialogRef?.current && !dialogRef?.current.open)

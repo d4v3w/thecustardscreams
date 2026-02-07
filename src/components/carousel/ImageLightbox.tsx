@@ -47,6 +47,7 @@ export default function ImageLightbox({
           <span className="text-xl" aria-hidden="true">✕</span>
         </button>
         {image && (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={image.src}
             alt={image.alt}

@@ -10,7 +10,7 @@ import { useReducedMotion } from "./useReducedMotion";
  * Feature: website-modernization
  * Requirements: 1.5, 2.4, 8.3, 10.5
  */
-export function useSmoothScroll(options?: UseSmoothScrollOptions) {
+export function useSmoothScroll(_options?: UseSmoothScrollOptions) {
   const prefersReducedMotion = useReducedMotion();
 
   const scrollToSection = useCallback(
@@ -64,7 +64,7 @@ export function useSmoothScroll(options?: UseSmoothScrollOptions) {
         prefersReducedMotion ? 0 : 500,
       ); // Wait for smooth scroll animation
     },
-    [prefersReducedMotion, options?.block],
+    [prefersReducedMotion],
   );
 
   return scrollToSection;
