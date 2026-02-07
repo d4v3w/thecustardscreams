@@ -1,0 +1,173 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - region "The Custard Screams" [ref=e2]:
+    - generic [ref=e3]:
+      - img "The Custard Screams logo" [ref=e5]
+      - heading "The Custard Screams" [level=1] [ref=e6]
+      - paragraph [ref=e7]: London based Post Hardcore Punk Rock Band
+      - img "The Custard Screams band photo, four members standing in a rehearsal studio." [ref=e8]
+      - blockquote [ref=e9]:
+        - text: "\"The Custard Screams' new three-track ST/EP feels like a solid snapshot of where the band is right now. Rooted in punk rock, the songs don't rely on speed alone—they breathe, groove, and give space for the message to land. It's straightforward music, but it's tight, well-executed, and honest, which makes it stick.\" –"
+        - link "Punk Rock Magazine" [ref=e10] [cursor=pointer]:
+          - /url: https://punkrockmag.com/2025/12/14/the-custard-scream/
+  - region "Live Shows" [ref=e11]:
+    - generic [ref=e12]:
+      - heading "Live Shows" [level=2] [ref=e13]
+      - generic [ref=e14]:
+        - heading "Upcoming Shows" [level=3] [ref=e15]
+        - paragraph [ref=e16]: Come and see The Custard Screams play live at these upcoming shows
+        - generic [ref=e19]:
+          - generic [ref=e20]:
+            - generic [ref=e21]: get updates on new shows, new music, and more
+            - link "follow" [ref=e22] [cursor=pointer]:
+              - /url: https://www.bandsintown.com/artist-subscribe/15623695-the-custard-screams?affil_code=js_localhost&app_id=9e137db868386b2ef5a78258f5fdbbb8&bg-color=rgba%280%2C0%2C0%2C1%29&border-color=rgba%2874%2C74%2C74%2C1%29&came_from=700&cta-bg-color=rgba%2874%2C74%2C74%2C1%29&cta-border-color=rgba%2874%2C74%2C74%2C1%29&cta-border-radius=2px&cta-border-width=0px&cta-text-color=rgba%28255%2C255%2C255%2C1%29&font=Helvetica&play-my-city=false&signature=ZZ4b8ece5274b0765ca9596656763e99723f1a7600d6ba47329f020b4ef84a9270&spn=0&text-color=rgba%28248%2C231%2C28%2C1%29&utm_campaign=track&utm_medium=web&utm_source=widget
+          - generic [ref=e24]:
+            - generic [ref=e25] [cursor=pointer]: Upcoming
+            - generic [ref=e26] [cursor=pointer]: "|Past"
+            - generic [ref=e27] [cursor=pointer]: "|Near Me"
+          - link "Feb. 22, 2026 London, United Kingdom The Engine Rooms Notify Me" [ref=e32] [cursor=pointer]:
+            - /url: https://www.bandsintown.com/e/1037954157?affil_code=js_localhost&app_id=9e137db868386b2ef5a78258f5fdbbb8&came_from=700&utm_campaign=event&utm_medium=web&utm_source=widget
+            - generic [ref=e35]: Feb. 22, 2026
+            - generic [ref=e36]:
+              - link:
+                - /url: https://www.bandsintown.com/e/1037954157?affil_code=js_localhost&app_id=9e137db868386b2ef5a78258f5fdbbb8&came_from=700&utm_campaign=event&utm_medium=web&utm_source=widget
+              - link "London, United Kingdom" [ref=e37]:
+                - /url: https://www.bandsintown.com/e/1037954157?affil_code=js_localhost&app_id=9e137db868386b2ef5a78258f5fdbbb8&came_from=700&utm_campaign=event&utm_medium=web&utm_source=widget
+              - link "The Engine Rooms" [ref=e39]:
+                - /url: https://www.bandsintown.com/e/1037954157?affil_code=js_localhost&app_id=9e137db868386b2ef5a78258f5fdbbb8&came_from=700&utm_campaign=event&utm_medium=web&utm_source=widget
+            - link "Notify Me" [ref=e43]:
+              - /url: https://www.bandsintown.com/artist-rsvp/15623695-the-custard-screams?affil_code=js_localhost&app_id=9e137db868386b2ef5a78258f5fdbbb8&bg-color=rgba%280%2C0%2C0%2C1%29&border-color=rgba%2874%2C74%2C74%2C1%29&came_from=700&cta-bg-color=rgba%2874%2C74%2C74%2C1%29&cta-border-color=rgba%2874%2C74%2C74%2C1%29&cta-border-radius=2px&cta-border-width=0px&cta-text-color=rgba%28255%2C255%2C255%2C1%29&event_id=1037954157&font=Helvetica&signature=ZZ4b8ece5274b0765ca9596656763e99723f1a7600d6ba47329f020b4ef84a9270&spn=0&text-color=rgba%28248%2C231%2C28%2C1%29&utm_campaign=notify_me&utm_medium=web&utm_source=widget
+              - generic [ref=e44]: Notify Me
+          - generic [ref=e45]:
+            - generic [ref=e46]: don't see a show near you?
+            - link "request a show" [ref=e47] [cursor=pointer]:
+              - /url: https://www.bandsintown.com/artist-subscribe/15623695-the-custard-screams?affil_code=js_localhost&app_id=9e137db868386b2ef5a78258f5fdbbb8&bg-color=rgba%280%2C0%2C0%2C1%29&border-color=rgba%2874%2C74%2C74%2C1%29&came_from=700&cta-bg-color=rgba%2874%2C74%2C74%2C1%29&cta-border-color=rgba%2874%2C74%2C74%2C1%29&cta-border-radius=2px&cta-border-width=0px&cta-text-color=rgba%28255%2C255%2C255%2C1%29&font=Helvetica&play-my-city=true&signature=ZZ4b8ece5274b0765ca9596656763e99723f1a7600d6ba47329f020b4ef84a9270&spn=0&text-color=rgba%28248%2C231%2C28%2C1%29&utm_campaign=play_my_city&utm_medium=web&utm_source=widget
+          - link [ref=e49] [cursor=pointer]:
+            - /url: https://www.bandsintown.com?affil_code=js_localhost&app_id=9e137db868386b2ef5a78258f5fdbbb8&came_from=700&utm_campaign=bit_logo&utm_medium=web&utm_source=widget
+            - img [ref=e50]
+      - article [ref=e58]:
+        - heading "Previous shows" [level=2] [ref=e59]
+        - paragraph [ref=e60]: The Custard Screams previous shows
+        - region "Previous shows gallery" [ref=e61]:
+          - generic [ref=e62]:
+            - 'button "View full size: The Custard Screams at Freaks and Geeks - Stratford, London, November 21st 2025" [ref=e64] [cursor=pointer]':
+              - img "The Custard Screams at Freaks and Geeks - Stratford, London, November 21st 2025" [ref=e65]
+            - 'button "View full size: The Custard Screams at Freaks and Geeks - Stratford, London, May 31st 2025" [ref=e67] [cursor=pointer]':
+              - img "The Custard Screams at Freaks and Geeks - Stratford, London, May 31st 2025" [ref=e68]
+            - 'button "View full size: The Custard Screams Skull Logo" [ref=e70] [cursor=pointer]':
+              - img "The Custard Screams Skull Logo" [ref=e71]
+          - button "Previous image" [disabled] [ref=e72]:
+            - generic [ref=e73]: ←
+          - button "Next image" [ref=e74]:
+            - generic [ref=e75]: →
+          - tablist "Carousel pagination" [ref=e76]:
+            - tab "Go to image 1 of 3" [ref=e77]
+            - tab "Go to image 2 of 3" [ref=e78]
+            - tab "Go to image 3 of 3" [ref=e79]
+  - region "Music" [ref=e80]:
+    - generic [ref=e81]:
+      - heading "Music" [level=2] [ref=e82]
+      - article [ref=e83]:
+        - heading "The Custard Screams EP - Available on all streaming platforms" [level=2] [ref=e84]
+        - paragraph [ref=e85]:
+          - text: The Custard Screams are available to stream on Spotify, Apple, Amazon and Youtube. For more download and steaming options visit the
+          - link "Music page" [ref=e86] [cursor=pointer]:
+            - /url: /music
+          - text: .
+        - paragraph [ref=e87]:
+          - text: Read more about
+          - link "The Custard Screams EP here" [ref=e88] [cursor=pointer]:
+            - /url: /music/the-custard-screams-ep
+          - text: .
+        - generic [ref=e89]:
+          - link "Spotify" [ref=e91] [cursor=pointer]:
+            - /url: https://open.spotify.com/artist/3PBO0gwS9iij6jj9hF8UJY
+            - img [ref=e92]
+          - link "Apple Music" [ref=e95] [cursor=pointer]:
+            - /url: https://music.apple.com/gb/artist/the-custard-screams/1849364288
+            - img [ref=e96]
+          - link "YouTube Music" [ref=e99] [cursor=pointer]:
+            - /url: https://www.youtube.com/@TheCustardScreams
+            - img [ref=e100]
+          - link "Amazon Music" [ref=e103] [cursor=pointer]:
+            - /url: https://music.amazon.com/artists/B0FYF69G9J/the-custard-screams
+            - img [ref=e104]
+  - region "About The Custard Screams" [ref=e107]:
+    - generic [ref=e108]:
+      - heading "About The Custard Screams" [level=2] [ref=e109]
+      - paragraph [ref=e110]: The Custard Screams formed in Sept 2024 in London, England. It was originally a band to jam out riffs that didn't fit in our other bands. The riffage developed and the writing increased so the band decided to record a few demos and before they knew it they had their first EP complete.
+      - generic [ref=e111]:
+        - link "Instagram → @thecustardscreams" [ref=e112] [cursor=pointer]:
+          - /url: https://instagram.thecustardscreams.com/
+          - heading "Instagram →" [level=3] [ref=e113]
+          - generic [ref=e114]: "@thecustardscreams"
+        - link "Facebook → @thecustardscreams" [ref=e115] [cursor=pointer]:
+          - /url: https://www.facebook.com/profile.php?id=61572629866193
+          - heading "Facebook →" [level=3] [ref=e116]
+          - generic [ref=e117]: "@thecustardscreams"
+        - link "TikTok → @the.custard.screams" [ref=e118] [cursor=pointer]:
+          - /url: https://tiktok.thecustardscreams.com/
+          - heading "TikTok →" [level=3] [ref=e119]
+          - generic [ref=e120]: "@the.custard.screams"
+      - generic [ref=e121]:
+        - heading "Band Members" [level=3] [ref=e122]
+        - list [ref=e123]:
+          - listitem [ref=e124]: Ali - Vocals, Guitar
+          - listitem [ref=e125]: Dave - Drums, Guitar Overdubs
+          - listitem [ref=e126]: Neil - Bass, Backing Vocals
+          - listitem [ref=e127]: Steve - Guitar
+      - generic [ref=e128]:
+        - heading "Band Info" [level=3] [ref=e129]
+        - paragraph [ref=e130]:
+          - strong [ref=e131]: "Genres:"
+          - text: Grunge, Heavy Rock, Punk Rock, Rock
+        - paragraph [ref=e132]:
+          - strong [ref=e133]: "Hometown:"
+          - text: London, United Kingdom
+  - contentinfo [ref=e135]:
+    - generic [ref=e136]:
+      - link "Spotify" [ref=e138] [cursor=pointer]:
+        - /url: https://open.spotify.com/artist/3PBO0gwS9iij6jj9hF8UJY
+        - img [ref=e139]
+      - link "Apple Music" [ref=e142] [cursor=pointer]:
+        - /url: https://music.apple.com/gb/artist/the-custard-screams/1849364288
+        - img [ref=e143]
+      - link "YouTube Music" [ref=e146] [cursor=pointer]:
+        - /url: https://www.youtube.com/@TheCustardScreams
+        - img [ref=e147]
+      - link "Amazon Music" [ref=e150] [cursor=pointer]:
+        - /url: https://music.amazon.com/artists/B0FYF69G9J/the-custard-screams
+        - img [ref=e151]
+      - link "Instagram" [ref=e155] [cursor=pointer]:
+        - /url: https://www.instagram.com/thecustardscreams
+        - img [ref=e156]
+      - link "TikTok" [ref=e159] [cursor=pointer]:
+        - /url: https://www.tiktok.com/@the.custard.screams
+        - img [ref=e160]
+      - link "Facebook" [ref=e163] [cursor=pointer]:
+        - /url: https://www.facebook.com/profile.php
+        - img [ref=e164]
+    - paragraph [ref=e166]: Copyright © 2026 The Custard Screams
+  - navigation "Main navigation" [ref=e167]:
+    - generic [ref=e168]:
+      - button "Home section with band introduction" [ref=e169]:
+        - generic [ref=e172]: Home
+      - button "Upcoming and past live shows" [ref=e173]:
+        - generic [ref=e176]: Shows
+      - button "Music streaming and downloads" [ref=e177]:
+        - generic [ref=e182]: Music
+      - button "About the band" [ref=e183]:
+        - generic [ref=e186]: About
+  - dialog "Cookie Consent" [ref=e187]:
+    - generic [ref=e188]:
+      - heading "Cookie Consent" [level=2] [ref=e189]
+      - paragraph [ref=e190]: We use cookies to analyze site traffic and improve your experience. These cookies help us understand how visitors interact with our website. You can choose to accept or decline non-essential cookies. The site will function fully regardless of your choice.
+      - generic [ref=e191]:
+        - button "Accept cookies and enable analytics" [ref=e192]: Accept Cookies
+        - button "Decline cookies and continue without analytics" [ref=e193]: Decline
+  - button "Open Next.js Dev Tools" [ref=e199] [cursor=pointer]:
+    - img [ref=e200]
+  - alert [ref=e204]
+```

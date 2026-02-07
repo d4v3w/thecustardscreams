@@ -16,3 +16,18 @@ Object.defineProperty(window, 'matchMedia', {
     })),
 });
 
+// Mock IntersectionObserver
+global.IntersectionObserver = class IntersectionObserver {
+    constructor() { }
+    disconnect() { }
+    observe() { }
+    takeRecords() {
+        return [];
+    }
+    unobserve() { }
+};
+
+// Mock HTMLDialogElement methods
+HTMLDialogElement.prototype.showModal = jest.fn();
+HTMLDialogElement.prototype.close = jest.fn();
+

@@ -92,3 +92,13 @@ section[data-section-id] {
   display: inline-flex;
   margin-right: 0.5rem;
 }
+
+/* Hide scrollbars for carousel while maintaining scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
