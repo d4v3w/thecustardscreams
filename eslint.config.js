@@ -48,7 +48,6 @@ const eslintConfig = defineConfig([
   // Note: eslint-plugin-react is already included in next/core-web-vitals
   {
     files: ["**/*.tsx", "**/*.jsx"],
-    ignores: ["e2e/**"],
     settings: {
       react: {
         version: "detect", // Automatically detect React version
@@ -63,14 +62,6 @@ const eslintConfig = defineConfig([
       "react/no-unescaped-entities": "off",
     },
   },
-  // Disable React rules for e2e test files
-  {
-    files: ["e2e/**/*.ts"],
-    rules: {
-      "react/display-name": "off",
-      "react/prop-types": "off",
-    },
-  },
   // Override default ignores of eslint-config-next
   globalIgnores([
     '.next/**',
@@ -78,9 +69,6 @@ const eslintConfig = defineConfig([
     'build/**',
     'next-env.d.ts',
     'e2e/**',
-    'e2etests/**',
-    'e2efixtures/**',
-    'e2escreenshots/**',
   ]),
 ]);
 

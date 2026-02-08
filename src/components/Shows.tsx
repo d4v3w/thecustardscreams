@@ -12,11 +12,6 @@ const Shows = () => {
       alt: "The Custard Screams at Freaks and Geeks - Stratford, London, May 31st 2025",
       id: "show-2",
     },
-    {
-      src: "https://xnrw2k7p6j.ufs.sh/f/kor843t3OqX11TVvcM2zyFK0ROkwl3WSGv8XHuon7LfdbVrj",
-      alt: "The Custard Screams Skull Logo",
-      id: "show-3",
-    },
   ];
 
   return (
