@@ -63,7 +63,7 @@
 /* Music Icon - Single Bold Eighth Note */
 .icon-music {
   position: relative;
-  width: 50%;
+  width: auto;
   height: 100%;
   display: block;
   color: currentColor;
