@@ -37,6 +37,8 @@ export default function ImageLightbox({
       className="max-h-full max-w-full bg-transparent p-0 backdrop:bg-black/80"
       onClose={onClose}
       onClick={handleDialogClick}
+      aria-label="Image lightbox"
+      aria-modal="true"
     >
       <div className="relative flex min-h-screen items-center justify-center p-4">
         <button

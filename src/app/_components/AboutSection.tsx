@@ -8,7 +8,7 @@ import Section from "~/components/Section";
  */
 export default function AboutSection() {
   return (
-    <Section id="about" className="flex flex-col items-center justify-start p-4 md:p-6">
+    <Section id="about" className="flex flex-col items-center justify-center p-4 md:p-6">
       <div className="w-full max-w-4xl">
         <h2 id="about-heading" className="mb-6 text-3xl font-bold text-amber-400 md:text-4xl">
           About The Custard Screams

@@ -11,7 +11,7 @@ import { ConditionalBandsintownWidget } from "~/components/cookie/ConditionalBan
  */
 export default function ShowsSection() {
   return (
-    <Section id="shows" className="flex flex-col items-center justify-start p-4 md:p-6">
+    <Section id="shows" className="flex flex-col items-center justify-center p-4 md:p-6">
       <div className="w-full max-w-4xl">
         <h2 id="shows-heading" className="mb-6 text-3xl font-bold text-amber-400 md:text-4xl">
           Live Shows

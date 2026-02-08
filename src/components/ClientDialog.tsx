@@ -63,6 +63,8 @@ const ClientDialog = ({ initialState }: ClientDialogProps) => {
       }}
       ref={dialogRef}
       className={st.dialog}
+      aria-label="Video player"
+      aria-modal="true"
     >
       <video
         autoPlay

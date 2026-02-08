@@ -35,7 +35,7 @@ export default function BottomNav({
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="mx-auto flex max-w-4xl items-center justify-around gap-2 px-2 py-2">
+      <div className="mx-auto flex max-w-4xl items-center justify-around gap-2 px-4 py-3">
         {SECTIONS.map((section) => {
           // Map section IDs to icon types
           const iconType = section.id === "home" ? "home" : section.id;
