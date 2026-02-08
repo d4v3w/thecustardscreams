@@ -88,19 +88,161 @@ export interface ShowsData {
 // ============================================================================
 
 /**
- * User's cookie consent preferences
+ * Cookie category identifiers
+ * Feature: gdpr-cookie-compliance-enhancement
+ */
+export type CookieCategoryId = 'essential' | 'analytics' | 'marketing';
+
+/**
+ * Information about a third-party service that uses cookies
+ * Feature: gdpr-cookie-compliance-enhancement
+ */
+export interface CookieService {
+  name: string;
+  purpose: string;
+  cookies: readonly string[];
+  privacyPolicyUrl: string;
+}
+
+/**
+ * Complete definition of a cookie category
+ * Feature: gdpr-cookie-compliance-enhancement
+ */
+export interface CookieCategory {
+  id: CookieCategoryId;
+  name: string;
+  description: string;
+  required: boolean;
+  services: readonly CookieService[];
+  retentionPeriod: string;
+}
+
+/**
+ * User's consent preferences by category
+ * Feature: gdpr-cookie-compliance-enhancement
+ */
+export interface CookieCategoryPreferences {
+  essential: boolean;
+  analytics: boolean;
+  marketing: boolean;
+}
+
+/**
+ * Method by which user provided consent
+ * Feature: gdpr-cookie-compliance-enhancement
+ */
+export type ConsentMethod = 'accept-all' | 'reject-all' | 'custom';
+
+/**
+ * User's cookie consent preferences (enhanced format v2)
+ * Feature: gdpr-cookie-compliance-enhancement
  */
 export interface CookiePreferences {
-  analytics: boolean;
+  categories: CookieCategoryPreferences;
   timestamp: number;
   version: number;
+  method: ConsentMethod;
+}
+
+/**
+ * Single consent decision log entry for audit trail
+ * Feature: gdpr-cookie-compliance-enhancement
+ */
+export interface ConsentLog {
+  id: string;
+  timestamp: number;
+  preferences: CookiePreferences;
+  userAgent: string;
+  version: number;
+}
+
+/**
+ * Collection of consent logs for audit purposes
+ * Feature: gdpr-cookie-compliance-enhancement
+ */
+export interface ConsentHistory {
+  logs: ConsentLog[];
+}
+
+/**
+ * React Context value for cookie consent state management
+ * Feature: gdpr-cookie-compliance-enhancement
+ */
+export interface CookieConsentContextValue {
+  preferences: CookiePreferences | null;
+  hasEssential: boolean;
+  hasAnalytics: boolean;
+  hasMarketing: boolean;
+  acceptAll: () => void;
+  rejectAll: () => void;
+  updatePreferences: (prefs: Partial<CookieCategoryPreferences>) => void;
+  withdrawConsent: () => void;
+  showBanner: boolean;
+  showModal: boolean;
+  openModal: () => void;
+  closeModal: () => void;
+  exportConsentLogs: () => ConsentLog[];
 }
 
 /**
  * Cookie consent storage configuration
  */
 export const COOKIE_CONSENT_KEY = "custard-screams-cookie-consent";
-export const CONSENT_VERSION = 1;
+export const CONSENT_LOGS_KEY = "custard-screams-consent-logs";
+export const CONSENT_VERSION = 2;
+export const MAX_CONSENT_LOGS = 50;
+
+/**
+ * Cookie category definitions with services and metadata
+ * Feature: gdpr-cookie-compliance-enhancement
+ */
+export const COOKIE_CATEGORIES: readonly CookieCategory[] = [
+  {
+    id: 'essential',
+    name: 'Essential Cookies',
+    description: 'Required for the website to function. These cannot be disabled.',
+    required: true,
+    services: [
+      {
+        name: 'Consent Preferences',
+        purpose: 'Stores your cookie consent choices',
+        cookies: ['custard-screams-cookie-consent', 'custard-screams-consent-logs'],
+        privacyPolicyUrl: '/privacy-policy'
+      }
+    ],
+    retentionPeriod: '1 year'
+  },
+  {
+    id: 'analytics',
+    name: 'Analytics Cookies',
+    description: 'Help us understand how visitors use our website.',
+    required: false,
+    services: [
+      {
+        name: 'Google Analytics',
+        purpose: 'Measures website traffic and user behavior',
+        cookies: ['_ga', '_ga_*', '_gid', '_gat'],
+        privacyPolicyUrl: 'https://policies.google.com/privacy'
+      }
+    ],
+    retentionPeriod: '2 years'
+  },
+  {
+    id: 'marketing',
+    name: 'Marketing Cookies',
+    description: 'Used by third parties to show relevant content and track engagement.',
+    required: false,
+    services: [
+      {
+        name: 'Bandsintown',
+        purpose: 'Displays upcoming concert information and may track engagement',
+        cookies: ['bit_*', 'bandsintown_*'],
+        privacyPolicyUrl: 'https://www.bandsintown.com/privacy'
+      }
+    ],
+    retentionPeriod: '1 year'
+  }
+] as const;
 
 // ============================================================================
 // Analytics Types
@@ -202,6 +344,31 @@ export interface CookieConsentProps {
 }
 
 /**
+ * Props for CookieSettingsLink component
+ * Feature: gdpr-cookie-compliance-enhancement
+ */
+export interface CookieSettingsLinkProps {
+  className?: string;
+}
+
+/**
+ * Props for ConditionalBandsintownWidget component
+ * Feature: gdpr-cookie-compliance-enhancement
+ */
+export interface ConditionalBandsintownWidgetProps {
+  artistId: string;
+  fallbackMessage?: string;
+}
+
+/**
+ * Props for ConditionalAnalyticsLoader component
+ * Feature: gdpr-cookie-compliance-enhancement
+ */
+export interface ConditionalAnalyticsLoaderProps {
+  measurementId: string;
+}
+
+/**
  * Props for ImageWithFallback component
  */
 export interface ImageWithFallbackProps {
@@ -261,7 +428,7 @@ export interface UseSmoothScrollOptions {
 }
 
 /**
- * Return type for useCookieConsent hook
+ * Return type for useCookieConsent hook (legacy - kept for backward compatibility)
  */
 export interface UseCookieConsentReturn {
   hasConsent: boolean | null; // null = not decided yet

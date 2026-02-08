@@ -1,13 +1,13 @@
 "use client";
 
 import { Bebas_Neue, Geist } from "next/font/google";
-import CookieConsent from "~/components/cookie/CookieConsent";
+import { CookieConsentProvider } from "~/contexts/CookieConsentContext";
 import { NavigationProvider } from "~/contexts/NavigationContext";
-import { useCookieConsent } from "~/hooks/useCookieConsent";
 import "~/styles/globals.css";
 import "~/styles/punk-icons.css";
 import "~/styles/punk-typography.css";
 import { LayoutClient } from "./LayoutClient";
+import { LayoutCookieComponents } from "./LayoutCookieComponents";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -26,8 +26,6 @@ const bebasNeue = Bebas_Neue({
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const { hasConsent, acceptCookies, declineCookies } = useCookieConsent();
-
   return (
     <html lang="en-GB" className={`${geist.variable} ${bebasNeue.variable}`}>
       <head>
@@ -44,16 +42,16 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className="bg-black text-white">
-        <NavigationProvider>
-          <LayoutClient>
-            {children}
-          </LayoutClient>
-          
-          {/* Cookie Consent Banner - only show if user hasn't decided */}
-          {hasConsent === null && (
-            <CookieConsent onAccept={acceptCookies} onDecline={declineCookies} />
-          )}
-        </NavigationProvider>
+        <CookieConsentProvider>
+          <NavigationProvider>
+            <LayoutClient>
+              {children}
+            </LayoutClient>
+            
+            {/* Cookie consent UI components */}
+            <LayoutCookieComponents />
+          </NavigationProvider>
+        </CookieConsentProvider>
       </body>
     </html>
   );
