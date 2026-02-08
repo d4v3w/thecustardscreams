@@ -26,6 +26,9 @@ test.describe('Shows Page', () => {
   test('should match visual snapshot', async ({ page }) => {
     await navigateToPage(page, '/live-shows');
     
+    // Wait for dynamic content to stabilize
+    await page.waitForTimeout(2000);
+    
     // Take a screenshot and compare against baseline
     await expect(page).toHaveScreenshot('shows-page.png', {
       fullPage: true,

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { CookieConsentProvider } from "~/contexts/CookieConsentContext";
 import { NavigationProvider } from "~/contexts/NavigationContext";
 import HomePage from "./page";
 
@@ -18,17 +19,21 @@ jest.mock("~/hooks/useReducedMotion", () => ({
 describe("Home Page", () => {
   it("renders without errors", () => {
     expect(() => render(
-      <NavigationProvider>
-        <HomePage />
-      </NavigationProvider>
+      <CookieConsentProvider>
+        <NavigationProvider>
+          <HomePage />
+        </NavigationProvider>
+      </CookieConsentProvider>
     )).not.toThrow();
   });
 
   it("renders all main sections", () => {
     render(
-      <NavigationProvider>
-        <HomePage />
-      </NavigationProvider>
+      <CookieConsentProvider>
+        <NavigationProvider>
+          <HomePage />
+        </NavigationProvider>
+      </CookieConsentProvider>
     );
     
     // Check that all section headings are present

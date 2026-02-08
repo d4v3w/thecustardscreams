@@ -11,6 +11,7 @@ import { expect } from '@playwright/test';
 export async function navigateToPage(page: Page, path: string): Promise<void> {
   await page.goto(path);
   await waitForPageLoad(page);
+  await dismissCookieConsent(page);
 }
 
 /**
@@ -19,6 +20,21 @@ export async function navigateToPage(page: Page, path: string): Promise<void> {
 export async function waitForPageLoad(page: Page): Promise<void> {
   // Use 'load' instead of 'networkidle' to avoid timeout issues with external resources
   await page.waitForLoadState('load');
+}
+
+/**
+ * Dismiss cookie consent dialog if present
+ */
+export async function dismissCookieConsent(page: Page): Promise<void> {
+  try {
+    const rejectButton = page.getByRole('button', { name: /Reject all/i });
+    if (await rejectButton.isVisible({ timeout: 2000 })) {
+      await rejectButton.click();
+      await page.waitForTimeout(500);
+    }
+  } catch {
+    // Cookie consent not present or already dismissed
+  }
 }
 
 /**

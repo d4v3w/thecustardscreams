@@ -1,15 +1,18 @@
 import { expect, test } from '@playwright/test';
+import { dismissCookieConsent } from '../fixtures/test-helpers';
 
 test.describe('Image Carousel with Lightbox', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
     // Wait for page to load
     await page.waitForLoadState('networkidle');
+    // Dismiss cookie consent dialog
+    await dismissCookieConsent(page);
   });
 
   test('should display carousel in Previous Shows section', async ({ page }) => {
-    // Scroll to shows section
-    await page.locator('text=Shows').click();
+    // Scroll to shows section by clicking the navigation button
+    await page.getByRole('button', { name: 'Upcoming and past live shows' }).click();
     await page.waitForTimeout(1000);
 
     // Check carousel is visible
@@ -22,7 +25,7 @@ test.describe('Image Carousel with Lightbox', () => {
   });
 
   test('should display navigation and pagination', async ({ page }) => {
-    await page.locator('text=Shows').click();
+    await page.getByRole('button', { name: 'Upcoming and past live shows' }).click();
     await page.waitForTimeout(1000);
 
     // Check navigation buttons
@@ -35,7 +38,7 @@ test.describe('Image Carousel with Lightbox', () => {
   });
 
   test('should navigate using next button', async ({ page }) => {
-    await page.locator('text=Shows').click();
+    await page.getByRole('button', { name: 'Upcoming and past live shows' }).click();
     await page.waitForTimeout(1000);
 
     const nextButton = page.getByLabel('Next image');
@@ -53,7 +56,7 @@ test.describe('Image Carousel with Lightbox', () => {
   });
 
   test('should open and close lightbox', async ({ page }) => {
-    await page.locator('text=Shows').click();
+    await page.getByRole('button', { name: 'Upcoming and past live shows' }).click();
     await page.waitForTimeout(1000);
 
     const carousel = page.locator('[aria-label="Previous shows gallery"]');
@@ -77,7 +80,7 @@ test.describe('Image Carousel with Lightbox', () => {
   });
 
   test('should close lightbox with Escape key', async ({ page }) => {
-    await page.locator('text=Shows').click();
+    await page.getByRole('button', { name: 'Upcoming and past live shows' }).click();
     await page.waitForTimeout(1000);
 
     const carousel = page.locator('[aria-label="Previous shows gallery"]');
@@ -99,7 +102,7 @@ test.describe('Image Carousel with Lightbox', () => {
   });
 
   test('should have proper accessibility labels', async ({ page }) => {
-    await page.locator('text=Shows').click();
+    await page.getByRole('button', { name: 'Upcoming and past live shows' }).click();
     await page.waitForTimeout(1000);
 
     // Check carousel region
