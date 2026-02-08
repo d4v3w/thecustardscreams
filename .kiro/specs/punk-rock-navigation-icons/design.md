@@ -291,7 +291,7 @@ const colorScheme = {
 }
 
 .icon-shows:hover::after {
-  background-color: #ffff00;
+  background-color: #ff0000;
 }
 
 .icon-container.active .icon-shows::before {
@@ -299,7 +299,7 @@ const colorScheme = {
 }
 
 .icon-container.active .icon-shows::after {
-  background-color: #ffff00;
+  background-color: #ff0000;
 }
 ```
 

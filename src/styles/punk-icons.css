@@ -174,22 +174,22 @@
 
 /* Shows Icon Hover State */
 .icon-shows:hover::before {
-  background-color: #ff0000 !important;
+  background-color: #ff0000;
   filter: drop-shadow(0 0 6px #ff0000);
   transform: translate(-50%, -50%) rotate(15deg) scale(1.1);
 }
 
 .icon-shows:hover::after {
-  background-color: #ffff00 !important;
+  background-color: #ff0000;
 }
 
 /* Shows Icon Active State */
 .icon-container.active .icon-shows::before {
-  background-color: #ff0000 !important;
+  background-color: #ff0000;
 }
 
 .icon-container.active .icon-shows::after {
-  background-color: #ffff00 !important;
+  background-color: #ff0000;
 }
 
 /* About Icon - Exclamation Mark (Information/Impact) */
