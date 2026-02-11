@@ -1,0 +1,4 @@
+packageExtensions:
+  antd:
+    peerDependencies:
+      '@types/react': '*'

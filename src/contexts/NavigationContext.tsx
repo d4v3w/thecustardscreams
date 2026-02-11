@@ -1,7 +1,9 @@
 "use client";
 
-import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import React, { createContext, useCallback, useContext, useRef, useState } from "react";
+import { useHashSync } from "~/hooks/useHashSync";
 import { useReducedMotion } from "~/hooks/useReducedMotion";
+import { useScrollObserver } from "~/hooks/useScrollObserver";
 import type { SectionId } from "~/lib/types";
 
 /**
@@ -35,16 +37,74 @@ interface NavigationContextValue {
   
   // Section refs for intersection observer
   getSectionRefs: () => Map<SectionId, React.RefObject<HTMLElement | null>>;
+  
+  // Hash synchronization (new)
+  updateHash: (section: SectionId, addToHistory?: boolean) => void;
+  isProgrammaticScroll: () => boolean;
 }
 
 const NavigationContext = createContext<NavigationContextValue | undefined>(undefined);
 
 export function NavigationProvider({ children }: { children: React.ReactNode }) {
-  const [currentSection, setCurrentSection] = useState<SectionId | null>(null);
   const [previousSection, setPreviousSection] = useState<SectionId | null>(null);
   const sectionsMapRef = useRef<Map<SectionId, SectionRegistration>>(new Map());
   const [sections, setSections] = useState<SectionId[]>([]);
   const prefersReducedMotion = useReducedMotion();
+  
+  // Programmatic scroll flag management (prevents infinite loops)
+  const programmaticScrollRef = useRef(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const setProgrammaticScroll = useCallback((value: boolean, duration: number = 800) => {
+    programmaticScrollRef.current = value;
+    
+    if (value) {
+      // Clear existing timeout
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      
+      // Auto-clear after duration
+      scrollTimeoutRef.current = setTimeout(() => {
+        programmaticScrollRef.current = false;
+      }, duration);
+    }
+  }, []);
+
+  const isProgrammaticScroll = useCallback(() => programmaticScrollRef.current, []);
+
+  // Get section refs map for intersection observer
+  const getSectionRefs = useCallback(() => {
+    const refsMap = new Map<SectionId, React.RefObject<HTMLElement | null>>();
+    sectionsMapRef.current.forEach((registration, id) => {
+      refsMap.set(id, registration.ref);
+    });
+    return refsMap;
+  }, []);
+
+  // Use hash sync hook to manage current section (hash is single source of truth)
+  const { currentSection, updateHash } = useHashSync({
+    sections,
+    getSectionRefs,
+    isProgrammaticScroll,
+    setProgrammaticScroll,
+    onHashChange: (section) => {
+      // Update previous section when current changes
+      setPreviousSection((prev) => {
+        // Only update if section actually changed
+        return prev !== section ? currentSection : prev;
+      });
+    },
+  });
+
+  // Initialize scroll observer to detect visible sections and update hash
+  // Replaces old useNavigationObserver hook (Requirements: 1.1, 1.3, 5.1)
+  useScrollObserver(getSectionRefs(), {
+    updateHash,
+    isProgrammaticScroll,
+    threshold: 0.3,
+    rootMargin: "-80px 0px -80px 0px",
+  });
 
   // Register a section with its ref and order
   const registerSection = useCallback((id: SectionId, ref: React.RefObject<HTMLElement | null>, order: number) => {
@@ -69,15 +129,6 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
     setSections(sortedSections);
   }, []);
 
-  // Get section refs map for intersection observer
-  const getSectionRefs = useCallback(() => {
-    const refsMap = new Map<SectionId, React.RefObject<HTMLElement | null>>();
-    sectionsMapRef.current.forEach((registration, id) => {
-      refsMap.set(id, registration.ref);
-    });
-    return refsMap;
-  }, []);
-
   // Calculate next section based on current
   const nextSection = currentSection 
     ? sections[sections.indexOf(currentSection) + 1] || null
@@ -85,31 +136,10 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
 
   // Navigate to a specific section
   const navigateToSection = useCallback((id: SectionId) => {
-    const registration = sectionsMapRef.current.get(id);
-    if (!registration?.ref.current) {
-      console.warn(`Section ${id} not found or not registered`);
-      return;
-    }
-
-    // Get the section element
-    const element = registration.ref.current;
-
-    // Determine scroll behavior based on user preference
-    const behavior = prefersReducedMotion ? "auto" : "smooth";
-
-    // Use scrollIntoView to scroll to the section
-    // This works better with scroll-snap-type
-    element.scrollIntoView({
-      behavior,
-      block: "start",
-      inline: "nearest",
-    });
-
-    // Update URL hash
-    if (window.history.pushState) {
-      window.history.pushState(null, "", `#${id}`);
-    }
-  }, [prefersReducedMotion]);
+    // Simply update the hash with history entry (for user clicks)
+    // The useHashSync hook will handle scrolling
+    updateHash(id, true);
+  }, [updateHash]);
 
   // Navigate to next section
   const navigateNext = useCallback(() => {
@@ -125,12 +155,6 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
     }
   }, [previousSection, navigateToSection]);
 
-  // Update current section (called by intersection observer)
-  useEffect(() => {
-    // This will be updated by the intersection observer hook
-    // which will call setCurrentSection through the context
-  }, []);
-
   const value: NavigationContextValue = {
     currentSection,
     previousSection,
@@ -142,12 +166,8 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
     navigateNext,
     navigatePrevious,
     getSectionRefs,
-  };
-
-  // Expose setCurrentSection internally for intersection observer
-  (value as any)._setCurrentSection = (section: SectionId | null) => {
-    setPreviousSection(currentSection);
-    setCurrentSection(section);
+    updateHash,
+    isProgrammaticScroll,
   };
 
   return (
@@ -166,11 +186,17 @@ export function useNavigation() {
   return context;
 }
 
-// Internal hook for intersection observer to update current section
+// DEPRECATED: Internal hook for intersection observer to update current section
+// This will be removed in task 5.4 when useScrollObserver replaces useNavigationObserver
+// For now, it's a no-op since currentSection is managed by useHashSync
 export function useNavigationUpdater() {
   const context = useContext(NavigationContext);
   if (!context) {
     throw new Error("useNavigationUpdater must be used within NavigationProvider");
   }
-  return (context as any)._setCurrentSection as (section: SectionId | null) => void;
+  // Return a no-op function since hash sync now manages currentSection
+  // The old useNavigationObserver will call this but it won't do anything
+  return (_section: SectionId | null) => {
+    // No-op: currentSection is now managed by useHashSync via URL hash
+  };
 }

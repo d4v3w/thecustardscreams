@@ -1,8 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
-import { useNavigation } from "~/contexts/NavigationContext";
-import { useNavigationObserver } from "~/hooks/useNavigationObserver";
 import AboutSection from "./_components/AboutSection";
 import HeroSection from "./_components/HeroSection";
 import MusicSection from "./_components/MusicSection";
@@ -11,30 +8,11 @@ import ShowsSection from "./_components/ShowsSection";
 /**
  * Single-page home with smooth scrolling sections
  * Uses NavigationContext for state management
- * Feature: website-modernization, persistent-navigation-breadcrumbs
+ * Feature: website-modernization, persistent-navigation-breadcrumbs, navigation-hash-sync
  * Requirements: 1.1, 1.2, 1.3, 2.1, 3.4, 10.4, 9.7
  */
 export default function HomePage() {
-  const { navigateToSection } = useNavigation();
-
-  // Set up intersection observer to track active section
-  useNavigationObserver({
-    threshold: 0.3,
-    rootMargin: "-80px 0px -80px 0px",
-  });
-
-  // Handle initial hash navigation
-  useEffect(() => {
-    if (typeof window !== "undefined" && window.location.hash) {
-      const hash = window.location.hash.slice(1);
-      if (hash) {
-        // Small delay to ensure sections are registered
-        setTimeout(() => {
-          navigateToSection(hash as any);
-        }, 100);
-      }
-    }
-  }, [navigateToSection]);
+  // Navigation observer and hash sync now handled in NavigationContext
 
   return (
     <>

@@ -51,15 +51,21 @@ export default function NavItem({ section, isActive, onClick, iconType }: NavIte
 
   return (
     <button
-      onClick={onClick}
+      onClick={(e) => {
+        onClick();
+        // Remove focus from button after click to prevent lingering focus styles
+        // Focus will be managed by scrollToSection which focuses the target section
+        e.currentTarget.blur();
+      }}
       className={`
         flex min-h-[44px] min-w-[44px] flex-1 flex-col items-center justify-center
         gap-1 rounded-lg px-3 py-2 transition-colors duration-200
         focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-black
+        active:scale-95
         ${
           isActive
             ? "bg-amber-400 text-black"
-            : "bg-transparent text-white hover:bg-white/10"
+            : "bg-transparent text-white hover:bg-white/10 active:bg-white/10 [@media(hover:hover)]:hover:bg-white/10 [@media(hover:none)]:hover:bg-transparent"
         }
       `}
       aria-label={section.ariaLabel}
