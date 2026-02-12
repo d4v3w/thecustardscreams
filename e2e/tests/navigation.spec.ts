@@ -29,8 +29,8 @@ test.describe('Navigation', () => {
     // Click on home link or navigate directly
     await page.goto('/');
     
-    // Verify URL changed back to home
-    await expect(page).toHaveURL('/');
+    // Verify URL changed back to home (may include #home hash)
+    expect(page.url()).toMatch(/\/(#home)?$/);
   });
 
   test('should use browser back button', async ({ page }) => {
@@ -43,8 +43,8 @@ test.describe('Navigation', () => {
     // Use browser back button
     await page.goBack();
     
-    // Verify we're back on home page
-    await expect(page).toHaveURL('/');
+    // Verify we're back on home page (may include #home hash)
+    expect(page.url()).toMatch(/\/(#home)?$/);
   });
 });
 

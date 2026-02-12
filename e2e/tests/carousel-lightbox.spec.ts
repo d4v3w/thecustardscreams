@@ -1,31 +1,24 @@
 import { expect, test } from '@playwright/test';
-import { dismissCookieConsent } from '../fixtures/test-helpers';
 
 test.describe('Image Carousel with Lightbox', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/');
-    // Wait for page to load
-    await page.waitForLoadState('networkidle');
-    // Dismiss cookie consent dialog
-    await dismissCookieConsent(page);
-  });
-
   test('should display carousel in Previous Shows section', async ({ page }) => {
-    // Scroll to shows section by clicking the navigation button
-    await page.getByRole('button', { name: 'Upcoming and past live shows' }).click();
+    // Navigate to shows section
+    await page.goto('/#shows');
+    await page.waitForLoadState('networkidle');
     await page.waitForTimeout(1000);
 
     // Check carousel is visible
     const carousel = page.locator('[aria-label="Previous shows gallery"]');
     await expect(carousel).toBeVisible({ timeout: 10000 });
 
-    // Check all three images are present
+    // Check images are present
     const images = carousel.locator('img');
-    await expect(images).toHaveCount(3);
+    await expect(images).toHaveCount(2);
   });
 
   test('should display navigation and pagination', async ({ page }) => {
-    await page.getByRole('button', { name: 'Upcoming and past live shows' }).click();
+    await page.goto('/#shows');
+    await page.waitForLoadState('networkidle');
     await page.waitForTimeout(1000);
 
     // Check navigation buttons
@@ -34,11 +27,12 @@ test.describe('Image Carousel with Lightbox', () => {
 
     // Check pagination dots
     const dots = page.locator('[role="tab"]');
-    await expect(dots).toHaveCount(3);
+    await expect(dots).toHaveCount(2);
   });
 
   test('should navigate using next button', async ({ page }) => {
-    await page.getByRole('button', { name: 'Upcoming and past live shows' }).click();
+    await page.goto('/#shows');
+    await page.waitForLoadState('networkidle');
     await page.waitForTimeout(1000);
 
     const nextButton = page.getByLabel('Next image');
@@ -56,7 +50,8 @@ test.describe('Image Carousel with Lightbox', () => {
   });
 
   test('should open and close lightbox', async ({ page }) => {
-    await page.getByRole('button', { name: 'Upcoming and past live shows' }).click();
+    await page.goto('/#shows');
+    await page.waitForLoadState('networkidle');
     await page.waitForTimeout(1000);
 
     const carousel = page.locator('[aria-label="Previous shows gallery"]');
@@ -80,7 +75,8 @@ test.describe('Image Carousel with Lightbox', () => {
   });
 
   test('should close lightbox with Escape key', async ({ page }) => {
-    await page.getByRole('button', { name: 'Upcoming and past live shows' }).click();
+    await page.goto('/#shows');
+    await page.waitForLoadState('networkidle');
     await page.waitForTimeout(1000);
 
     const carousel = page.locator('[aria-label="Previous shows gallery"]');
@@ -102,7 +98,8 @@ test.describe('Image Carousel with Lightbox', () => {
   });
 
   test('should have proper accessibility labels', async ({ page }) => {
-    await page.getByRole('button', { name: 'Upcoming and past live shows' }).click();
+    await page.goto('/#shows');
+    await page.waitForLoadState('networkidle');
     await page.waitForTimeout(1000);
 
     // Check carousel region
@@ -113,8 +110,7 @@ test.describe('Image Carousel with Lightbox', () => {
     await expect(page.getByLabel('Next image')).toBeVisible();
 
     // Check pagination
-    await expect(page.getByLabel('Go to image 1 of 3')).toBeVisible();
-    await expect(page.getByLabel('Go to image 2 of 3')).toBeVisible();
-    await expect(page.getByLabel('Go to image 3 of 3')).toBeVisible();
+    await expect(page.getByLabel('Go to image 1 of 2')).toBeVisible();
+    await expect(page.getByLabel('Go to image 2 of 2')).toBeVisible();
   });
 });

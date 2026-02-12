@@ -1,0 +1,14 @@
+{
+  "cookies": [],
+  "origins": [
+    {
+      "origin": "http://localhost:3000",
+      "localStorage": [
+        {
+          "name": "custard-screams-cookie-consent",
+          "value": "{\"categories\":{\"essential\":true,\"analytics\":false,\"marketing\":false},\"timestamp\":1770898317250,\"version\":2,\"method\":\"reject-all\"}"
+        }
+      ]
+    }
+  ]
+}

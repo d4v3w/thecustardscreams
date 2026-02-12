@@ -16,8 +16,8 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   
-  /* Opt out of parallel tests on CI */
-  workers: process.env.CI ? 1 : undefined,
+  /* Use more workers for faster test execution */
+  workers: process.env.CI ? 4 : undefined,
   
   /* Reporter to use */
   reporter: [
@@ -25,6 +25,9 @@ export default defineConfig({
     ['json', { outputFile: 'playwright-report/results.json' }],
     ['list']
   ],
+
+  /* Global setup to configure cookie consent */
+  globalSetup: './e2e/global-setup.ts',
 
   /* Shared settings for all the projects below */
   use: {
@@ -39,6 +42,9 @@ export default defineConfig({
 
     /* Video on failure */
     video: 'retain-on-failure',
+
+    /* Use storage state with cookie consent already set */
+    storageState: 'e2e/.auth/storage.json',
   },
 
   /* Configure projects for major browsers */
@@ -57,10 +63,11 @@ export default defineConfig({
       use: { ...devices['Desktop Firefox'] },
     },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // Webkit disabled - missing system dependencies on Arch Linux
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
   ],
 
   /* Run your local dev server before starting the tests */
