@@ -98,7 +98,7 @@ export function useHashSync(options: UseHashSyncOptions): UseHashSyncReturn {
     }
 
     // Set programmatic scroll flag to prevent infinite loops
-    setProgrammaticScroll(true, 800);
+    setProgrammaticScroll(true);
 
     // Determine scroll behavior based on user preference
     const behavior = prefersReducedMotion ? "auto" : "smooth";

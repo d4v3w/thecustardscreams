@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useCallback, useContext, useRef, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { useHashSync } from "~/hooks/useHashSync";
 import { useReducedMotion } from "~/hooks/useReducedMotion";
 import { useScrollObserver } from "~/hooks/useScrollObserver";
@@ -54,20 +54,45 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
   // Programmatic scroll flag management (prevents infinite loops)
   const programmaticScrollRef = useRef(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const scrollListenerCleanupRef = useRef<(() => void) | null>(null);
 
-  const setProgrammaticScroll = useCallback((value: boolean, duration: number = 800) => {
+  const setProgrammaticScroll = useCallback((value: boolean) => {
     programmaticScrollRef.current = value;
     
     if (value) {
-      // Clear existing timeout
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
+      // Clear any existing listeners
+      if (scrollListenerCleanupRef.current) {
+        scrollListenerCleanupRef.current();
       }
       
-      // Auto-clear after duration
-      scrollTimeoutRef.current = setTimeout(() => {
+      // Set up scroll completion detection
+      let scrollTimeout: NodeJS.Timeout;
+      let fallbackTimeout: NodeJS.Timeout;
+      
+      const handleScroll = () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          programmaticScrollRef.current = false;
+          cleanup();
+        }, 100);
+      };
+      
+      const cleanup = () => {
+        clearTimeout(scrollTimeout);
+        clearTimeout(fallbackTimeout);
+        window.removeEventListener('scroll', handleScroll);
+        scrollListenerCleanupRef.current = null;
+      };
+      
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      
+      // Fallback: clear after 1500ms if scroll events don't fire
+      fallbackTimeout = setTimeout(() => {
         programmaticScrollRef.current = false;
-      }, duration);
+        cleanup();
+      }, 1500);
+      
+      scrollListenerCleanupRef.current = cleanup;
     }
   }, []);
 
@@ -105,6 +130,22 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
     threshold: 0.3,
     rootMargin: "-80px 0px -80px 0px",
   });
+
+  // Cleanup scroll listener on unmount
+  useEffect(() => {
+    return () => {
+      // Cleanup scroll listener on unmount
+      if (scrollListenerCleanupRef.current) {
+        scrollListenerCleanupRef.current();
+      }
+      // Clear scroll timeout
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      // Reset flag
+      programmaticScrollRef.current = false;
+    };
+  }, []);
 
   // Register a section with its ref and order
   const registerSection = useCallback((id: SectionId, ref: React.RefObject<HTMLElement | null>, order: number) => {
