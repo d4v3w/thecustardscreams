@@ -1,7 +1,7 @@
 "use client";
 
 import Footer from "~/components/Footer";
-import Nav from "~/components/navigation/Nav";
+import BottomNav from "~/components/navigation/BottomNav";
 import { useNavigation } from "~/contexts/NavigationContext";
 
 /**
@@ -18,7 +18,7 @@ export function LayoutClient({ children }: { children: React.ReactNode }) {
         {children}
         <Footer />
       </div>
-      <Nav activeSection={currentSection} onNavigate={navigateToSection} />
+      <BottomNav activeSection={currentSection} onNavigate={navigateToSection} />
     </>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { Bebas_Neue, Geist } from "next/font/google";
-import SkipLink from "~/components/navigation/SkipLink";
 import { CookieConsentProvider } from "~/contexts/CookieConsentContext";
 import { NavigationProvider } from "~/contexts/NavigationContext";
 import "~/styles/globals.css";
@@ -43,7 +42,6 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className="bg-black text-white">
-        <SkipLink />
         <CookieConsentProvider>
           <NavigationProvider>
             <LayoutClient>

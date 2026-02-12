@@ -63,7 +63,7 @@ export default function HomePage() {
       <MusicSection />
       <AboutSection />
 
-      {/* Nav now rendered in layout */}
+      {/* BottomNav now rendered in layout */}
     </>
   );
 }

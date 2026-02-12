@@ -8,7 +8,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import Section from "~/components/Section";
-import Nav from "~/components/navigation/Nav";
+import BottomNav from "~/components/navigation/BottomNav";
 import { NavigationProvider } from "~/contexts/NavigationContext";
 
 // Mock Next.js router
@@ -107,7 +107,7 @@ describe("Navigation and Scroll Snap", () => {
               <Section id="music">Music Content</Section>
               <Section id="shows">Shows Content</Section>
               <Section id="about">About Content</Section>
-              <Nav
+              <BottomNav
                 activeSection={currentSection as any}
                 onNavigate={(id) => {
                   const element = document.querySelector(`[data-section-id="${id}"]`);
@@ -147,7 +147,7 @@ describe("Navigation and Scroll Snap", () => {
             <div>
               <Section id="home">Home Content</Section>
               <Section id="music">Music Content</Section>
-              <Nav
+              <BottomNav
                 activeSection="home"
                 onNavigate={(id) => {
                   window.history.pushState(null, "", `#${id}`);
@@ -181,7 +181,7 @@ describe("Navigation and Scroll Snap", () => {
                   {id} Content
                 </Section>
               ))}
-              <Nav
+              <BottomNav
                 activeSection="home"
                 onNavigate={(id) => {
                   const element = document.querySelector(`[data-section-id="${id}"]`);
@@ -249,7 +249,7 @@ describe("Navigation and Scroll Snap", () => {
     it("should highlight the active navigation item", () => {
       render(
         <NavigationProvider>
-          <Nav activeSection="music" onNavigate={() => {}} />
+          <BottomNav activeSection="music" onNavigate={() => {}} />
         </NavigationProvider>
       );
 
@@ -268,7 +268,7 @@ describe("Navigation and Scroll Snap", () => {
     it("should update active state when different section is active", () => {
       const { rerender } = render(
         <NavigationProvider>
-          <Nav activeSection="home" onNavigate={() => {}} />
+          <BottomNav activeSection="home" onNavigate={() => {}} />
         </NavigationProvider>
       );
 
@@ -278,7 +278,7 @@ describe("Navigation and Scroll Snap", () => {
       // Change active section
       rerender(
         <NavigationProvider>
-          <Nav activeSection="shows" onNavigate={() => {}} />
+          <BottomNav activeSection="shows" onNavigate={() => {}} />
         </NavigationProvider>
       );
 
@@ -294,7 +294,7 @@ describe("Navigation and Scroll Snap", () => {
     it("should have proper ARIA labels on navigation items", () => {
       render(
         <NavigationProvider>
-          <Nav activeSection="home" onNavigate={() => {}} />
+          <BottomNav activeSection="home" onNavigate={() => {}} />
         </NavigationProvider>
       );
 
@@ -308,7 +308,7 @@ describe("Navigation and Scroll Snap", () => {
     it("should indicate current page with aria-current", () => {
       render(
         <NavigationProvider>
-          <Nav activeSection="music" onNavigate={() => {}} />
+          <BottomNav activeSection="music" onNavigate={() => {}} />
         </NavigationProvider>
       );
 
@@ -319,7 +319,7 @@ describe("Navigation and Scroll Snap", () => {
     it("should have minimum touch target size of 44x44px", () => {
       const { container } = render(
         <NavigationProvider>
-          <Nav activeSection="home" onNavigate={() => {}} />
+          <BottomNav activeSection="home" onNavigate={() => {}} />
         </NavigationProvider>
       );
 
@@ -337,7 +337,7 @@ describe("Navigation and Scroll Snap", () => {
 
       render(
         <NavigationProvider>
-          <Nav activeSection="home" onNavigate={() => {}} />
+          <BottomNav activeSection="home" onNavigate={() => {}} />
         </NavigationProvider>
       );
 
@@ -354,7 +354,7 @@ describe("Navigation and Scroll Snap", () => {
 
       render(
         <NavigationProvider>
-          <Nav activeSection="home" onNavigate={mockNavigate} />
+          <BottomNav activeSection="home" onNavigate={mockNavigate} />
         </NavigationProvider>
       );
 
@@ -372,7 +372,7 @@ describe("Navigation and Scroll Snap", () => {
 
       render(
         <NavigationProvider>
-          <Nav activeSection="home" onNavigate={mockNavigate} />
+          <BottomNav activeSection="home" onNavigate={mockNavigate} />
         </NavigationProvider>
       );
 
