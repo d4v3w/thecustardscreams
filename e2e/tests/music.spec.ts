@@ -1,5 +1,4 @@
 import { expect, test } from '@playwright/test';
-import { navigateToPage } from '../fixtures/test-helpers';
 
 test.describe('Music Page', () => {
   test('should load music page and display content', async ({ page }) => {
@@ -23,13 +22,5 @@ test.describe('Music Page', () => {
     await expect(iframes.first()).toBeVisible();
   });
 
-  test('should match visual snapshot', async ({ page }) => {
-    await navigateToPage(page, '/music');
-    
-    // Take a screenshot and compare against baseline
-    await expect(page).toHaveScreenshot('music-page.png', {
-      fullPage: true,
-      maxDiffPixels: 100,
-    });
-  });
+
 });

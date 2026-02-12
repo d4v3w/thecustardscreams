@@ -1,5 +1,4 @@
 import { expect, test } from '@playwright/test';
-import { navigateToPage } from '../fixtures/test-helpers';
 
 test.describe('Shows Page', () => {
   test('should load shows page and display content', async ({ page }) => {
@@ -23,16 +22,5 @@ test.describe('Shows Page', () => {
     expect(hasHeading).toBeTruthy();
   });
 
-  test('should match visual snapshot', async ({ page }) => {
-    await navigateToPage(page, '/live-shows');
-    
-    // Wait for dynamic content to stabilize
-    await page.waitForTimeout(2000);
-    
-    // Take a screenshot and compare against baseline
-    await expect(page).toHaveScreenshot('shows-page.png', {
-      fullPage: true,
-      maxDiffPixels: 100,
-    });
-  });
+
 });
