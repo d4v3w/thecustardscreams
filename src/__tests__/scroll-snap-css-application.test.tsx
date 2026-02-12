@@ -8,6 +8,22 @@ import { render } from "@testing-library/react";
 import Section from "~/components/Section";
 import { NavigationProvider } from "~/contexts/NavigationContext";
 
+// Mock Next.js router
+jest.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    prefetch: jest.fn(),
+  }),
+  usePathname: () => "/",
+  useSearchParams: () => new URLSearchParams(),
+}));
+
+// Mock hooks
+jest.mock("~/hooks/useReducedMotion", () => ({
+  useReducedMotion: () => false,
+}));
+
 describe("Scroll-Snap CSS Application", () => {
   it("should render Section component with data-section-id attribute for CSS targeting", () => {
     const { container } = render(
