@@ -1,20 +1,20 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import type { BottomNavProps } from "~/lib/types";
+import type { NavProps } from "~/lib/types";
 import { SECTIONS } from "~/lib/types";
 import NavItem from "./NavItem";
 
 /**
  * Fixed bottom navigation bar with section links
  * Highlights active section and provides smooth scroll navigation
- * Feature: website-modernization, persistent-navigation-breadcrumbs
- * Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.7, 1.3, 1.4, 6.1, 6.2, 6.3
+ * Feature: website-modernization, persistent-navigation-breadcrumbs, skip-navigation-link
+ * Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.7, 1.3, 1.4, 6.1, 6.2, 6.3, 3.1, 4.1
  */
-export default function BottomNav({
+export default function Nav({
   activeSection,
   onNavigate,
-}: BottomNavProps) {
+}: NavProps) {
   const pathname = usePathname();
   const router = useRouter();
   const isHomePage = pathname === "/";
@@ -31,6 +31,8 @@ export default function BottomNav({
 
   return (
     <nav
+      id="main-navigation"
+      tabIndex={-1}
       className="fixed bottom-0 left-0 right-0 z-40 border-t border-white/10 bg-black/95 backdrop-blur-sm"
       role="navigation"
       aria-label="Main navigation"

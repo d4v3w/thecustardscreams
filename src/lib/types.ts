@@ -281,9 +281,9 @@ export interface SectionProps {
 }
 
 /**
- * Props for BottomNav component
+ * Props for Nav component (main navigation)
  */
-export interface BottomNavProps {
+export interface NavProps {
   activeSection: SectionId | null;
   onNavigate: (sectionId: SectionId) => void;
 }
