@@ -43,11 +43,11 @@ export default function Carousel<T>({
   const showNavigation = items.length > 1;
 
   return (
-    <div className={`relative ${className}`} role="region" aria-label={ariaLabel}>
+    <div className={`relative max-h-[65vh] md:max-h-[70vh] flex flex-col ${className}`} role="region" aria-label={ariaLabel}>
       {/* Scroll Container */}
       <div
         ref={containerRef}
-        className="scrollbar-hide flex snap-x snap-mandatory overflow-x-auto"
+        className="scrollbar-hide flex snap-x snap-mandatory overflow-x-auto flex-1 min-h-0"
       >
         {items.map((item, index) => (
           <div key={index} className="w-full flex-shrink-0 snap-center">

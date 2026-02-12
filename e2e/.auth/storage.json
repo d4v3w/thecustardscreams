@@ -6,7 +6,7 @@
       "localStorage": [
         {
           "name": "custard-screams-cookie-consent",
-          "value": "{\"categories\":{\"essential\":true,\"analytics\":false,\"marketing\":false},\"timestamp\":1770899305345,\"version\":2,\"method\":\"reject-all\"}"
+          "value": "{\"categories\":{\"essential\":true,\"analytics\":false,\"marketing\":false},\"timestamp\":1770900082263,\"version\":2,\"method\":\"reject-all\"}"
         }
       ]
     }

@@ -29,7 +29,7 @@ export default function ImageCarousel({
             <img
               src={image.src}
               alt={image.alt}
-              className="h-auto w-full rounded-lg object-cover"
+              className="h-full w-full max-w-full rounded-lg object-contain"
             />
           </button>
         )}

@@ -87,4 +87,23 @@ describe('ImageCarousel', () => {
       expect(button.tagName).toBe('BUTTON');
     });
   });
+
+  it('should apply proper sizing constraints to images', () => {
+    render(<ImageCarousel images={mockImages} />);
+
+    const images = screen.getAllByRole('img');
+    images.forEach((img) => {
+      expect(img).toHaveClass('h-full');
+      expect(img).toHaveClass('w-full');
+      expect(img).toHaveClass('object-contain');
+    });
+  });
+
+  it('should apply viewport height constraints to carousel wrapper', () => {
+    render(<ImageCarousel images={mockImages} />);
+
+    const carousel = screen.getByRole('region');
+    expect(carousel).toHaveClass('max-h-[65vh]');
+    expect(carousel).toHaveClass('flex-col');
+  });
 });
