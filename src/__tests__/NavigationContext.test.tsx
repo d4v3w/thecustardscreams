@@ -38,8 +38,9 @@ const mockRequestAnimationFrame = jest.fn((callback: FrameRequestCallback) => {
 });
 window.requestAnimationFrame = mockRequestAnimationFrame;
 
-// Helper to flush RAF callbacks
-const flushRequestAnimationFrame = () => {
+// Helper to flush RAF callbacks (currently unused but kept for future tests)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const _flushRequestAnimationFrame = () => {
   const callbacks = [...rafCallbacks];
   rafCallbacks.length = 0;
   callbacks.forEach(cb => cb(performance.now()));
@@ -50,7 +51,7 @@ const mockObserve = jest.fn();
 const mockUnobserve = jest.fn();
 const mockDisconnect = jest.fn();
 
-global.IntersectionObserver = jest.fn().mockImplementation((callback) => ({
+global.IntersectionObserver = jest.fn().mockImplementation((_callback) => ({
   observe: mockObserve,
   unobserve: mockUnobserve,
   disconnect: mockDisconnect,

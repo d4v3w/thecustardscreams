@@ -16,7 +16,7 @@ import { useCookieConsent } from "~/hooks/useCookieConsent";
  * Must be inside CookieConsentProvider
  */
 export function LayoutCookieComponents() {
-  const { showBanner, showModal } = useCookieConsent();
+  const { showBanner, showModal, preferences } = useCookieConsent();
   
   // Get GA measurement ID from environment
   const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "G-XXXXXXXXXX";
@@ -27,7 +27,7 @@ export function LayoutCookieComponents() {
       {showBanner && <CookieConsentBanner />}
       
       {/* Cookie Preferences Modal */}
-      {showModal && <CookiePreferencesModal />}
+      {showModal && <CookiePreferencesModal key={preferences?.timestamp ?? 0} />}
       
       {/* Conditional Analytics Loader */}
       <ConditionalAnalyticsLoader measurementId={measurementId} />

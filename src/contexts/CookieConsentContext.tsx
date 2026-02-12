@@ -7,7 +7,7 @@
 
 "use client";
 
-import { createContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useState, type ReactNode } from "react";
 import {
     createConsentLog,
     exportConsentLogs as exportLogs,
@@ -40,25 +40,21 @@ interface CookieConsentProviderProps {
  * Manages consent state, persistence, and logging
  */
 export function CookieConsentProvider({ children }: CookieConsentProviderProps) {
-  const [preferences, setPreferences] = useState<CookiePreferences | null>(null);
-  const [showBanner, setShowBanner] = useState(false);
+  // Initialize state from localStorage immediately (lazy initialization)
+  const [preferences, setPreferences] = useState<CookiePreferences | null>(() => {
+    if (typeof window === "undefined") return null;
+    return loadPreferences();
+  });
+  
+  const [showBanner, setShowBanner] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return !loadPreferences();
+  });
+  
   const [showModal, setShowModal] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(false);
-
-  // Initialize state from localStorage on mount
-  useEffect(() => {
-    const stored = loadPreferences();
-    
-    if (stored) {
-      setPreferences(stored);
-      setShowBanner(false);
-    } else {
-      // No saved preferences - show banner
-      setShowBanner(true);
-    }
-    
-    setIsInitialized(true);
-  }, []);
+  
+  // Use a simple flag instead of state to avoid setState-in-effect
+  const [isInitialized] = useState(true);
 
   // Derived state for quick access
   const hasEssential = preferences?.categories.essential ?? true;

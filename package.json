@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "next build",
-    "build:prod": "pnpm lint && pnpm typecheck && pnpm test && next build",
+    "build:prod": "pnpm lint && pnpm typecheck && pnpm test:all && next build",
     "postbuild": "next-sitemap",
     "check": "eslint . && tsc --noEmit",
     "dev": "next dev --turbo",
@@ -48,7 +48,7 @@
     "@types/react": "^19.2.13",
     "@types/react-dom": "^19.2.3",
     "baseline-browser-mapping": "^2.9.19",
-    "eslint": "^10.0.0",
+    "eslint": "^9.39.2",
     "eslint-config-next": "^16.1.6",
     "eslint-plugin-react": "^7.37.5",
     "fast-check": "^4.5.3",
@@ -59,7 +59,7 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.54.0"
+    "typescript-eslint": "^8.55.0"
   },
   "ct3aMetadata": {
     "initVersion": "7.39.3"

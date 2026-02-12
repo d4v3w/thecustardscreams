@@ -57,7 +57,6 @@ export function useHashSync(options: UseHashSyncOptions): UseHashSyncReturn {
     sections,
     getSectionRefs,
     onHashChange,
-    isProgrammaticScroll,
     setProgrammaticScroll,
   } = options;
 

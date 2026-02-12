@@ -32,7 +32,7 @@ const mockUseHashSync = useHashSync as jest.MockedFunction<typeof useHashSync>;
 mockUseHashSync.mockImplementation(({ onHashChange }: { onHashChange?: (section: SectionId) => void }) => {
   return {
     currentSection: "home" as SectionId,
-    updateHash: jest.fn((section: SectionId, addToHistory?: boolean) => {
+    updateHash: jest.fn((section: SectionId, _addToHistory?: boolean) => {
       onHashChange?.(section);
     }),
   };

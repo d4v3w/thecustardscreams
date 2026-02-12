@@ -1,8 +1,7 @@
 "use client";
 
-import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useHashSync } from "~/hooks/useHashSync";
-import { useReducedMotion } from "~/hooks/useReducedMotion";
 import { useScrollObserver } from "~/hooks/useScrollObserver";
 import type { SectionId } from "~/lib/types";
 
@@ -49,7 +48,6 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
   const [previousSection, setPreviousSection] = useState<SectionId | null>(null);
   const sectionsMapRef = useRef<Map<SectionId, SectionRegistration>>(new Map());
   const [sections, setSections] = useState<SectionId[]>([]);
-  const prefersReducedMotion = useReducedMotion();
   
   // Programmatic scroll flag management (prevents infinite loops)
   const programmaticScrollRef = useRef(false);
@@ -99,6 +97,7 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
   const isProgrammaticScroll = useCallback(() => programmaticScrollRef.current, []);
 
   // Get section refs map for intersection observer
+  // Memoize to avoid recreating on every render
   const getSectionRefs = useCallback(() => {
     const refsMap = new Map<SectionId, React.RefObject<HTMLElement | null>>();
     sectionsMapRef.current.forEach((registration, id) => {
@@ -106,6 +105,11 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
     });
     return refsMap;
   }, []);
+
+  // Create stable refs map for scroll observer
+  // We need to recreate when sections array changes (sections added/removed)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const sectionRefsMap = useMemo(() => getSectionRefs(), [sections]);
 
   // Use hash sync hook to manage current section (hash is single source of truth)
   const { currentSection, updateHash } = useHashSync({
@@ -124,7 +128,7 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
 
   // Initialize scroll observer to detect visible sections and update hash
   // Replaces old useNavigationObserver hook (Requirements: 1.1, 1.3, 5.1)
-  useScrollObserver(getSectionRefs(), {
+  useScrollObserver(sectionRefsMap, {
     updateHash,
     isProgrammaticScroll,
     threshold: 0.3,
@@ -133,14 +137,17 @@ export function NavigationProvider({ children }: { children: React.ReactNode }) 
 
   // Cleanup scroll listener on unmount
   useEffect(() => {
+    // Capture ref value at effect creation time (not in cleanup)
+    const timeoutId = scrollTimeoutRef.current;
+    
     return () => {
       // Cleanup scroll listener on unmount
       if (scrollListenerCleanupRef.current) {
         scrollListenerCleanupRef.current();
       }
-      // Clear scroll timeout
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
+      // Clear scroll timeout using captured value
+      if (timeoutId) {
+        clearTimeout(timeoutId);
       }
       // Reset flag
       programmaticScrollRef.current = false;

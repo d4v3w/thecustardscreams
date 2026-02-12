@@ -18,15 +18,10 @@ export function CookiePreferencesModal() {
   const { preferences, updatePreferences, closeModal } = useCookieConsent();
   const modalRef = useRef<HTMLDivElement>(null);
   
-  // Local state for toggle changes
+  // Local state for toggle changes - initialize from preferences
+  // Component remounts when preferences change (via key prop), so no sync needed
   const [analytics, setAnalytics] = useState(preferences?.categories.analytics ?? false);
   const [marketing, setMarketing] = useState(preferences?.categories.marketing ?? false);
-
-  // Update local state when preferences change
-  useEffect(() => {
-    setAnalytics(preferences?.categories.analytics ?? false);
-    setMarketing(preferences?.categories.marketing ?? false);
-  }, [preferences]);
 
   // Handle save
   const handleSave = () => {
