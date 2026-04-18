@@ -8,10 +8,11 @@ export const metadata = {
 
 export default async function EPPage() {
   return (
-    <article className="p2 md:p-3">
-      <h1 className="text-xl font-bold text-amber-400">
-        The Custard Screams EP
-      </h1>
+    <article className="flex flex-col items-center justify-center p-4 md:p-6">
+      <div className="w-full max-w-4xl">
+        <h1 className="text-xl font-bold text-amber-400">
+          The Custard Screams EP
+        </h1>
       <p>
         The Custard Screams debut self titled EP - "The Custard Screams EP" is
         available on all major streaming platforms. Follw the links below for
@@ -53,6 +54,7 @@ export default async function EPPage() {
           width={250}
           className="mx-auto h-40 w-40 rounded-full sm:h-50 sm:w-50 md:mx-0 lg:h-60 lg:w-60"
         />
+      </div>
       </div>
     </article>
   );

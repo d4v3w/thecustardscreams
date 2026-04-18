@@ -6,7 +6,7 @@ export const metadata = {
 
 export function Song({ songNavigation }: { songNavigation?: React.ReactNode }) {
   return (
-    <article className="p2 md:p-3">
+    <>
       <h1 className="text-xl font-bold text-amber-400">Song: Royal Flush</h1>
       
       {songNavigation}
@@ -43,6 +43,6 @@ export function Song({ songNavigation }: { songNavigation?: React.ReactNode }) {
           These times are tough it’s a royal flush
         </pre>
       </section>
-    </article>
+    </>
   );
 }

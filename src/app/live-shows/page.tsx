@@ -12,12 +12,13 @@ export const metadata = {
 
 export default async function LiveShowsPage() {
   return (
-    <article className="p2 md:p-3">
-      <h1 className="text-xl font-bold text-amber-400">
-        Custard Screams Live Shows, Gigs and Events
-      </h1>
+    <article className="flex flex-col items-center justify-center p-4 md:p-6">
+      <div className="w-full max-w-4xl">
+        <h1 className="text-xl font-bold text-amber-400">
+          Custard Screams Live Shows, Gigs and Events
+        </h1>
 
-      <article className="p2 md:p-3">
+        <article>
         <h2 className="text-xl font-bold text-amber-400">Upcoming shows</h2>
         <p>
           Come and see The Custard Screams play live at these upcoming shows
@@ -115,6 +116,7 @@ export default async function LiveShowsPage() {
         ></a>
       </article>
       <Shows />
+      </div>
     </article>
   );
 }

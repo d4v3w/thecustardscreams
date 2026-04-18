@@ -24,10 +24,10 @@ export default function Breadcrumb({ className = "" }: BreadcrumbProps) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className={`bg-black text-sm ${className}`}
+      className={`flex flex-col items-center justify-center bg-black text-sm ${className}`}
       role="navigation"
     >
-      <ol className="flex flex-wrap items-center gap-2">
+      <ol className="flex flex-wrap items-center gap-2 w-full max-w-4xl px-4 lg:px-0">
         {breadcrumbs.map((breadcrumb, index) => (
           <li key={breadcrumb.href} className="flex items-center gap-2">
             {breadcrumb.isActive ? (

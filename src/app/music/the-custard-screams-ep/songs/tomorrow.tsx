@@ -6,7 +6,7 @@ export const metadata = {
 
 export function Song({ songNavigation }: { songNavigation?: React.ReactNode }) {
   return (
-    <article className="p2 md:p-3">
+    <>
       <h1 className="text-xl font-bold text-amber-400">Song: Tomorrow</h1>
       
       {songNavigation}
@@ -39,6 +39,6 @@ export function Song({ songNavigation }: { songNavigation?: React.ReactNode }) {
           tomorrow You won't Infect tomorrow I won't reject tomorrow
         </pre>
       </section>
-    </article>
+    </>
   );
 }

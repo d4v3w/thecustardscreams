@@ -52,11 +52,13 @@ export default async function SongPage({
 
   if (!validSongs.includes(slug)) {
     return (
-      <article className="p2 md:p-3">
-        <h1 className="text-xl font-bold text-amber-400">
-          404 - Song Not Found
-        </h1>
-        <p>The song "{slug}" could not be found.</p>
+      <article className="flex flex-col items-center justify-center p-4 md:p-6">
+        <div className="w-full max-w-4xl">
+          <h1 className="text-xl font-bold text-amber-400">
+            404 - Song Not Found
+          </h1>
+          <p>The song "{slug}" could not be found.</p>
+        </div>
       </article>
     );
   }
@@ -64,42 +66,44 @@ export default async function SongPage({
   const { Song: SongComponent } = await import(`../songs/${slug}`);
 
   return (
-    <>
-      <SongComponent songNavigation={
-        <ol className="inline-sep m-3">
-          <li>
-            <Link
-              href="/music/the-custard-screams-ep/royal-flush"
-              className="text-amber-400 underline"
-            >
-              Royal Flush
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/music/the-custard-screams-ep/would-you"
-              className="text-amber-400 underline"
-            >
-              Would You
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/music/the-custard-screams-ep/tomorrow"
-              className="text-amber-400 underline"
-            >
-              Tomorrow
-            </Link>
-          </li>
-        </ol>
-      } />
-      <p>
-        <Link href="/music/the-custard-screams-ep">
-          Read more about{" "}
-          <span className="text-amber-400">The Custard Screams EP</span> here
-        </Link>
-        .
-      </p>
-    </>
+    <article className="flex flex-col items-center justify-center p-4 md:p-6">
+      <div className="w-full max-w-4xl">
+        <SongComponent songNavigation={
+          <ol className="inline-sep m-3">
+            <li>
+              <Link
+                href="/music/the-custard-screams-ep/royal-flush"
+                className="text-amber-400 underline"
+              >
+                Royal Flush
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/music/the-custard-screams-ep/would-you"
+                className="text-amber-400 underline"
+              >
+                Would You
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/music/the-custard-screams-ep/tomorrow"
+                className="text-amber-400 underline"
+              >
+                Tomorrow
+              </Link>
+            </li>
+          </ol>
+        } />
+        <p>
+          <Link href="/music/the-custard-screams-ep">
+            Read more about{" "}
+            <span className="text-amber-400">The Custard Screams EP</span> here
+          </Link>
+          .
+        </p>
+      </div>
+    </article>
   );
 }

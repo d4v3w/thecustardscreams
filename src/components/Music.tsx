@@ -2,7 +2,7 @@ import Link from "next/link";
 import Socials from "./Socials";
 
 const Music = () => (
-  <article className="p-2 md:p-3">
+  <article>
     <h2 className="text-xl font-bold text-amber-400">
       The Custard Screams EP - Available on all streaming platforms
     </h2>
