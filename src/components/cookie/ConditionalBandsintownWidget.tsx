@@ -31,7 +31,10 @@ export function ConditionalBandsintownWidget({
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    // Use a microtask to defer state update outside the effect body
+    queueMicrotask(() => {
+      setIsMounted(true);
+    });
   }, []);
 
   // Always render consent prompt during SSR to avoid hydration mismatch

@@ -31,11 +31,7 @@ export default async function MusicPage() {
               title="The Custard Screams - Bandcamp - Royal Flush"
               src="https://bandcamp.com/EmbeddedPlayer/track=593440947/size=large/bgcol=333333/linkcol=e99708/tracklist=false/artwork=small/transparent=true/"
               seamless
-            >
-              <a href="https://thecustardscreams.bandcamp.com/track/royal-flush">
-                Royal Flush by The Custard Screams
-              </a>
-            </iframe>
+            />
           </section>
           <section className="rounded-xl">
             <iframe
@@ -43,11 +39,7 @@ export default async function MusicPage() {
               title="The Custard Screams - Bandcamp - Tomorrow"
               src="https://bandcamp.com/EmbeddedPlayer/track=2403260668/size=large/bgcol=333333/linkcol=e99708/tracklist=false/artwork=small/transparent=true/"
               seamless
-            >
-              <a href="https://thecustardscreams.bandcamp.com/track/tomorrow">
-                Tomorrow by The Custard Screams
-              </a>
-            </iframe>
+            />
           </section>
           <section className="rounded-xl">
             <iframe
@@ -55,11 +47,7 @@ export default async function MusicPage() {
               title="The Custard Screams - Bandcamp - Would You (Breathe)"
               src="https://bandcamp.com/EmbeddedPlayer/track=1319783194/size=large/bgcol=333333/linkcol=e99708/tracklist=false/artwork=small/transparent=true/"
               seamless
-            >
-              <a href="https://thecustardscreams.bandcamp.com/track/would-you-breathe">
-                Would You (Breathe) by The Custard Screams
-              </a>
-            </iframe>
+            />
           </section>
         </div>
       </article>
@@ -67,8 +55,8 @@ export default async function MusicPage() {
         <iframe
           width="560"
           height="315"
-          src="https://www.youtube.com/embed/BR6U5TuXlAM"
-          title="YouTube video player"
+          src="https://www.youtube.com/embed/OzE7EgHfAx8"
+          title="The Custard Screams - Would You [Official Performance Video]"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
