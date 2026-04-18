@@ -79,14 +79,6 @@ describe("Breadcrumb", () => {
     expect(nav).toHaveAttribute("aria-label", "Breadcrumb");
   });
 
-  it("should apply custom className", () => {
-    mockUsePathname.mockReturnValue("/music");
-    const { container } = render(<Breadcrumb className="custom-class" />);
-    
-    const nav = container.querySelector("nav");
-    expect(nav).toHaveClass("custom-class");
-  });
-
   it("should have amber color for clickable links", () => {
     mockUsePathname.mockReturnValue("/music");
     render(<Breadcrumb />);

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { generateBreadcrumbs, shouldShowBreadcrumbs } from "~/lib/breadcrumbs";
-import type { BreadcrumbProps } from "~/lib/types";
 
 /**
  * Breadcrumb navigation component
@@ -11,7 +10,7 @@ import type { BreadcrumbProps } from "~/lib/types";
  * Feature: persistent-navigation-breadcrumbs
  * Requirements: 2.1, 2.2, 2.3, 2.9, 3.1, 3.2, 3.3, 3.7, 5.1, 5.2, 5.3, 5.4, 5.6, 7.1, 7.2, 7.6
  */
-export default function Breadcrumb({ className = "" }: BreadcrumbProps) {
+export default function Breadcrumb() {
   const pathname = usePathname();
 
   // Don't show breadcrumbs on home page
@@ -24,7 +23,7 @@ export default function Breadcrumb({ className = "" }: BreadcrumbProps) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className={`flex flex-col items-center justify-center bg-black text-sm ${className}`}
+      className={`flex flex-col items-center justify-center bg-black text-sm px-4`}
       role="navigation"
     >
       <ol className="flex flex-wrap items-center gap-2 w-full max-w-4xl px-4 lg:px-0">

@@ -403,7 +403,6 @@ export interface BreadcrumbItem {
  * Feature: persistent-navigation-breadcrumbs
  */
 export interface BreadcrumbProps {
-  className?: string;
 }
 
 // ============================================================================

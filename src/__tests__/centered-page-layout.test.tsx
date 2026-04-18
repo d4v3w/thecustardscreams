@@ -219,7 +219,15 @@ describe("Centered Page Layout - Preservation Testing", () => {
 
     it("should preserve privacy policy page back link", async () => {
       const { container } = render(await PrivacyPolicyPage());
-      const backLink = container.querySelector('a[href="/"]');
+      const allLinks = container.querySelectorAll('a[href="/"]');
+      
+      // Find the link that contains "Back to Home" text
+      let backLink = null;
+      allLinks.forEach((link) => {
+        if (link.textContent?.includes("Back to Home")) {
+          backLink = link;
+        }
+      });
       
       expect(backLink).toBeInTheDocument();
       expect(backLink?.textContent).toContain("Back to Home");

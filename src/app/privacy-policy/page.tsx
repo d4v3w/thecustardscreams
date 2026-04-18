@@ -1,15 +1,20 @@
 /**
  * Privacy Policy Page
- * Feature: gdpr-cookie-compliance-enhancement
- * Requirements: 2.4, 6.5, 6.6
+ * Feature: gdpr-cookie-compliance-enhancement, logo-on-subpages
+ * Requirements: 2.4, 6.5, 6.6, 1.1, 3.1, 3.2, 3.4, 3.5, 7.1, 7.2, 7.3, 7.4, 7.5, 9.1, 9.2, 9.3, 9.4, 9.5
  */
 
 import Link from "next/link";
+import Logo from "~/components/Logo";
 
 export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-black p-6 text-white">
       <div className="mx-auto max-w-4xl">
+        <div className="mb-6">
+          <Logo />
+        </div>
+
         <Link
           href="/"
           className="mb-6 inline-block text-amber-400 hover:underline"
