@@ -418,15 +418,6 @@ export interface UseIntersectionObserverOptions {
 }
 
 /**
- * Return type for useSmoothScroll hook
- */
-export interface UseSmoothScrollOptions {
-  behavior?: ScrollBehavior;
-  block?: ScrollLogicalPosition;
-  offset?: number;
-}
-
-/**
  * Return type for useCookieConsent hook (legacy - kept for backward compatibility)
  */
 export interface UseCookieConsentReturn {

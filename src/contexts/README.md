@@ -6,11 +6,15 @@ The Navigation Context provides a centralized state management system for page/s
 
 ## Architecture
 
+The URL hash is the single source of truth for the current section.
+
 ```
 NavigationProvider (Context)
     ↓
     ├── Sections register themselves via useRegisterSection hook
-    ├── Intersection Observer updates current section via useNavigationObserver
+    ├── useHashSync reads/writes the URL hash and scrolls to the target section
+    ├── useScrollObserver watches section visibility (IntersectionObserver) and
+    │   updates the hash as the user scrolls, without disturbing history
     └── Components access navigation state via useNavigation hook
 ```
 
@@ -54,28 +58,7 @@ export default function MySection() {
 }
 ```
 
-### 3. Set up intersection observer in page
-
-```tsx
-// In page.tsx
-import { useNavigationObserver } from "~/hooks/useNavigationObserver";
-
-export default function Page() {
-  useNavigationObserver({
-    threshold: 0.3,
-    rootMargin: "-80px 0px -80px 0px",
-  });
-  
-  return (
-    <>
-      <MySection />
-      <AnotherSection />
-    </>
-  );
-}
-```
-
-### 4. Access navigation state anywhere
+### 3. Access navigation state anywhere
 
 ```tsx
 import { useNavigation } from "~/contexts/NavigationContext";
@@ -119,14 +102,15 @@ export default function MyComponent() {
 - `navigateNext()` - Navigate to next section
 - `navigatePrevious()` - Navigate to previous section
 - `getSectionRefs()` - Get map of all section refs (for intersection observer)
+- `updateHash(section, addToHistory?)` - Update the URL hash (used internally by navigateToSection and the scroll observer)
+- `isProgrammaticScroll()` - Whether a scroll triggered by navigation is currently in flight
 
 ### Hooks
 
 #### `useNavigation()`
-Access navigation context state and methods.
-
-#### `useNavigationObserver(options?)`
-Set up intersection observer to track active section. Call once per page.
+Access navigation context state and methods. The intersection observer that tracks
+the active section (`useScrollObserver`) and the hash listener (`useHashSync`) are
+wired up automatically inside `NavigationProvider` - no per-page setup needed.
 
 #### `useRegisterSection(id, order)`
 Register a section with navigation context. Returns ref to attach to section element.
