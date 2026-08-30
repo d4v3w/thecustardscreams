@@ -66,6 +66,11 @@ export function useHashSync(options: UseHashSyncOptions): UseHashSyncReturn {
   const [currentSection, setCurrentSection] = useState<SectionId | null>(null);
   const isInitializedRef = useRef(false);
   const isUpdatingHashRef = useRef(false);
+  // The section a still-animating programmatic scroll is currently headed to.
+  const inFlightTargetRef = useRef<SectionId | null>(null);
+  // The pending focus-management timeout, so a newer click can supersede an
+  // older one instead of both running and racing over the same tabindex.
+  const focusTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   /**
    * Scroll to a specific section
@@ -103,7 +108,18 @@ export function useHashSync(options: UseHashSyncOptions): UseHashSyncReturn {
       return;
     }
 
+    // If a programmatic scroll is already animating toward this exact
+    // target, don't re-issue it. Repeatedly calling scrollIntoView on a
+    // target that's already in flight restarted the browser's smooth-scroll
+    // animation each time (visible as judder when a nav item is pressed
+    // several times in a row) and wastefully tore down and rebuilt the
+    // scroll-completion listener on every click.
+    if (isProgrammaticScroll() && inFlightTargetRef.current === sectionId) {
+      return;
+    }
+
     // Set programmatic scroll flag to prevent infinite loops
+    inFlightTargetRef.current = sectionId;
     setProgrammaticScroll(true);
 
     // Determine scroll behavior based on user preference
@@ -117,21 +133,29 @@ export function useHashSync(options: UseHashSyncOptions): UseHashSyncReturn {
     });
 
     // Focus management for accessibility (Requirement 6.3)
-    // Wait for scroll to complete before focusing
+    // Wait for scroll to complete before focusing. Cancel any focus
+    // management still pending from an earlier, now-superseded navigation -
+    // otherwise two overlapping timeouts race over the same element's
+    // tabindex (one restoring it while the other is still using it).
+    if (focusTimeoutRef.current) {
+      clearTimeout(focusTimeoutRef.current);
+    }
+
     const scrollDuration = prefersReducedMotion ? 0 : 800;
-    setTimeout(() => {
+    focusTimeoutRef.current = setTimeout(() => {
+      focusTimeoutRef.current = null;
       const element = ref.current;
       if (!element) return;
 
       // Store original tabindex to restore later
       const originalTabIndex = element.getAttribute("tabindex");
-      
+
       // Temporarily set tabindex="-1" to make element focusable
       element.setAttribute("tabindex", "-1");
-      
+
       // Focus the element (preventScroll to avoid double scroll)
       element.focus({ preventScroll: true });
-      
+
       // Restore original tabindex after focus to maintain tab order
       // Use requestAnimationFrame to ensure focus has been applied
       requestAnimationFrame(() => {
@@ -143,6 +167,15 @@ export function useHashSync(options: UseHashSyncOptions): UseHashSyncReturn {
       });
     }, scrollDuration);
   }, [getSectionRefs, isProgrammaticScroll, prefersReducedMotion, setProgrammaticScroll]);
+
+  // Cancel any pending focus-management timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (focusTimeoutRef.current) {
+        clearTimeout(focusTimeoutRef.current);
+      }
+    };
+  }, []);
 
   /**
    * Handle hash change events
