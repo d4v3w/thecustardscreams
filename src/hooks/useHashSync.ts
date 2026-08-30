@@ -57,13 +57,13 @@ export function useHashSync(options: UseHashSyncOptions): UseHashSyncReturn {
     sections,
     getSectionRefs,
     onHashChange,
+    isProgrammaticScroll,
     setProgrammaticScroll,
   } = options;
 
   const router = useRouter();
   const prefersReducedMotion = useReducedMotion();
   const [currentSection, setCurrentSection] = useState<SectionId | null>(null);
-  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
   const isInitializedRef = useRef(false);
   const isUpdatingHashRef = useRef(false);
 
@@ -88,8 +88,15 @@ export function useHashSync(options: UseHashSyncOptions): UseHashSyncReturn {
     }
 
     // Check if section is already visible (prevents jarring page jumps)
-    const alreadyVisible = isSectionVisible(sectionId, sectionRefs, 0.3);
-    
+    // Only trust this when scroll is idle: while a previous programmatic
+    // scroll is still animating, "visible" is computed against the current
+    // (stale) position, not where that in-flight scroll is headed. Skipping
+    // here during rapid clicks left the hash pointing at one section while
+    // an earlier click's un-superseded scrollIntoView carried the page to
+    // another, desyncing the URL/nav highlight from what was on screen.
+    const alreadyVisible =
+      !isProgrammaticScroll() && isSectionVisible(sectionId, sectionRefs, 0.3);
+
     if (alreadyVisible) {
       // Section is already visible, no need to scroll
       // This is critical for seamless hash updates during manual scroll
@@ -135,7 +142,7 @@ export function useHashSync(options: UseHashSyncOptions): UseHashSyncReturn {
         }
       });
     }, scrollDuration);
-  }, [getSectionRefs, prefersReducedMotion, setProgrammaticScroll]);
+  }, [getSectionRefs, isProgrammaticScroll, prefersReducedMotion, setProgrammaticScroll]);
 
   /**
    * Handle hash change events
@@ -200,11 +207,6 @@ export function useHashSync(options: UseHashSyncOptions): UseHashSyncReturn {
     // For user clicks, execute immediately (no debounce)
     // For scroll events, debounce to prevent excessive router calls
     if (addToHistory) {
-      // Clear any pending scroll updates
-      if (debounceTimerRef.current) {
-        clearTimeout(debounceTimerRef.current);
-      }
-      
       try {
         // Security: section is type-safe SectionId, no XSS risk
         const newHash = `#${section}`;
@@ -232,55 +234,41 @@ export function useHashSync(options: UseHashSyncOptions): UseHashSyncReturn {
         }
       }
     } else {
-      // Scroll event: debounce to prevent excessive updates
-      if (debounceTimerRef.current) {
-        clearTimeout(debounceTimerRef.current);
-      }
+      // Scroll event: useScrollObserver already debounces the section change
+      // by 150ms before calling us, so no second debounce is needed here.
+      // Set flag to prevent handleHashChange from running (prevents wobble)
+      isUpdatingHashRef.current = true;
 
-      debounceTimerRef.current = setTimeout(() => {
-        // Set flag to prevent handleHashChange from running (prevents wobble)
-        isUpdatingHashRef.current = true;
-        
-        try {
-          // Security: section is type-safe SectionId, no XSS risk
-          const newHash = `#${section}`;
-          
-          // Scroll event: replace current entry (no history pollution)
-          router.replace(newHash, { scroll: false });
-          
-          // Update current section state directly (bypass handleHashChange)
+      try {
+        // Security: section is type-safe SectionId, no XSS risk
+        const newHash = `#${section}`;
+
+        // Scroll event: replace current entry (no history pollution)
+        router.replace(newHash, { scroll: false });
+
+        // Update current section state directly (bypass handleHashChange)
+        setCurrentSection(section);
+        onHashChange?.(section);
+      } catch (error) {
+        // Fallback to direct hash manipulation if router fails
+        console.error("Router hash update failed, using fallback", error);
+        // Security: section is validated SectionId, safe to use
+        if (typeof window !== "undefined") {
+          // Use history API to avoid browser scroll
+          const newUrl = `${window.location.pathname}${window.location.search}#${section}`;
+          window.history.replaceState(null, "", newUrl);
+          // Update state directly
           setCurrentSection(section);
           onHashChange?.(section);
-        } catch (error) {
-          // Fallback to direct hash manipulation if router fails
-          console.error("Router hash update failed, using fallback", error);
-          // Security: section is validated SectionId, safe to use
-          if (typeof window !== "undefined") {
-            // Use history API to avoid browser scroll
-            const newUrl = `${window.location.pathname}${window.location.search}#${section}`;
-            window.history.replaceState(null, "", newUrl);
-            // Update state directly
-            setCurrentSection(section);
-            onHashChange?.(section);
-          }
-        } finally {
-          // Clear flag after a short delay
-          setTimeout(() => {
-            isUpdatingHashRef.current = false;
-          }, 100);
         }
-      }, 150); // Debounce for 150ms
+      } finally {
+        // Clear flag after a short delay
+        setTimeout(() => {
+          isUpdatingHashRef.current = false;
+        }, 100);
+      }
     }
   }, [router, onHashChange, scrollToSection]);
-
-  // Cleanup debounce timer on unmount
-  useEffect(() => {
-    return () => {
-      if (debounceTimerRef.current) {
-        clearTimeout(debounceTimerRef.current);
-      }
-    };
-  }, []);
 
   return {
     currentSection,

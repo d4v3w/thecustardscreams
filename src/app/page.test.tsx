@@ -19,10 +19,6 @@ jest.mock("~/hooks/useIntersectionObserver", () => ({
   useIntersectionObserver: () => "home",
 }));
 
-jest.mock("~/hooks/useSmoothScroll", () => ({
-  useSmoothScroll: () => jest.fn(),
-}));
-
 jest.mock("~/hooks/useReducedMotion", () => ({
   useReducedMotion: () => false,
 }));

@@ -234,17 +234,3 @@ export function useNavigation() {
   return context;
 }
 
-// DEPRECATED: Internal hook for intersection observer to update current section
-// This will be removed in task 5.4 when useScrollObserver replaces useNavigationObserver
-// For now, it's a no-op since currentSection is managed by useHashSync
-export function useNavigationUpdater() {
-  const context = useContext(NavigationContext);
-  if (!context) {
-    throw new Error("useNavigationUpdater must be used within NavigationProvider");
-  }
-  // Return a no-op function since hash sync now manages currentSection
-  // The old useNavigationObserver will call this but it won't do anything
-  return (_section: SectionId | null) => {
-    // No-op: currentSection is now managed by useHashSync via URL hash
-  };
-}
