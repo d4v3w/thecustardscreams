@@ -41,6 +41,21 @@ section[data-section-id] {
   position: relative; /* Ensure sections are positioned */
 }
 
+/*
+ * The footer (with the "Cookie Settings" link) follows the last snap
+ * section in the DOM but had no snap point of its own. With
+ * scroll-snap-type: y mandatory on body, that made it unreachable: the
+ * browser always snapped back to the last section, never letting the
+ * page scroll far enough to bring the footer fully into view. Giving it
+ * a snap point too fixes that. Scoped to pages that actually use
+ * scroll-snap sections (the single-page home layout) so it doesn't
+ * introduce a new snap point on ordinary long-content pages, where
+ * footer scrolling already works fine.
+ */
+body:has(section[data-section-id]) footer {
+  scroll-snap-align: end;
+}
+
 /* Fade-in animation for sections */
 @media (prefers-reduced-motion: no-preference) {
   @keyframes fade-in {
