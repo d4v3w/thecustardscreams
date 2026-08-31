@@ -80,7 +80,7 @@ describe("Scroll-Snap Diagnostics", () => {
 
       expect(hasType).toBe(true);
       expect(scrollSnapType).toContain("y");
-      expect(scrollSnapType).toContain("mandatory");
+      expect(scrollSnapType).toContain("proximity");
     });
 
     it("should have scroll-snap-align on sections", () => {
