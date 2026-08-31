@@ -7,7 +7,7 @@
 
 "use client";
 
-import { createContext, useState, type ReactNode } from "react";
+import { createContext, useEffect, useState, type ReactNode } from "react";
 import {
     createConsentLog,
     exportConsentLogs as exportLogs,
@@ -40,21 +40,27 @@ interface CookieConsentProviderProps {
  * Manages consent state, persistence, and logging
  */
 export function CookieConsentProvider({ children }: CookieConsentProviderProps) {
-  // Initialize state from localStorage immediately (lazy initialization)
-  const [preferences, setPreferences] = useState<CookiePreferences | null>(() => {
-    if (typeof window === "undefined") return null;
-    return loadPreferences();
-  });
-  
-  const [showBanner, setShowBanner] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return !loadPreferences();
-  });
-  
+  // Start with the SSR-safe defaults (no stored preferences, banner hidden)
+  // so the client's first hydration pass renders the same tree the server
+  // did. Reading localStorage synchronously in these initializers used to
+  // branch on `typeof window`, which made the client's initial render
+  // diverge from the server's - the classic cause of a React hydration
+  // mismatch (showBanner flips true/false depending on stored consent,
+  // directly changing whether <CookieConsentBanner /> is in the tree).
+  // The real value is loaded after mount instead, in the effect below.
+  const [preferences, setPreferences] = useState<CookiePreferences | null>(null);
+  const [showBanner, setShowBanner] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  
-  // Use a simple flag instead of state to avoid setState-in-effect
-  const [isInitialized] = useState(true);
+
+  useEffect(() => {
+    // Deferred to a microtask (rather than calling setState directly in the
+    // effect body) per this repo's react-hooks/set-state-in-effect lint rule.
+    queueMicrotask(() => {
+      const stored = loadPreferences();
+      setPreferences(stored);
+      setShowBanner(!stored);
+    });
+  }, []);
 
   // Derived state for quick access
   const hasEssential = preferences?.categories.essential ?? true;
@@ -194,11 +200,6 @@ export function CookieConsentProvider({ children }: CookieConsentProviderProps) 
     closeModal,
     exportConsentLogs,
   };
-
-  // Don't render children until initialized to avoid hydration mismatch
-  if (!isInitialized) {
-    return null;
-  }
 
   return (
     <CookieConsentContext.Provider value={contextValue}>

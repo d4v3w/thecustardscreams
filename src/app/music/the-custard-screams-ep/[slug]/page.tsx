@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/dist/client/link";
+import Link from "next/link";
 import { getCanonicalUrl } from "~/lib/metadata";
 
 const validSongs = ["royal-flush", "tomorrow", "would-you"];

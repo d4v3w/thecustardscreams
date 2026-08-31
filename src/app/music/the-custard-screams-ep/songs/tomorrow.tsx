@@ -1,9 +1,3 @@
-export const metadata = {
-  title: "Tomorrow",
-  description:
-    "Tomorrow song breakdown and lyrics, taken from the debut self-titled EP by The Custard Screams.",
-};
-
 export function Song({ songNavigation }: { songNavigation?: React.ReactNode }) {
   return (
     <>

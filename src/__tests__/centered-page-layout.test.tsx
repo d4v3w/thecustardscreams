@@ -347,10 +347,10 @@ describe("Centered Page Layout - Preservation Testing", () => {
   describe("Page Metadata Preservation", () => {
     it("should preserve music page metadata", async () => {
       const { container } = render(await MusicPage());
-      
+
       // Check for page title in heading
       const h1 = container.querySelector("h1");
-      expect(h1?.textContent).toContain("About The Custard Screams");
+      expect(h1?.textContent).toContain("The Custard Screams Music");
     });
 
     it("should preserve live-shows page metadata", async () => {
