@@ -19,6 +19,12 @@ import AboutPage from "~/app/about/page";
 import LiveShowsPage from "~/app/live-shows/page";
 import MusicPage from "~/app/music/page";
 import PrivacyPolicyPage from "~/app/privacy-policy/page";
+import { CookieConsentProvider } from "~/contexts/CookieConsentContext";
+
+// AboutPage renders CookieSettingsLink, which reads CookieConsentContext.
+async function renderAboutPage() {
+  return render(await AboutPage(), { wrapper: CookieConsentProvider });
+}
 
 describe("Centered Page Layout - Bug Condition Exploration", () => {
   describe("Music Page Layout", () => {
@@ -94,7 +100,7 @@ describe("Centered Page Layout - Bug Condition Exploration", () => {
 
   describe("About Page Layout", () => {
     it("should have flex centering classes on outer article", async () => {
-      const { container } = render(await AboutPage());
+      const { container } = await renderAboutPage();
       const article = container.querySelector("article");
       
       expect(article).toHaveClass("flex");
@@ -104,7 +110,7 @@ describe("Centered Page Layout - Bug Condition Exploration", () => {
     });
 
     it("should have responsive padding p-4 md:p-6 on outer article", async () => {
-      const { container } = render(await AboutPage());
+      const { container } = await renderAboutPage();
       const article = container.querySelector("article");
       
       expect(article).toHaveClass("p-4");
@@ -112,14 +118,14 @@ describe("Centered Page Layout - Bug Condition Exploration", () => {
     });
 
     it("should have max-w-4xl wrapper constraint", async () => {
-      const { container } = render(await AboutPage());
+      const { container } = await renderAboutPage();
       const maxWidthWrapper = container.querySelector(".max-w-4xl");
       
       expect(maxWidthWrapper).toBeInTheDocument();
     });
 
     it("should NOT have incorrect padding p2 md:p-3", async () => {
-      const { container } = render(await AboutPage());
+      const { container } = await renderAboutPage();
       const article = container.querySelector("article");
       
       expect(article).not.toHaveClass("p-2");
@@ -167,7 +173,7 @@ describe("Centered Page Layout - Bug Condition Exploration", () => {
     });
 
     it("should verify about page has the centered layout pattern", async () => {
-      const { container } = render(await AboutPage());
+      const { container } = await renderAboutPage();
       const article = container.querySelector("article");
       const maxWidthWrapper = container.querySelector(".max-w-4xl");
 
@@ -314,7 +320,7 @@ describe("Centered Page Layout - Preservation Testing", () => {
     });
 
     it("should preserve semantic structure on about page", async () => {
-      const { container } = render(await AboutPage());
+      const { container } = await renderAboutPage();
       
       // Check for article element
       const article = container.querySelector("article");
@@ -332,7 +338,7 @@ describe("Centered Page Layout - Preservation Testing", () => {
     });
 
     it("should preserve list structure on about page", async () => {
-      const { container } = render(await AboutPage());
+      const { container } = await renderAboutPage();
       
       // Check for unordered list
       const ul = container.querySelector("ul");
@@ -362,7 +368,7 @@ describe("Centered Page Layout - Preservation Testing", () => {
     });
 
     it("should preserve about page metadata", async () => {
-      const { container } = render(await AboutPage());
+      const { container } = await renderAboutPage();
       
       // Check for page title in heading
       const h1 = container.querySelector("h1");

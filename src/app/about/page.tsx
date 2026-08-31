@@ -1,4 +1,6 @@
+import Link from "next/link";
 import Links from "~/components/Links";
+import { CookieSettingsLink } from "~/components/cookie/CookieSettingsLink";
 import { getCanonicalUrl } from "~/lib/metadata";
 
 export const metadata = {
@@ -41,6 +43,24 @@ export default async function AboutPage() {
         <p>
           <strong>Hometown:</strong> London, United Kingdom
         </p>
+
+        {/*
+          Reachable with a single nav tap, regardless of scroll position -
+          GDPR requires cookie preferences stay accessible, so this can't
+          depend on scrolling all the way to the footer.
+        */}
+        <h2 className="mt-4 text-lg font-bold text-amber-600">
+          Privacy &amp; Cookies
+        </h2>
+        <p>
+          We use cookies to analyze site traffic and improve your experience.
+          Read our{" "}
+          <Link href="/privacy-policy" className="text-amber-400 underline">
+            Privacy Policy
+          </Link>{" "}
+          or update your preferences at any time.
+        </p>
+        <CookieSettingsLink />
       </div>
     </article>
   );
