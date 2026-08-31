@@ -192,3 +192,51 @@ test.describe('Single-page section navigation (bottom nav)', () => {
   });
 });
 
+test.describe('Footer reachability on the single-page home layout', () => {
+  // Reported: the "Cookie Settings" link at the bottom of the home page
+  // didn't work. Root cause: the footer trails the last scroll-snap
+  // section (About) but had no snap point of its own, so with
+  // scroll-snap-type: y mandatory on body, the browser always snapped
+  // back to About and never let the page scroll far enough to bring the
+  // footer fully into view - the link was there, just unreachable.
+
+  test('the footer and its Cookie Settings link are reachable by scrolling to the bottom', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('nav')).toBeVisible();
+
+    await page.evaluate(() => {
+      document.body.scrollTo({ top: document.body.scrollHeight, behavior: 'auto' });
+    });
+    await page.waitForTimeout(500);
+
+    const cookieSettingsLink = page.getByRole('button', { name: 'Open cookie preferences', exact: true });
+    await expect(cookieSettingsLink).toBeInViewport();
+
+    await cookieSettingsLink.click();
+    await expect(page.getByRole('dialog', { name: 'Cookie Preferences' })).toBeVisible();
+  });
+
+  test('navigation still works normally after opening cookie settings from the footer', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('nav')).toBeVisible();
+
+    await page.evaluate(() => {
+      document.body.scrollTo({ top: document.body.scrollHeight, behavior: 'auto' });
+    });
+    await page.waitForTimeout(500);
+
+    await page.getByRole('button', { name: 'Open cookie preferences', exact: true }).click();
+    await page.getByRole('button', { name: 'Cancel' }).click();
+    await page.waitForTimeout(300);
+
+    await page.locator('nav').getByRole('button', { name: 'Home section with band introduction', exact: true }).click();
+    await page.waitForTimeout(1500);
+
+    await expect(page).toHaveURL(/#home$/);
+    const homeTop = await page.evaluate(
+      () => document.querySelector('[data-section-id="home"]')?.getBoundingClientRect().top,
+    );
+    expect(Math.abs(homeTop ?? Infinity)).toBeLessThan(30);
+  });
+});
+
