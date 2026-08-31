@@ -8,7 +8,7 @@ const Music = () => (
     </h2>
     <p>
       The Custard Screams are available to stream on Spotify, Apple, Amazon and
-      Youtube. For more download and steaming options visit the{" "}
+      Youtube. For more download and streaming options visit the{" "}
       <Link href="/music" className="text-amber-400 underline">
         Music page
       </Link>

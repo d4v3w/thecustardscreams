@@ -31,7 +31,8 @@ export function ConditionalBandsintownWidget({
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    // Use a microtask to defer state update outside the effect body
+    // Deferred to a microtask (rather than calling setState directly in the
+    // effect body) per this repo's react-hooks/set-state-in-effect lint rule.
     queueMicrotask(() => {
       setIsMounted(true);
     });

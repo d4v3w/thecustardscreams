@@ -1,9 +1,13 @@
 import Link from "next/link";
+import { getCanonicalUrl } from "~/lib/metadata";
 
 export const metadata = {
-  title: "Royal Flush",
+  title: "The Custard Screams EP",
   description:
-    "Royal Flush song breakdown and lyrics, taken from the debut self-titled EP by The Custard Screams.",
+    "The Custard Screams debut self-titled EP, available on all major streaming platforms - with song-by-song breakdowns and lyrics.",
+  alternates: {
+    canonical: getCanonicalUrl("/music/the-custard-screams-ep"),
+  },
 };
 
 export default async function EPPage() {
@@ -15,8 +19,8 @@ export default async function EPPage() {
         </h1>
       <p>
         The Custard Screams debut self titled EP - "The Custard Screams EP" is
-        available on all major streaming platforms. Follw the links below for
-        detailed breakdown and lyrics for each song on the record.
+        available on all major streaming platforms. Follow the links below
+        for detailed breakdown and lyrics for each song on the record.
       </p>
       <ol className="m-3 list-decimal pl-6">
         <li>

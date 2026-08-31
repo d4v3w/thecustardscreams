@@ -22,7 +22,7 @@ jest.mock("~/hooks/useScrollObserver", () => ({
   useScrollObserver: jest.fn(),
 }));
 
-import { renderHook } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
 import { useHashSync } from "~/hooks/useHashSync";
 import type { SectionId } from "~/lib/types";
 import { NavigationProvider, useNavigation } from "./NavigationContext";
@@ -92,7 +92,9 @@ describe("NavigationContext - Programmatic Scroll Flag Management", () => {
 
     const updateHashSpy = jest.spyOn(result.current, "updateHash");
 
-    result.current.navigateToSection("music");
+    act(() => {
+      result.current.navigateToSection("music");
+    });
 
     expect(updateHashSpy).toHaveBeenCalledWith("music", true);
   });

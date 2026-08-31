@@ -14,7 +14,7 @@ export default async function MusicPage() {
     <article className="flex flex-col items-center justify-center p-4 md:p-6">
       <div className="w-full max-w-4xl">
         <h1 className="text-xl font-bold text-amber-400">
-          About The Custard Screams
+          The Custard Screams Music
         </h1>
         <Music />
 

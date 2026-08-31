@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { CookieConsentProvider } from "~/contexts/CookieConsentContext";
 import { NavigationProvider } from "~/contexts/NavigationContext";
 import HomePage from "./page";
@@ -24,7 +24,7 @@ jest.mock("~/hooks/useReducedMotion", () => ({
 }));
 
 describe("Home Page", () => {
-  it("renders without errors", () => {
+  it("renders without errors", async () => {
     expect(() => render(
       <CookieConsentProvider>
         <NavigationProvider>
@@ -32,9 +32,15 @@ describe("Home Page", () => {
         </NavigationProvider>
       </CookieConsentProvider>
     )).not.toThrow();
+
+    // CookieConsentProvider and ConditionalBandsintownWidget read their
+    // client-only initial state in a microtask (queued from a mount
+    // effect) to avoid a hydration mismatch. Flush it so that update is
+    // wrapped in act() like any other state change during the test.
+    await act(async () => {});
   });
 
-  it("renders all main sections", () => {
+  it("renders all main sections", async () => {
     render(
       <CookieConsentProvider>
         <NavigationProvider>
@@ -42,7 +48,8 @@ describe("Home Page", () => {
         </NavigationProvider>
       </CookieConsentProvider>
     );
-    
+    await act(async () => {});
+
     // Check that all section headings are present
     expect(screen.getByRole("heading", { name: /The Custard Screams/i, level: 1 })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: /^Music$/i, level: 2 })).toBeInTheDocument();
