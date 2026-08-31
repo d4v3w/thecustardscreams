@@ -209,7 +209,7 @@ test.describe('Footer reachability on the single-page home layout', () => {
     });
     await page.waitForTimeout(500);
 
-    const cookieSettingsLink = page.getByRole('button', { name: 'Open cookie preferences', exact: true });
+    const cookieSettingsLink = page.locator('footer').getByRole('button', { name: 'Open cookie preferences', exact: true });
     await expect(cookieSettingsLink).toBeInViewport();
 
     await cookieSettingsLink.click();
@@ -225,7 +225,7 @@ test.describe('Footer reachability on the single-page home layout', () => {
     });
     await page.waitForTimeout(500);
 
-    await page.getByRole('button', { name: 'Open cookie preferences', exact: true }).click();
+    await page.locator('footer').getByRole('button', { name: 'Open cookie preferences', exact: true }).click();
     await page.getByRole('button', { name: 'Cancel' }).click();
     await page.waitForTimeout(300);
 
