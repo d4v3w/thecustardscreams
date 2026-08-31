@@ -24,7 +24,23 @@ html {
   overflow: hidden;
 }
 
-/* Body is the scroll container with scroll-snap */
+/*
+ * Body is the scroll container with scroll-snap.
+ * scroll-snap-type is "proximity", not "mandatory": at narrow viewport
+ * widths the About section's content wraps to more lines than fits in
+ * one viewport, so it's taller than its own min-height snap box. With
+ * "mandatory", a single scroll gesture (a real touch fling especially)
+ * that doesn't travel far enough to clear that overflow gets forced back
+ * to About's own snap point instead of carrying through to the footer
+ * beyond it - trapping the page and making the footer (and its Cookie
+ * Settings link) unreachable in one continuous scroll, even though the
+ * footer has its own valid snap point below. "proximity" still snaps
+ * cleanly for normal scrolling near a section boundary, but doesn't
+ * fight a scroll that's headed further than the nearest snap point -
+ * exactly what's needed once content can be taller than one viewport.
+ * Programmatic navigation (clicking a nav item, which calls
+ * scrollIntoView on an explicit target) is unaffected either way.
+ */
 body {
   height: 100%;
   height: 100dvh;
@@ -32,7 +48,7 @@ body {
   padding: 0;
   overflow-y: scroll;
   overflow-x: hidden;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   scroll-padding-bottom: 80px; /* Account for bottom nav */
   -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
 }

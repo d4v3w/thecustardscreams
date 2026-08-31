@@ -215,11 +215,11 @@ describe("Navigation and Scroll Snap", () => {
   describe("Scroll Snap Behavior", () => {
     it("should have scroll-snap-type on body element", () => {
       // This test checks if the CSS is properly applied
-      // In a real browser, body would have scroll-snap-type: y mandatory
+      // In a real browser, body would have scroll-snap-type: y proximity
       const style = document.createElement("style");
       style.textContent = `
         body {
-          scroll-snap-type: y mandatory;
+          scroll-snap-type: y proximity;
         }
       `;
       document.head.appendChild(style);

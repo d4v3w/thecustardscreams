@@ -213,7 +213,7 @@ export function setupTestDOM(sectionIds: string[]): HTMLElement[] {
   // Set up body with scroll-snap
   document.body.style.height = "100vh";
   document.body.style.overflowY = "scroll";
-  document.body.style.scrollSnapType = "y mandatory";
+  document.body.style.scrollSnapType = "y proximity";
 
   // Create sections
   const sections = sectionIds.map((id, index) => {
