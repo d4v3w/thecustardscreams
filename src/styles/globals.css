@@ -9,20 +9,25 @@
     var(--font-bebas-neue), Impact, "Arial Black", "Franklin Gothic Bold", sans-serif;
 }
 
-/* Smooth scroll behavior - only when not using scroll-snap */
+/*
+ * HTML and Body setup for scroll-snap.
+ * height: 100% resolves against a static viewport reference, same as
+ * 100vh - it doesn't track a mobile browser's address/toolbar chrome
+ * showing and hiding as the page scrolls. 100dvh (dynamic viewport
+ * height) does; it's listed second so it overrides the percentage in
+ * browsers that support it, keeping this scroll container's own sizing
+ * consistent with the min-height: 100dvh on the sections inside it.
+ */
 html {
   height: 100%;
-}
-
-/* HTML and Body setup for scroll-snap */
-html {
-  height: 100%;
+  height: 100dvh;
   overflow: hidden;
 }
 
 /* Body is the scroll container with scroll-snap */
 body {
   height: 100%;
+  height: 100dvh;
   margin: 0;
   padding: 0;
   overflow-y: scroll;
@@ -32,9 +37,24 @@ body {
   -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
 }
 
-/* Ensure sections snap properly */
+/*
+ * Ensure sections snap properly.
+ * min-height uses both 100vh and 100dvh: 100vh is a static reference (the
+ * viewport size with the mobile browser's address/toolbar chrome hidden),
+ * while 100dvh tracks the *current* visible viewport as that chrome shows
+ * and hides during scrolling. On mobile, sizing sections against the
+ * stale 100vh reference while the bottom nav is `position: fixed` (which
+ * is always positioned against the real, current viewport) can leave the
+ * two disagreeing about where "the bottom of the screen" is after a
+ * toolbar transition - which is exactly what scrolling down to the
+ * footer, then opening the fixed-position cookie preferences modal, was
+ * likely to trigger. 100dvh is listed second so it overrides 100vh in
+ * browsers that support it (current mobile Safari/Chrome do); older
+ * browsers keep the 100vh fallback.
+ */
 section[data-section-id] {
   min-height: 100vh;
+  min-height: 100dvh;
   scroll-snap-align: start;
   scroll-snap-stop: normal;
   scroll-margin-top: 0;
