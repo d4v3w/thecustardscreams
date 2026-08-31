@@ -1,5 +1,7 @@
+import Link from "next/link";
 import Links from "~/components/Links";
 import Section from "~/components/Section";
+import { CookieSettingsLink } from "~/components/cookie/CookieSettingsLink";
 
 /**
  * About section with band information and member list
@@ -42,6 +44,24 @@ export default function AboutSection() {
           <p className="text-lg text-white">
             <strong>Hometown:</strong> London, United Kingdom
           </p>
+        </div>
+
+        {/*
+          Reachable with a single nav tap, regardless of scroll position -
+          GDPR requires cookie preferences stay accessible, so this can't
+          depend on scrolling all the way to the footer.
+        */}
+        <div className="mt-8">
+          <h3 className="mb-4 text-xl font-bold text-amber-400">Privacy &amp; Cookies</h3>
+          <p className="mb-4 text-lg text-white">
+            We use cookies to analyze site traffic and improve your experience.
+            Read our{" "}
+            <Link href="/privacy-policy" className="text-amber-400 underline">
+              Privacy Policy
+            </Link>{" "}
+            or update your preferences at any time.
+          </p>
+          <CookieSettingsLink className="text-lg" />
         </div>
       </div>
     </Section>
